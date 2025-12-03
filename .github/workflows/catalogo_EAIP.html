@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENLACE ART IN PROGRESS | Catálogo de Obras Disponibles</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f0f0f;
+            color: #e5e5e5;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(to bottom, #1a1a1a, #0f0f0f);
+            border-bottom: 1px solid #333;
+        }
+        .logo {
+            max-width: 380px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #d4af37;
+            margin: 0;
+            letter-spacing: 3px;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #aaa;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+        .contact-info {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #999;
+        }
+        .filter {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .filter select {
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            padding: 60px 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .artwork {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .artwork:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+        }
+        .artwork img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+        .info {
+            padding: 24px;
+        }
+        .artist {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #d4af37;
+            margin: 0 0 8px 0;
+        }
+        .title {
+            font-size: 20px;
+            font-style: italic;
+            color: #fff;
+            margin: 0 0 12px 0;
+        }
+        .details {
+            font-size: 14px;
+            color: #bbb;
+            margin: 8px 0;
+        }
+        .price {
+            font-size: 22px;
+            font-weight: 500;
+            color: #d4af37;
+            margin-top: 16px;
+            letter-spacing: 1px;
+        }
+        .price:empty::before {
+            content: "Precio bajo consulta";
+            color: #999;
+            font-style: italic;
+        }
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #000;
+            font-size: 14px;
+            color: #666;
+        }
+        .website {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+            h1 { font-size: 34px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://enlaceartinprogress.com/wp-content/uploads/2023/09/EAIP-logo-XL.png" alt="ENLACE ART IN PROGRESS" class="logo">
+        <h1>CATÁLOGO DE OBRAS</h1>
+        <p class="subtitle">Colección exclusiva · Diciembre 2025</p>
+        <div class="contact-info">
+            Riells 2, 17133 Serra de Daró, Girona · España<br>
+            +34 658 772 020 &nbsp;&nbsp; +54 9 11 4410 4878<br>
+            <a href="mailto:info@enlaceartinprogress.com" style="color:#999; text-decoration:none;">info@enlaceartinprogress.com</a>
+        </div>
+    </header>
+    
+    <div class="filter">
+        <label for="artist-filter" style="font-size:18px; color:#d4af37; margin-right:15px;">Filtrar por Artista:</label>
+        <select id="artist-filter">
+            <option value="all">Todos los Artistas</option>
+<option value="basterretxea,-néstor">Basterretxea, Néstor</option>
+<option value="bea,-manuel">Bea, Manuel</option>
+<option value="boneo,-maria">Boneo, Maria</option>
+<option value="canals,-josep">Canals, Josep</option>
+<option value="caro,-anthony">Caro, Anthony</option>
+<option value="cuixart,-modest">Cuixart, Modest</option>
+<option value="dalí,-salvador">Dalí, Salvador</option>
+<option value="feito,-luis">Feito, Luis</option>
+<option value="gargallo,-pablo">Gargallo, Pablo</option>
+<option value="juan-de-andrés">Juan de Andrés</option>
+<option value="krauel,-luis">Krauel, Luis</option>
+<option value="millares,-manolo">Millares, Manolo</option>
+<option value="miró,-joan">Miró, Joan</option>
+<option value="picasso,-pablo">Picasso, Pablo</option>
+<option value="serrano,-pablo">Serrano, Pablo</option>
+<option value="sánchez,-xaro">Sánchez, Xaro</option>
+<option value="tàpies,-antoni">Tàpies, Antoni</option>
+        </select>
+    </div>
+
+    <section class="gallery">
+
+        <div class="artwork" data-artist="basterretxea,-néstor">
+            <img src="https://lh3.googleusercontent.com/d/1cD6Cbr3ol-uSI0MF8delkMEEuCLpV1tK" alt="Forma - Basterretxea, Néstor">
+            <div class="info">
+                <h3 class="artist">Basterretxea, Néstor</h3>
+                <p class="title">Forma</p>
+                <p class="details">1978 · Alabastro · 10 x 52 x 56 cm</p>
+                <p class="price">10.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="bea,-manuel">
+            <img src="https://lh3.googleusercontent.com/d/1Wc4TIHCL9ZIxPVid6nfobUEr5BBFz9Do" alt="S/T - Bea, Manuel">
+            <div class="info">
+                <h3 class="artist">Bea, Manuel</h3>
+                <p class="title">S/T</p>
+                <p class="details">1972 · Óleo sobre lienzo · 94 x 130 cm</p>
+                <p class="price">6.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="boneo,-maria">
+            <img src="https://lh3.googleusercontent.com/d/1s6JVYQpzG1tUCipoy_bmOKoJi5tju6ul" alt="Presencia de un vacío - Boneo, Maria">
+            <div class="info">
+                <h3 class="artist">Boneo, Maria</h3>
+                <p class="title">Presencia de un vacío</p>
+                <p class="details">2017 · Bronce laqueado · 120 x 40 x 40 cm</p>
+                <p class="price"></p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="boneo,-maria">
+            <img src="https://lh3.googleusercontent.com/d/1WLG1LLGjZIFzgHnHbbDENzKcji-oDz9R" alt="Marina - Boneo, Maria">
+            <div class="info">
+                <h3 class="artist">Boneo, Maria</h3>
+                <p class="title">Marina</p>
+                <p class="details">2014 · Mármol Carrara · 32 x 30 x 36 cm</p>
+                <p class="price"></p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="boneo,-maria">
+            <img src="https://lh3.googleusercontent.com/d/1jqk5FX2eQO9EMFRevQM7PvyKtufck-Vh" alt="Sobrevuelo - Boneo, Maria">
+            <div class="info">
+                <h3 class="artist">Boneo, Maria</h3>
+                <p class="title">Sobrevuelo</p>
+                <p class="details">2022 · Resina poliester laqueada · 120 x 40 x 40 cm</p>
+                <p class="price"></p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/145WM67yzZGVwV9CeKTa18oKsSFaQz_0E" alt="Moebius CLXC - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CLXC</p>
+                <p class="details">2024 · Poliester, Hierro · 98 x 320 x 125 cm</p>
+                <p class="price">40.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1TEVsruZ4ChZ1Av4-VfOTxwL2DVsYs7TE" alt="Moebius CXLI - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CXLI</p>
+                <p class="details">2016 · Mármol Carrara · 186 x 57 x 34 cm</p>
+                <p class="price">18.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1ASUTpecYrDmWkC-yuWodhQ9aWM4EMGTc" alt="Planeta dels Simbols - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Planeta dels Simbols</p>
+                <p class="details">2021 · Mármol, Hierro · 130 x 120 x 100 cm</p>
+                <p class="price">90.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/15AQ60a1ukTAfp4OJrqSwCfoAGqB_X8mS" alt="Moebius CLXXXII - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CLXXXII</p>
+                <p class="details">2023 · Poliester, Hierro · 98 x 320 x 125 cm</p>
+                <p class="price">36.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1SBSa7_HmU901gbIjM5sRMiwEjAfa0RH7" alt="Moebius CXXVIII - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CXXVIII</p>
+                <p class="details">2014 · Poliéster y Piedra de San Vicente · 220 x 180 x 180 cm</p>
+                <p class="price">38.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/16K0GQaSYiUdI7R2OHx4pH7D4fkjUAswC" alt="Moebius LXXXI - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius LXXXI</p>
+                <p class="details">2014 · Hierro - Basalt · 179 x 24 x 24 cm</p>
+                <p class="price">7.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1D231V2mLrX2n0WzgSFhZuaG0lH3BcnX3" alt="Moebius XXVIII - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius XXVIII</p>
+                <p class="details">1995 · Piedra de Ulldecona · 31 x 69 x 23 cm</p>
+                <p class="price">7.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1kzgcDMOGEFZ-V-M2iwJAGVXBlk9wh4Qq" alt="Moebius CLIV - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CLIV</p>
+                <p class="details">2018 · Poliester, Piedra, Madera · 375 x 160 x 160 cm</p>
+                <p class="price">37.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1wDIoYhWdHJqXSg4DLoznHdhWaTs-HEE5" alt="Moebius CLX - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CLX</p>
+                <p class="details">2019 · Madera Bubinga, Hierro · 160 x 40 x 8 cm</p>
+                <p class="price">19.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1D231V2mLrX2n0WzgSFhZuaG0lH3BcnX3" alt="Moebius CLXXXVII - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CLXXXVII</p>
+                <p class="details">2023 · Poliéster, Mármol · 200 x 100 x 100 cm</p>
+                <p class="price">36.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1r1NN6nwUfgMDtdGbBqhfs9z7ADk4m0yz" alt="Moebius CXL - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CXL</p>
+                <p class="details">2016 · Mármol de Carrara y Granito · 233 x 40 x 40 cm</p>
+                <p class="price">16.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/13gEFiIuUPnowouE4HV630ak4Rmg35ROy" alt="Moebius CXLII - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CXLII</p>
+                <p class="details">2016 · Mármol de Carrara y Granito · 215 x 40 x 40 cm</p>
+                <p class="price">28.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1xsDHLX2k5Y-L6ZDs7QUG84WRCC5UyHvy" alt="Moebius CXXXIV - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius CXXXIV</p>
+                <p class="details">2016 · Mármol Carrara · 220 x 35 x 24 cm</p>
+                <p class="price">16.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1l1c4PpR3_PsBfi3gA6nmdxyFxTLOdYwU" alt="Moebius LXXXII - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius LXXXII</p>
+                <p class="details">2004 · Mármol Carrara · 150 x 100 x 100 cm</p>
+                <p class="price">20.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1Tpl1EzYQCiWaDhXb8WNQEbrNQzGYkXP1" alt="Moebius XLVIII - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">Moebius XLVIII</p>
+                <p class="details">2005 · Hierro · 42 x 48 x 36 cm</p>
+                <p class="price">4.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1ppqo2AJg4W0MbRYo9Kzwpm9b6mOTTJ32" alt="S/T - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Mármol Carrara · 19 x 54 x 31 cm</p>
+                <p class="price">7.800 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1n-tVhtAC1n105p5lbBwD3X2wKgdCvtv-" alt="S/T - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Bronce/Hierro · 147 x 72 x 34 cm</p>
+                <p class="price">21.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1Kob5z08e59suqNvb2n7WjSOTLapKJDTy" alt="S/T - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Madera de Noguera · 52 x 25 x 25 cm</p>
+                <p class="price">7.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/13MKJwphtb0pW2XnjP7vFvzfxoUHOWyyB" alt="S/T - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Mármol Carrara · 60 x 15 x 13 cm</p>
+                <p class="price">7.800 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/1zz99TnHTjk9XdpOLtsX3rN4bm3OoTM7M" alt="S/T - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Mármol Carrara · 84 x 49,5 x 9 cm</p>
+                <p class="price">6.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/17ViF74NyTkMTK7y2nInEKU2Lu_TMN_CS" alt="S/T - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Mármol Calatorao/Hierro · 189 x 35 x 35 cm</p>
+                <p class="price">7.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="canals,-josep">
+            <img src="https://lh3.googleusercontent.com/d/145eCSyUCj3wu45vO-srVrlNYecMm5KxR" alt="S/T - Canals, Josep">
+            <div class="info">
+                <h3 class="artist">Canals, Josep</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Mármol Calatorao/Hierro · 174 x 16 x 16 cm</p>
+                <p class="price">6.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="caro,-anthony">
+            <img src="https://lh3.googleusercontent.com/d/1cVG8DeVFWphhjKE92rhVF0BMbllBGH8q" alt="Music Box - Caro, Anthony">
+            <div class="info">
+                <h3 class="artist">Caro, Anthony</h3>
+                <p class="title">Music Box</p>
+                <p class="details">2001 · Bronce · 28 x 20 x 18 cm</p>
+                <p class="price">50.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="cuixart,-modest">
+            <img src="https://lh3.googleusercontent.com/d/161_yGt3dlrMqlfL2UEkAOOS2o6nqWD-9" alt="Caricia - Cuixart, Modest">
+            <div class="info">
+                <h3 class="artist">Cuixart, Modest</h3>
+                <p class="title">Caricia</p>
+                <p class="details">1953 · Mixta sobre papel · 23 x 25 cm</p>
+                <p class="price">6.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="dalí,-salvador">
+            <img src="https://lh3.googleusercontent.com/d/1EWfS8-_207wL_N2UU2OTaKF8M2Q9elZ2" alt="Estudio para la película “Destino” de Walt Disney - Dalí, Salvador">
+            <div class="info">
+                <h3 class="artist">Dalí, Salvador</h3>
+                <p class="title">Estudio para la película “Destino” de Walt Disney</p>
+                <p class="details">1946 · Tinta sobre papel · 17 x 22 cm</p>
+                <p class="price">45.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="dalí,-salvador">
+            <img src="https://lh3.googleusercontent.com/d/1Jf2Vw6dZ-OKEzT0XfH2s0sU_qfTBjQH7" alt="Estudio para la estatua de Zeus en el Olimpo - Dalí, Salvador">
+            <div class="info">
+                <h3 class="artist">Dalí, Salvador</h3>
+                <p class="title">Estudio para la estatua de Zeus en el Olimpo</p>
+                <p class="details">1954 · Acuarela · 15 x 13 cm</p>
+                <p class="price">67.600 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="dalí,-salvador">
+            <img src="https://lh3.googleusercontent.com/d/1E7uiwKzKuqGgOqKHe5oG4lQ3NKV9jXVu" alt="Estudi per La Invención de los Monstruos - Dalí, Salvador">
+            <div class="info">
+                <h3 class="artist">Dalí, Salvador</h3>
+                <p class="title">Estudi per La Invención de los Monstruos</p>
+                <p class="details">1937 · Pluma y tinta china sobre papel · 22,5 x 28,9 cm</p>
+                <p class="price">52.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="dalí,-salvador">
+            <img src="https://lh3.googleusercontent.com/d/15_ABSEBQQDDg9VwvnAuRN5T3nKx7QHvx" alt="Estudio para el Templo de Diana - Dalí, Salvador">
+            <div class="info">
+                <h3 class="artist">Dalí, Salvador</h3>
+                <p class="title">Estudio para el Templo de Diana</p>
+                <p class="details">1954 · Tinta sepia y acuarela sobre papel · 13.7 x 19.7 cm</p>
+                <p class="price">67.600 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="feito,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1PBXJaD6tapkPDwuqJWMBEeYpyCyzyw_F" alt="S/T - Feito, Luis">
+            <div class="info">
+                <h3 class="artist">Feito, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details">1970 · Mixta sobre papel · 50 x 65 cm</p>
+                <p class="price">9.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="gargallo,-pablo">
+            <img src="https://lh3.googleusercontent.com/d/1B3v649nAzZVidOBwF6WgVilNH8tF7wso" alt="Petit Tors - Gargallo, Pablo">
+            <div class="info">
+                <h3 class="artist">Gargallo, Pablo</h3>
+                <p class="title">Petit Tors</p>
+                <p class="details">1934 · Mármol Bélgica · 25 x 8,5 x 7 cm</p>
+                <p class="price">50.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/1B-W0ATwZJ5qadfeDaIZJidgxR2xEy4ED" alt="FM16 - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">FM16</p>
+                <p class="details">2016 · Técnica mixta sobre lienzo y madera · 14 x 52,2x 2,7 cm</p>
+                <p class="price">5.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/1wRdBzvfqPnkxYRno7N7gvS44mNtoxPbf" alt="PVM16 - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">PVM16</p>
+                <p class="details">2016 · Técnica mixta sobre lienzo y madera · 11 x 52,3 x 2,7 cm</p>
+                <p class="price">5.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/1Lw_twPgS1VC96bqh2vyuR9JCOWzvLgrg" alt="RMM16 - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">RMM16</p>
+                <p class="details">2016 · Técnica mixta sobre lienzo y madera · 13,7 x 52,2 x 2 cm</p>
+                <p class="price">5.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/1Q42gwA7XDRkq70zSS-wS2M4_UchMiDsA" alt="S/T, Catalogado - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">S/T, Catalogado</p>
+                <p class="details">2021 · Técnica mixta sobre lienzo y madera · 19  x 30 x 4 cm</p>
+                <p class="price">5.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/13uGnkwMcJYRb2z4MDJQ3uqu6KZEai8ab" alt="S/T - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">S/T</p>
+                <p class="details">2020 · Técnica mixta sobre lienzo y madera · 15 x 47,5 x 35 cm</p>
+                <p class="price">5.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/1AuJ_8L4gu1KisHkG9_ZYRxTDvJhQqfTw" alt="S/T, Catalogado - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">S/T, Catalogado</p>
+                <p class="details">2021 · Técnica mixta sobre lienzo y madera · 14,5 x 36,5 x 2,7 cm</p>
+                <p class="price">5.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/1GFhbtiKWdJ2_dOLRw0ISSpyte05EFXTE" alt="S/T - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">S/T</p>
+                <p class="details">2021 · Técnica mixta sobre lienzo y madera · 13,3  x 52,3 x 2,5 cm</p>
+                <p class="price">5.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/1-CyZerF9LO8gxSkGbAfCNhWwxDhW2Qem" alt="TGC 15 - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">TGC 15</p>
+                <p class="details">2015 · Técnica mixta sobre lienzo y madera · 10 x 35,5 x 2,5 cm</p>
+                <p class="price">5.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/1bPz12VDEGYlnx8Rm1Bakp2atPnhEnUH9" alt="TS16 - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">TS16</p>
+                <p class="details">2016 · Técnica mixta sobre lienzo y madera · 15 x 52,3 x 2,7 cm</p>
+                <p class="price">5.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="juan-de-andrés">
+            <img src="https://lh3.googleusercontent.com/d/10afJUi2lbtbkZ6w2bdCiGRkBYdoiN83V" alt="S/T, Catalogado - Juan de Andrés">
+            <div class="info">
+                <h3 class="artist">Juan de Andrés</h3>
+                <p class="title">S/T, Catalogado</p>
+                <p class="details"> · Técnica mixta sobre lienzo y madera · 177.5 x 83 x 30 cms</p>
+                <p class="price">28.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="millares,-manolo">
+            <img src="https://lh3.googleusercontent.com/d/1dl4ySGDKoySM5J0SrH3UiPvZgOcr4RDG" alt="S/T (Antropofauna) - Millares, Manolo">
+            <div class="info">
+                <h3 class="artist">Millares, Manolo</h3>
+                <p class="title">S/T (Antropofauna)</p>
+                <p class="details">1970 · Mixta sobre papel · 54 x 75 cm</p>
+                <p class="price">25.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="miró,-joan">
+            <img src="https://lh3.googleusercontent.com/d/19oowTbfM95zUIeE7ypu308bUeY-bltSc" alt="Germinació nocturna - Miró, Joan">
+            <div class="info">
+                <h3 class="artist">Miró, Joan</h3>
+                <p class="title">Germinació nocturna</p>
+                <p class="details">1955 · Litografia sobre papel · 76 x 56 cm</p>
+                <p class="price">11.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="miró,-joan">
+            <img src="https://lh3.googleusercontent.com/d/1E30i0cON34oW3rcCBqd6fuBXOK9vRlZp" alt="Serie Barcelona - Miró, Joan">
+            <div class="info">
+                <h3 class="artist">Miró, Joan</h3>
+                <p class="title">Serie Barcelona</p>
+                <p class="details"> · Prueba de taller. Aguafuerte, aguatinta y carborundum sobre papel · 67,8 x 104 cm</p>
+                <p class="price">8.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="picasso,-pablo">
+            <img src="https://lh3.googleusercontent.com/d/1IoyTDDEVQHRft_Zide3WiPF33-qcd-Qt" alt="S/T - Picasso, Pablo">
+            <div class="info">
+                <h3 class="artist">Picasso, Pablo</h3>
+                <p class="title">S/T</p>
+                <p class="details">1971 · Aguafuerte y punta seca · 21 x 15 cm</p>
+                <p class="price">12.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="serrano,-pablo">
+            <img src="https://lh3.googleusercontent.com/d/1cj2jhAp_RnaYshpWXqLRKvmN_-Aerkgn" alt="Bóveda para el hombre - Serrano, Pablo">
+            <div class="info">
+                <h3 class="artist">Serrano, Pablo</h3>
+                <p class="title">Bóveda para el hombre</p>
+                <p class="details">1970-72 · Bronce patinado · 70 x 60 x 50 cm</p>
+                <p class="price">35.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="serrano,-pablo">
+            <img src="https://lh3.googleusercontent.com/d/13NxBLMVWqh914tP2rKl0LyWxrYd381Ax" alt="Unidad Yunta - Serrano, Pablo">
+            <div class="info">
+                <h3 class="artist">Serrano, Pablo</h3>
+                <p class="title">Unidad Yunta</p>
+                <p class="details">1975 · Bronce · 21 x 41 x 18, cm</p>
+                <p class="price">8.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="serrano,-pablo">
+            <img src="https://lh3.googleusercontent.com/d/1A9zuQ5bB9oyuAw0Y_AbTE6bTx6ai-Kko" alt="Unidades Yunta - Serrano, Pablo">
+            <div class="info">
+                <h3 class="artist">Serrano, Pablo</h3>
+                <p class="title">Unidades Yunta</p>
+                <p class="details">1970-72 · Bronce · 12 x 25 x 13 cm</p>
+                <p class="price">5.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="tàpies,-antoni">
+            <img src="https://lh3.googleusercontent.com/d/1FUEEcUeOUv-aEhYyY4N6Y56flsbXbgWN" alt="S/T - Tàpies, Antoni">
+            <div class="info">
+                <h3 class="artist">Tàpies, Antoni</h3>
+                <p class="title">S/T</p>
+                <p class="details">1991 · Pintura, barniz y lápices sobre contracubierta de catálogo · 40 x 41 x 18,5 cm</p>
+                <p class="price">27.000 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1k3t7esd5Uzeq4w6RiaMte-bKab5RMeSH" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 81,5 x 122 cm</p>
+                <p class="price">4.060 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1AdtGNhAYwl6MLqPj8Y1jcZQ8avzk81Fq" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 130 x 195 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1Gq6abgIkqQ2dqW_js-mJ12C6Wkp8072W" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 113 x 169 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1ethEMijcMLHBuRjc8yMjn4LBAemF3erP" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 113 x 169 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1LqzGexT1P1dlCg18UA20JXbq_fNsuC4p" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 130 x 162 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1Odo8ZlbYq-n-1kdtYEr7kFJHKo-XUuSD" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 195x 260 cm</p>
+                <p class="price">9.100 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1n6uxDHe41ZZH5gsJP5OBGpv34e28vgdk" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 162 x 130 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1xf3hybMs7u4QV8eiaX9hqTxJzBMkaWPl" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 130 x 195 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1ThppNJb_S5BOKeJlwusbJgQDT4AEbLsF" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 130 x 195 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1Pxoa0EeW3XyAoD7DXK-sENERpFasP1eX" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 129 x 194 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1e9tWS3_0EmfuZdKmr4tZde35hvqC0LPU" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 135 x 185 cm</p>
+                <p class="price">6.400 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/11iyteAkGmKtXn2Je_M-HYTVhm_-NngdS" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 130 x 195 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1tTahGO9es3pzC3UPVXJJZ6hPHXNGm4-A" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 130x 162 cm</p>
+                <p class="price">5.900 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1XT62NhkWPmsVGDnYea3A1fgye1_U4lnY" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 123 x 163 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="krauel,-luis">
+            <img src="https://lh3.googleusercontent.com/d/1SJwM-ILBYHrr_wFivVNaFEbaqelaQbeD" alt="S/T - Krauel, Luis">
+            <div class="info">
+                <h3 class="artist">Krauel, Luis</h3>
+                <p class="title">S/T</p>
+                <p class="details"> · Oleo sobre tela · 130 x 195 cm</p>
+                <p class="price">6.500 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="sánchez,-xaro">
+            <img src="https://lh3.googleusercontent.com/d/1-_d8z8ZyFld_Ond9BsgFvroY04PnH8Jp" alt="Fill no desitjat - Sánchez, Xaro">
+            <div class="info">
+                <h3 class="artist">Sánchez, Xaro</h3>
+                <p class="title">Fill no desitjat</p>
+                <p class="details"> · Alcogravat s/p Hahnemüle · 106,8 x 69,2 cm (plancha)</p>
+                <p class="price">1.200 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="sánchez,-xaro">
+            <img src="https://lh3.googleusercontent.com/d/1qVrVBLM6txo8UpAfKiNWTZrMnB0kWaAH" alt="Mare abusadora - Sánchez, Xaro">
+            <div class="info">
+                <h3 class="artist">Sánchez, Xaro</h3>
+                <p class="title">Mare abusadora</p>
+                <p class="details"> · Alcogravat s/p Hahnemüle · 106,9 x 68,9 cm (plancha)</p>
+                <p class="price">1.200 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="sánchez,-xaro">
+            <img src="https://lh3.googleusercontent.com/d/10WYb0DVIV-URV-2e7G-oIjRmjnOYakKb" alt="Munchausen per poders - Sánchez, Xaro">
+            <div class="info">
+                <h3 class="artist">Sánchez, Xaro</h3>
+                <p class="title">Munchausen per poders</p>
+                <p class="details">2008 · Alcogravat s/p Hahnemüle · 69,2 x 106,8 cm (plancha)</p>
+                <p class="price">1.200 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="sánchez,-xaro">
+            <img src="https://lh3.googleusercontent.com/d/16XjpXd3cHIguBvL__lT0DX9DnSNKtjS6" alt="Pare abusador - Sánchez, Xaro">
+            <div class="info">
+                <h3 class="artist">Sánchez, Xaro</h3>
+                <p class="title">Pare abusador</p>
+                <p class="details"> · Alcogravat s/p Hahnemüle · 106,8 x 69,2 cm (plancha)</p>
+                <p class="price">1.200 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="sánchez,-xaro">
+            <img src="https://lh3.googleusercontent.com/d/1hij4xwEVxAkRWnevOVZ0QZHXsov3m75O" alt="Pederasta - Sánchez, Xaro">
+            <div class="info">
+                <h3 class="artist">Sánchez, Xaro</h3>
+                <p class="title">Pederasta</p>
+                <p class="details"> · Alcogravat s/p Hahnemüle · 106,8 x 69,2 cm (plancha)</p>
+                <p class="price">1.200 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="sánchez,-xaro">
+            <img src="https://lh3.googleusercontent.com/d/1hpjE76OYM8Ep7Sw2V36WXuG0ZLjPt_st" alt="Psicòpat - Sánchez, Xaro">
+            <div class="info">
+                <h3 class="artist">Sánchez, Xaro</h3>
+                <p class="title">Psicòpat</p>
+                <p class="details"> · Alcogravat s/p Hahnemüle · 39,5 x 28,5cm (plancha)</p>
+                <p class="price">1.200 €</p>
+            </div>
+        </div>
+    
+        <div class="artwork" data-artist="sánchez,-xaro">
+            <img src="https://lh3.googleusercontent.com/d/1wImaAaYtbSg_YWdoJl55j4Cdagdd0Uq3" alt="Violència vicària - Sánchez, Xaro">
+            <div class="info">
+                <h3 class="artist">Sánchez, Xaro</h3>
+                <p class="title">Violència vicària</p>
+                <p class="details"> · Alcogravat s/p Hahnemüle · 106,6 x 69,5 cm (plancha)</p>
+                <p class="price">1.200 €</p>
+            </div>
+        </div>
+    
+    </section>
+
+    <footer>
+        <p>ENLACE ART IN PROGRESS · <a href="https://enlaceartinprogress.com" class="website" target="_blank">enlaceartinprogress.com</a></p>
+        <p style="margin-top:10px; font-size:12px;">Todas las obras están sujetas a disponibilidad · Precios no incluyen gastos de envío ni impuestos aplicables</p>
+    </footer>
+    
+    <script>
+        const filterSelect = document.getElementById('artist-filter');
+        filterSelect.addEventListener('change', function() {
+            const selected = this.value;
+            const artworks = document.querySelectorAll('.artwork');
+            artworks.forEach(art => {
+                if (selected === 'all' || art.dataset.artist === selected) {
+                    art.style.display = 'block';
+                } else {
+                    art.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
