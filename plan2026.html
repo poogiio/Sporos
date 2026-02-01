@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Estratégico Retail 2026 | Tiendas</title>
+    <style>
+        :root {
+            --primary: #0f172a; /* Azul noche elegante */
+            --accent: #3b82f6; /* Azul vibrante para acciones */
+            --success: #10b981; /* Verde para resultados */
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header / Hero */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
+        .subtitle { font-size: 1.2rem; color: #cbd5e1; margin-top: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: -3rem auto 2rem;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 { color: var(--primary); border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 0.5rem; margin-top: 0; }
+        h3 { color: var(--text); margin-top: 1.5rem; }
+
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+
+        /* Visual Elements for "Las 4 Palancas" */
+        .pillar-card {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent);
+            transition: transform 0.2s;
+        }
+        .pillar-card:hover { transform: translateY(-5px); background: white; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .pillar-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+        /* Chart Placeholder (CSS Only) */
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 200px;
+            margin-top: 2rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .bar-group { text-align: center; width: 20%; }
+        .bar { width: 100%; border-radius: 4px 4px 0 0; position: relative; }
+        .bar.bad { background: #cbd5e1; height: 80%; } /* Inventario malo */
+        .bar.good { background: var(--success); height: 120%; box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); } /* Ventas Top */
+        .bar-label { font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-light); }
+
+        /* Timeline / Roadmap */
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .month-tag {
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            align-self: flex-start;
+        }
+
+        /* Checklists */
+        ul.checklist { list-style: none; padding: 0; }
+        ul.checklist li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+        }
+        ul.checklist li:before {
+            content: '✔';
+            color: var(--success);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .container { margin-top: -1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Plan de Trabajo 2026</h1>
+    <p class="subtitle">Tiendas Pals & Besalú | Estrategia de Retail Turístico</p>
+</header>
+
+<div class="container">
+
+    <div class="card" style="text-align: center;">
+        <h2 style="border:none;">🎯 Tu Meta Principal</h2>
+        <p style="font-size: 1.3rem; font-weight: bold; color: var(--primary);">
+            "Aumentar el dinero generado por cada día que la tienda está abierta." 
+        </p>
+        <p style="color: var(--text-light);">
+            No buscamos "vender más trabajando más", sino "no perder ventas que ya estaban ahí".
+        </p>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h2>⛔ El Error Común</h2>
+            <p>Ante la bajada de ventas, lo tradicional es:</p>
+            <ul style="color: #ef4444;">
+                <li>Reducir compras y variedad.</li>
+                <li>Intentar "optimizar costes" a ciegas.</li>
+                <li>Presionar márgenes.</li>
+            </ul>
+            <p><strong>Resultado:</strong> Menos variedad = peor percepción = clientes que se van.</p>
+        </div>
+        <div class="card">
+            <h2>✅ La Solución 2026</h2>
+            <p>El cliente turístico no vuelve mañana ni acepta sustitutos. La clave es:</p>
+            <ul class="checklist">
+                <li>Disponibilidad perfecta de lo que se vende solo.</li>
+                <li>Eliminar lo que estorba (inventario lento).</li>
+                <li>Claridad visual en menos de 10 segundos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🛠️ Las 4 Palancas de Acción </h2>
+        <p>Estas son las únicas acciones que realmente mueven la aguja en tu negocio:</p>
+        
+        <div class="grid-4" style="margin-top: 2rem;">
+            <div class="pillar-card">
+                <span class="pillar-icon">💎</span>
+                <strong>1. Disponibilidad Perfecta</strong>
+                <p style="font-size:0.9rem;">El 20% de tus productos generan el 70% del dinero. Que nunca falten.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-icon">📉</span>
+                <strong>2. Reducir Inventario Malo</strong>
+                <p style="font-size:0.9rem;">Liquida lo lento. Usa ese espacio y dinero para reforzar lo rápido.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-icon">👀</span>
+                <strong>3. Flujo y Presentación</strong>
+                <p style="font-size:0.9rem;">Si el cliente tarda >15 seg en entender la tienda, se va. Organiza por zonas claras.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-icon">🎁</span>
+                <strong>4. Diferenciación Real</strong>
+                <p style="font-size:0.9rem;">Packs de regalo, historia local y exclusividad. Sube el ticket medio sin subir precios.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📊 ¿Qué analizar primero?</h2>
+        <p>No analices todo a la vez. Sigue este orden estricto de prioridad:</p>
+        
+        <div style="display: flex; gap: 10px; margin: 2rem 0; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px; background: #e0f2fe; padding: 1rem; border-radius: 8px; border: 2px solid #0ea5e9;">
+                <h4 style="margin:0; color:#0369a1;">GRUPO 1: TOP DINERO </h4>
+                <p style="font-size: 0.85rem;">10-20 productos que pagan las facturas. Proteger a toda costa.</p>
+            </div>
+            <div style="flex: 1; min-width: 200px; background: #f0fdf4; padding: 1rem; border-radius: 8px; border: 2px solid #22c55e;">
+                <h4 style="margin:0; color:#15803d;">GRUPO 2: TOP UNIDADES </h4>
+                <p style="font-size: 0.85rem;">Imanes, llaveros. Puerta de entrada y volumen.</p>
+            </div>
+            <div style="flex: 1; min-width: 200px; background: #fff7ed; padding: 1rem; border-radius: 8px; border: 2px solid #f97316;">
+                <h4 style="margin:0; color:#c2410c;">GRUPO 3: REGALO FÁCIL </h4>
+                <p style="font-size: 0.85rem;">Packs y piezas medianas (15-40€). Decisión rápida.</p>
+            </div>
+            <div style="flex: 1; min-width: 200px; background: #faf5ff; padding: 1rem; border-radius: 8px; border: 2px solid #a855f7;">
+                <h4 style="margin:0; color:#7e22ce;">GRUPO 4: LOCAL HEROES </h4>
+                <p style="font-size: 0.85rem;">Diferenciales. Justifican la visita y suben prestigio.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📅 Plan de Ejecución: 90 Días</h2>
+        
+        <div class="timeline-item">
+            <div>
+                <span class="month-tag">Mes 1: Limpieza y Foco</span>
+                <h3>Clasificación y Liquidación </h3>
+                <ul class="checklist">
+                    <li>Identificar el TOP 20 productos por dinero generado.</li>
+                    <li>Detectar faltantes frecuentes en estos productos.</li>
+                    <li>Liquidar agresivamente inventario lento (hacer espacio).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div>
+                <span class="month-tag" style="background: var(--accent);">Mes 2: Ajuste Visual</span>
+                <h3>Diseño y Oferta </h3>
+                <ul class="checklist">
+                    <li>Ajustar las compras futuras SOLO a productos clave.</li>
+                    <li>Rediseñar las "zonas calientes" de la tienda.</li>
+                    <li>Crear Packs de Regalo (Pals/Besalú) y definir productos ancla.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div>
+                <span class="month-tag" style="background: var(--success);">Mes 3: Estabilización</span>
+                <h3>Medición y Rutina </h3>
+                <ul class="checklist">
+                    <li>Medir ventas diarias comparables.</li>
+                    <li>Ajustar reposición basada en consumo real, no en previsión anual.</li>
+                    <li>Consolidar el sistema operativo.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="background: var(--primary); color: white;">
+        <h2 style="color: white; border-color: white;">🚀 Resultado Esperable</h2>
+        <div class="grid-2">
+            <div>
+                <p style="font-size: 1.1rem;">Sin aumentar gastos fijos y sin publicidad masiva, esperamos:</p>
+                <ul>
+                    <li><strong>+10-20%</strong> en Ventas brutas.</li>
+                    <li><strong>+20%</strong> en Beneficio neto.</li>
+                    <li>Menos estrés operativo.</li>
+                </ul>
+            </div>
+            <div style="text-align: right; align-self: center;">
+                <span style="font-size: 4rem;">📈</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <p>"Aquí es donde se gana o se pierde el 2026. Sé concreto y lógico."</p>
+    </div>
+
+</div>
+
+</body>
+</html>
