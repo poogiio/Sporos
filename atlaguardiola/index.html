@@ -1270,13 +1270,33 @@
         const contactForm = document.getElementById('contact-form');
         
         contactForm.addEventListener('submit', function(e) {
-            // Si no tienes Formspree configurado, prevenir el envío y mostrar mensaje
-            if (this.action.includes('YOUR_FORM_ID')) {
-                e.preventDefault();
-                alert('¡Gracias por tu interés! Por favor, llámanos al 972 641 234 o escríbenos por WhatsApp para solicitar tu cita.');
-            }
-            // Si tienes Formspree configurado, el formulario se enviará normalmente
-        });
+    e.preventDefault();
+    
+    // Recoger datos del formulario
+    const nombre = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const telefono = document.getElementById('phone').value;
+    const servicio = document.getElementById('service').value;
+    const mensaje = document.getElementById('message').value;
+    
+    // Construir mensaje para WhatsApp
+    let textoWhatsApp = `*Nueva solicitud de cita*%0A%0A`;
+    textoWhatsApp += `*Nombre:* ${encodeURIComponent(nombre)}%0A`;
+    textoWhatsApp += `*Email:* ${encodeURIComponent(email)}%0A`;
+    textoWhatsApp += `*Teléfono:* ${encodeURIComponent(telefono)}%0A`;
+    if (servicio) {
+        textoWhatsApp += `*Servicio:* ${encodeURIComponent(servicio)}%0A`;
+    }
+    if (mensaje) {
+        textoWhatsApp += `*Mensaje:* ${encodeURIComponent(mensaje)}`;
+    }
+    
+    // Abrir WhatsApp con el mensaje
+    window.open(`https://wa.me/34649072362?text=${textoWhatsApp}`, '_blank');
+    
+    // Limpiar formulario
+    contactForm.reset();
+});
 
         // Intersection Observer for fade-in animations
         const observerOptions = {
