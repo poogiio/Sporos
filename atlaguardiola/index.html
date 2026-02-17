@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Autotaller La Guardiola - Taller mecánico multimarca en La Bisbal d'Empordà con más de 20 años de experiencia. Servicio profesional, precios competitivos y atención personalizada.">
+    <meta name="keywords" content="taller mecánico, La Bisbal d'Empordà, reparación automóviles, mantenimiento coches, mecánico Girona">
+    <title>Autotaller La Guardiola | Taller Mecánico en La Bisbal d'Empordà</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts - Distinctive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutomotiveBusiness",
+      "name": "Autotaller La Guardiola",
+      "image": "https://images.unsplash.com/photo-1632823469883-e78daf080781?w=1200",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Carrer Ramon Muntaner, 22",
+        "addressLocality": "La Bisbal d'Empordà",
+        "addressRegion": "Girona",
+        "postalCode": "17100",
+        "addressCountry": "ES"
+      },
+      "telephone": "+34972641234",
+      "email": "a.t.laguardiola@gmail.com",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "15:00",
+          "closes": "19:30"
+        }
+      ],
+      "priceRange": "€€"
+    }
+    </script>
+    
+    <style>
+        /* Custom CSS Variables */
+        :root {
+            --primary-blue: #1E3A8A;
+            --accent-orange: #F97316;
+            --light-gray: #F3F4F6;
+            --dark-gray: #374151;
+            --text-dark: #111827;
+        }
+        
+        /* Custom Fonts */
+        body {
+            font-family: 'Work Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, .logo-text {
+            font-family: 'Russo One', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Mechanical Texture Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(30, 58, 138, 0.02) 49%, rgba(30, 58, 138, 0.02) 51%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(30, 58, 138, 0.02) 49%, rgba(30, 58, 138, 0.02) 51%, transparent 51%);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Navbar Sticky */
+        .navbar-sticky {
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Hero Section */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(30, 58, 138, 0.85) 100%);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Card Hover Effects */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.15);
+        }
+        
+        /* CTA Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #ea580c 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 55px;
+            height: 55px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .back-to-top:hover {
+            background: var(--accent-orange);
+            transform: translateY(-5px);
+        }
+        
+        .back-to-top.show {
+            display: flex;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Gallery Grid */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.15);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(30, 58, 138, 0.8) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            animation: fadeInUp 0.4s ease-out;
+        }
+        
+        /* Testimonial Cards */
+        .testimonial-card {
+            background: white;
+            border-left: 4px solid var(--accent-orange);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Section Decorations */
+        .section-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        /* Form Styles */
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+        }
+        
+        /* Staggered Animations */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#inicio" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-900 to-blue-700 rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                        <i class="fas fa-car text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="logo-text text-xl text-blue-900 leading-tight">Autotaller</div>
+                        <div class="text-xs text-orange-500 font-semibold uppercase tracking-wider">La Guardiola</div>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-700 hover:text-orange-500 font-medium transition-colors">Inicio</a>
+                    <a href="#servicios" class="text-gray-700 hover:text-orange-500 font-medium transition-colors">Servicios</a>
+                    <a href="#nosotros" class="text-gray-700 hover:text-orange-500 font-medium transition-colors">Nosotros</a>
+                    <a href="#galeria" class="text-gray-700 hover:text-orange-500 font-medium transition-colors">Galería</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-orange-500 font-medium transition-colors">Contacto</a>
+                    <a href="tel:+34972641234" class="btn-primary text-white px-6 py-3 rounded-full font-semibold flex items-center space-x-2">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Llamar Ahora</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-80 h-full bg-white shadow-2xl z-50 md:hidden">
+        <div class="p-6">
+            <button id="close-menu" class="absolute top-6 right-6 text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mt-16 space-y-6">
+                <a href="#inicio" class="block text-lg text-gray-700 hover:text-orange-500 font-medium transition-colors menu-link">Inicio</a>
+                <a href="#servicios" class="block text-lg text-gray-700 hover:text-orange-500 font-medium transition-colors menu-link">Servicios</a>
+                <a href="#nosotros" class="block text-lg text-gray-700 hover:text-orange-500 font-medium transition-colors menu-link">Nosotros</a>
+                <a href="#galeria" class="block text-lg text-gray-700 hover:text-orange-500 font-medium transition-colors menu-link">Galería</a>
+                <a href="#contacto" class="block text-lg text-gray-700 hover:text-orange-500 font-medium transition-colors menu-link">Contacto</a>
+                <a href="tel:+34972641234" class="btn-primary text-white px-6 py-4 rounded-full font-semibold flex items-center justify-center space-x-2 mt-8">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Llamar Ahora</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-20 min-h-screen flex items-center">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1632823469883-e78daf080781?w=1920&q=80" 
+                 alt="Taller mecánico profesional" 
+                 class="w-full h-full object-cover"
+                 loading="eager">
+            <div class="hero-gradient absolute inset-0"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="max-w-3xl">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 fade-in-up">
+                    Tu Taller de Confianza en <span class="text-orange-500">La Bisbal d'Empordà</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-100 mb-8 fade-in-up stagger-2">
+                    Más de 20 años de experiencia en mantenimiento y reparación de automóviles. Servicio profesional, precios competitivos y atención personalizada.
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 mb-12 fade-in-up stagger-3">
+                    <a href="tel:+34972641234" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center space-x-3">
+                        <i class="fas fa-phone-alt text-xl"></i>
+                        <span>972 641 234</span>
+                    </a>
+                    <a href="https://wa.me/34972641234" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="#contacto" class="btn-secondary bg-white text-blue-900 px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center space-x-3">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Pide Cita</span>
+                    </a>
+                </div>
+                
+                <!-- Trust Indicators -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 fade-in-up stagger-4">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20">
+                        <div class="text-4xl font-bold text-orange-500 mb-2">20+</div>
+                        <div class="text-white font-medium">Años de Experiencia</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20">
+                        <div class="text-4xl font-bold text-orange-500 mb-2">
+                            <i class="fas fa-star"></i> 5.0
+                        </div>
+                        <div class="text-white font-medium">Valoración Clientes</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20">
+                        <div class="text-4xl font-bold text-orange-500 mb-2">100%</div>
+                        <div class="text-white font-medium">Trabajo Garantizado</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 float-animation">
+            <a href="#nosotros" class="text-white flex flex-col items-center space-y-2">
+                <span class="text-sm uppercase tracking-wider">Descubre más</span>
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="relative py-20 bg-white overflow-hidden">
+        <div class="section-decoration top-10 right-10"></div>
+        <div class="section-decoration bottom-20 left-10"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Image -->
+                <div class="relative">
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-orange-500 rounded-full opacity-20"></div>
+                    <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80" 
+                         alt="Equipo Autotaller La Guardiola" 
+                         class="rounded-2xl shadow-2xl relative z-10 w-full"
+                         loading="lazy">
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-900 rounded-full opacity-20"></div>
+                </div>
+                
+                <!-- Content -->
+                <div>
+                    <div class="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+                        Sobre Nosotros
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
+                        Compromiso con la <span class="text-orange-500">Excelencia</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        En <strong>Autotaller La Guardiola</strong>, llevamos más de dos décadas cuidando de tu vehículo con la misma dedicación que el primer día. Somos un taller mecánico multimarca especializado en mantenimiento y reparación de automóviles, ubicado en el corazón de La Bisbal d'Empordà.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Nuestro equipo de profesionales cualificados trabaja con la última tecnología y herramientas de diagnóstico para ofrecerte un servicio completo, rápido y fiable. Creemos en la transparencia, la honestidad y en construir relaciones duraderas con nuestros clientes.
+                    </p>
+                    
+                    <!-- Values -->
+                    <div class="grid sm:grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-award text-orange-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-blue-900">Experiencia</h3>
+                                <p class="text-sm text-gray-600">Más de 20 años en el sector</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-handshake text-orange-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-blue-900">Honestidad</h3>
+                                <p class="text-sm text-gray-600">Diagnósticos claros y transparentes</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-bolt text-orange-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-blue-900">Rapidez</h3>
+                                <p class="text-sm text-gray-600">Servicio ágil sin perder calidad</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-euro-sign text-orange-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-blue-900">Precios Justos</h3>
+                                <p class="text-sm text-gray-600">Tarifas competitivas y sin sorpresas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contacto" class="btn-primary inline-flex items-center space-x-2 text-white px-8 py-4 rounded-full font-bold">
+                        <span>Visítanos Hoy</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+                    Nuestros Servicios
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+                    Soluciones Completas para tu <span class="text-orange-500">Vehículo</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Ofrecemos un servicio integral de mantenimiento y reparación con tecnología de última generación
+                </p>
+            </div>
+            
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-laptop-code text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Diagnóstico por Ordenador</h3>
+                    <p class="text-gray-600">Análisis completo con equipos de última generación para detectar cualquier problema electrónico.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-cog text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Mecánica General</h3>
+                    <p class="text-gray-600">Reparación de motor, cambios de correa de distribución y mantenimiento completo del sistema mecánico.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-brake-warning text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Frenos y Suspensión</h3>
+                    <p class="text-gray-600">Revisión y sustitución de pastillas, discos, embrague y sistema de suspensión completo.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-oil-can text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Cambio de Aceite</h3>
+                    <p class="text-gray-600">Mantenimiento preventivo con aceites de calidad y sustitución de filtros según especificaciones.</p>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-tire text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Neumáticos</h3>
+                    <p class="text-gray-600">Venta, montaje, equilibrado y alineación de neumáticos de primeras marcas.</p>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-snowflake text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Aire Acondicionado</h3>
+                    <p class="text-gray-600">Revisión, recarga y reparación de sistemas de climatización y aire acondicionado.</p>
+                </div>
+                
+                <!-- Service 7 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bolt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Electricidad</h3>
+                    <p class="text-gray-600">Reparación de sistemas eléctricos y electrónica del automóvil, baterías y alternadores.</p>
+                </div>
+                
+                <!-- Service 8 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-clipboard-check text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">Revisión Pre-ITV</h3>
+                    <p class="text-gray-600">Inspección completa antes de la ITV para garantizar que tu vehículo pase sin problemas.</p>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="text-center">
+                <p class="text-lg text-gray-600 mb-6">¿Necesitas un servicio específico?</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="tel:+34972641234" class="btn-primary text-white px-8 py-4 rounded-full font-bold flex items-center justify-center space-x-2">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Llámanos Ahora</span>
+                    </a>
+                    <a href="#contacto" class="btn-secondary px-8 py-4 rounded-full font-bold flex items-center justify-center space-x-2">
+                        <i class="fas fa-envelope"></i>
+                        <span>Pide Presupuesto</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20 bg-blue-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+                    ¿Por Qué Elegirnos?
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Tu Mejor Opción en <span class="text-orange-500">La Bisbal</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Reason 1 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-euro-sign text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Precios Competitivos</h3>
+                    <p class="text-gray-300">Tarifas justas y transparentes sin costes ocultos. Presupuestos claros antes de cualquier intervención.</p>
+                </div>
+                
+                <!-- Reason 2 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-user-tie text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Atención Personalizada</h3>
+                    <p class="text-gray-300">Trato cercano y profesional. Te asesoramos sobre el mejor mantenimiento para tu vehículo.</p>
+                </div>
+                
+                <!-- Reason 3 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Garantía Total</h3>
+                    <p class="text-gray-300">Todos nuestros trabajos están garantizados. Usamos repuestos de calidad certificada.</p>
+                </div>
+                
+                <!-- Reason 4 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-clock text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Servicio Rápido</h3>
+                    <p class="text-gray-300">Respetamos tu tiempo. Trabajamos con eficiencia sin comprometer la calidad del servicio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+                    Testimonios
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+                    Lo que Dicen Nuestros <span class="text-orange-500">Clientes</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Económico y buen servicio. Facilidad al dejar el vehículo."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-orange-500"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-blue-900">Antonio Jaen</div>
+                            <div class="text-sm text-gray-500">Cliente verificado</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Bon taller"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-orange-500"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-blue-900">Jordi Massot</div>
+                            <div class="text-sm text-gray-500">Cliente verificado</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                        <i class="fas fa-star text-orange-500"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Trato excelente y profesionalidad máxima. Siempre vuelvo para cualquier reparación. Totalmente recomendable."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-orange-500"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-blue-900">María García</div>
+                            <div class="text-sm text-gray-500">Cliente habitual</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+                    Galería
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+                    Nuestro Trabajo en <span class="text-orange-500">Imágenes</span>
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80" 
+                         alt="Diagnóstico por ordenador" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Diagnóstico Digital</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=600&q=80" 
+                         alt="Reparación de motor" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Mecánica de Precisión</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=600&q=80" 
+                         alt="Sistema de frenos" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Sistema de Frenos</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&q=80" 
+                         alt="Cambio de neumáticos" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Neumáticos</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80" 
+                         alt="Interior del taller" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Nuestras Instalaciones</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://imagenes.autobild.es/files/image_1280_720/uploads/imagenes/2023/05/29/68cd7f38bff18.jpeg" 
+                         alt="Equipo de trabajo" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Equipamiento Moderno</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&q=80" 
+                         alt="Revisión completa" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Revisiones Completas</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=80" 
+                         alt="Mantenimiento preventivo" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Mantenimiento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+                    Contacto
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+                    Estamos Aquí para <span class="text-orange-500">Ayudarte</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Visítanos, llámanos o escríbenos. Estaremos encantados de atenderte
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-6">Solicita tu Cita</h3>
+                    <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <div class="mb-6">
+                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Nombre completo *</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Teléfono *</label>
+                            <input type="tel" id="phone" name="phone" required 
+                                   class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="service" class="block text-sm font-semibold text-gray-700 mb-2">Servicio solicitado</label>
+                            <select id="service" name="service" 
+                                    class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none">
+                                <option value="">Selecciona un servicio</option>
+                                <option value="diagnostico">Diagnóstico por ordenador</option>
+                                <option value="mecanica">Mecánica general</option>
+                                <option value="frenos">Frenos y suspensión</option>
+                                <option value="aceite">Cambio de aceite</option>
+                                <option value="neumaticos">Neumáticos</option>
+                                <option value="aire">Aire acondicionado</option>
+                                <option value="electricidad">Electricidad</option>
+                                <option value="itv">Revisión pre-ITV</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Mensaje</label>
+                            <textarea id="message" name="message" rows="4" 
+                                      class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full text-white px-8 py-4 rounded-full font-bold flex items-center justify-center space-x-2">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Enviar Solicitud</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info & Map -->
+                <div>
+                    <!-- Contact Cards -->
+                    <div class="grid sm:grid-cols-2 gap-6 mb-8">
+                        <!-- Phone -->
+                        <a href="tel:+34972641234" class="bg-blue-900 text-white p-6 rounded-xl hover:bg-blue-800 transition-all duration-300 transform hover:scale-105">
+                            <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-phone-alt text-white text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Teléfono</h4>
+                            <p class="text-orange-300 font-semibold">972 641 234</p>
+                        </a>
+                        
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/34972641234" target="_blank" class="bg-green-500 text-white p-6 rounded-xl hover:bg-green-600 transition-all duration-300 transform hover:scale-105">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4">
+                                <i class="fab fa-whatsapp text-green-500 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">WhatsApp</h4>
+                            <p class="text-green-100 font-semibold">Escríbenos</p>
+                        </a>
+                        
+                        <!-- Email -->
+                        <a href="mailto:a.t.laguardiola@gmail.com" class="bg-orange-500 text-white p-6 rounded-xl hover:bg-orange-600 transition-all duration-300 transform hover:scale-105">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-envelope text-orange-500 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Email</h4>
+                            <p class="text-orange-100 font-semibold text-sm">a.t.laguardiola@gmail.com</p>
+                        </a>
+                        
+                        <!-- Address -->
+                        <div class="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800 p-6 rounded-xl">
+                            <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">Dirección</h4>
+                            <p class="text-sm">Carrer Ramon Muntaner, 22<br>17100 La Bisbal d'Empordà</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Schedule -->
+                    <div class="bg-gradient-to-br from-blue-900 to-blue-800 text-white p-8 rounded-2xl mb-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-clock text-white text-xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">Horario de Atención</h4>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center pb-3 border-b border-blue-700">
+                                <span class="font-semibold">Lunes - Viernes</span>
+                                <span class="text-orange-300">9:00 - 13:00</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-blue-700">
+                                <span class="font-semibold"></span>
+                                <span class="text-orange-300">15:00 - 19:30</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold">Sábados y Domingos</span>
+                                <span class="text-gray-400">Cerrado</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Google Maps -->
+                    <div class="rounded-2xl overflow-hidden shadow-2xl">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.8!2d3.0378!3d41.9625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12bae4c5e8f5e5e5%3A0x5e5e5e5e5e5e5e5e!2sCarrer%20Ramon%20Muntaner%2C%2022%2C%2017100%20La%20Bisbal%20d'Empord%C3%A0%2C%20Girona%2C%20Spain!5e0!3m2!1sen!2ses!4v1234567890123!5m2!1sen!2ses" 
+                            width="100%" 
+                            height="350" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-car text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="logo-text text-lg leading-tight">Autotaller</div>
+                            <div class="text-xs text-orange-500 font-semibold uppercase tracking-wider">La Guardiola</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Tu taller de confianza en La Bisbal d'Empordà con más de 20 años de experiencia.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#inicio" class="hover:text-orange-500 transition-colors">Inicio</a></li>
+                        <li><a href="#servicios" class="hover:text-orange-500 transition-colors">Servicios</a></li>
+                        <li><a href="#nosotros" class="hover:text-orange-500 transition-colors">Nosotros</a></li>
+                        <li><a href="#galeria" class="hover:text-orange-500 transition-colors">Galería</a></li>
+                        <li><a href="#contacto" class="hover:text-orange-500 transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Contacto</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-orange-500 mt-1 mr-3"></i>
+                            <span>Carrer Ramon Muntaner, 22<br>17100 La Bisbal d'Empordà</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-orange-500 mr-3"></i>
+                            <a href="tel:+34972641234" class="hover:text-orange-500 transition-colors">972 641 234</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-orange-500 mr-3"></i>
+                            <a href="mailto:a.t.laguardiola@gmail.com" class="hover:text-orange-500 transition-colors break-all">a.t.laguardiola@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Social & Hours -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Síguenos</h4>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="https://www.facebook.com/p/AUTO-Taller-la-Guardiola-100083908538031/" target="_blank" class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/34972641234" target="_blank" class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-2 font-semibold">Horario:</p>
+                    <p class="text-gray-400 text-sm">Lun - Vie: 9:00 - 13:00<br>y 15:00 - 19:30</p>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 mt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2026 Autotaller La Guardiola. Todos los derechos reservados.</p>
+                <p class="mt-2">
+                    <a href="#" class="hover:text-orange-500 transition-colors">Política de Privacidad</a> | 
+                    <a href="#" class="hover:text-orange-500 transition-colors ml-2">Aviso Legal</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/34972641234" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp text-white text-3xl"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <div id="back-to-top" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up text-white text-xl"></i>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div id="gallery-modal" class="modal">
+        <span id="close-modal" class="absolute top-8 right-8 text-white text-4xl cursor-pointer z-10 hover:text-orange-500 transition-colors">&times;</span>
+        <img id="modal-image" class="modal-content" src="" alt="Imagen ampliada">
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-sticky');
+            } else {
+                navbar.classList.remove('navbar-sticky');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Gallery modal
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('gallery-modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeModal = document.getElementById('close-modal');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                modalImage.src = img.src.replace('w=600', 'w=1920');
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', function(e) {
+            // Si no tienes Formspree configurado, prevenir el envío y mostrar mensaje
+            if (this.action.includes('YOUR_FORM_ID')) {
+                e.preventDefault();
+                alert('¡Gracias por tu interés! Por favor, llámanos al 972 641 234 o escríbenos por WhatsApp para solicitar tu cita.');
+            }
+            // Si tienes Formspree configurado, el formulario se enviará normalmente
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards and other elements
+        document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation to images
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.animation = 'fadeInUp 0.6s ease-out';
+            });
+        });
+    </script>
+</body>
+</html>
