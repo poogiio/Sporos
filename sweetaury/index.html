@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ca" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       EDITAR AQUÍ: Títol i descripció SEO
+       ============================================================ -->
+  <title>Sweet Aury · Obrador Pastisseria Artesana a Pals, Girona</title>
+  <meta name="description" content="Obrador pastisseria artesana a Pals, Girona. Pastissos, tartes personalitzades, dolços sense gluten i cafeteria. Elaboració pròpia cada dia. Comanda la teva tarta especial — WhatsApp +34 638 95 85 17." />
+  <meta name="keywords" content="pastisseria Pals, obrador Pals Girona, pastissos artesans, tarta personalitzada, sense gluten Baix Empordà, Sweet Aury, pastisseria Begur, pastisseria Costa Brava" />
+  <link rel="canonical" href="https://sweetaury.github.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sweetaury.github.io/" />
+  <meta property="og:title" content="Sweet Aury · Obrador Pastisseria Artesana a Pals, Girona" />
+  <meta property="og:description" content="Pastissos artesans i tartes personalitzades al cor del Baix Empordà. Opcions sense gluten. Comanda per WhatsApp." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1562440499-64c9a111f713?w=1200&q=80" />
+  <meta property="og:locale" content="ca_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sweet Aury · Obrador Pastisseria Artesana a Pals" />
+  <meta name="twitter:description" content="Pastissos artesans, tartes personalitzades i sense gluten a Pals, Girona." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1562440499-64c9a111f713?w=1200&q=80" />
+
+  <!-- JSON-LD Schema LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Obrador Pastisseria Sweet Aury",
+    "image": "https://images.unsplash.com/photo-1562440499-64c9a111f713?w=1200&q=80",
+    "url": "https://sweetaury.github.io/",
+    "telephone": "+34638958517",
+    "sameAs": ["https://www.instagram.com/obrador.sweetaury/"],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carrer Enginyer Algarra, 54",
+      "addressLocality": "Pals",
+      "addressRegion": "Girona",
+      "postalCode": "17256",
+      "addressCountry": "ES"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 41.9744, "longitude": 3.1489 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "08:00", "closes": "20:00" }
+    ],
+    "servesCuisine": "Pastisseria artesana",
+    "priceRange": "€€",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "55" }
+  }
+  </script>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:  { DEFAULT: '#FDF6EC', dark: '#F2E8D5' },
+            rose:   { DEFAULT: '#C97B5A', light: '#E8A88A', dark: '#A8573A' },
+            choc:   { DEFAULT: '#2E1A0E', mid: '#5C3317', light: '#8B5128' },
+            sage:   { DEFAULT: '#7A9E76', light: '#B8D5B4' },
+            gold:   { DEFAULT: '#C4913A', light: '#E8C87A' },
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['"Jost"', 'system-ui', 'sans-serif'],
+            script:  ['"Great Vibes"', 'cursive'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+
+  <!-- Alpine.js v3 -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    html { scroll-padding-top: 80px; }
+
+    /* Grain overlay texture */
+    .grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 2;
+      border-radius: inherit;
+    }
+
+    /* Hero parallax image */
+    .hero-img {
+      background-image: url('https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1920&q=85&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center 40%;
+      background-attachment: fixed;
+    }
+
+    /* Card lift on hover */
+    .card-lift {
+      transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.35s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 24px 48px rgba(46,26,14,.14);
+    }
+
+    /* WhatsApp pulse */
+    @keyframes wa-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,.55); }
+      60%       { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+    }
+    .wa-pulse { animation: wa-pulse 2.4s infinite; }
+
+    /* Fade-up animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up-1 { animation: fadeUp 0.8s 0.1s both; }
+    .fade-up-2 { animation: fadeUp 0.8s 0.28s both; }
+    .fade-up-3 { animation: fadeUp 0.8s 0.46s both; }
+    .fade-up-4 { animation: fadeUp 0.8s 0.64s both; }
+
+    /* Decorative script underline */
+    .script-under::after {
+      content: '';
+      display: block;
+      height: 3px;
+      width: 80px;
+      margin: 12px auto 0;
+      background: linear-gradient(90deg, #C4913A, #E8C87A, #C4913A);
+      border-radius: 4px;
+    }
+
+    /* Book section shine */
+    @keyframes bookShine {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .book-shine {
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.18) 50%, transparent 60%);
+      background-size: 200% 100%;
+      animation: bookShine 3.5s linear infinite;
+    }
+
+    /* Smooth image loading */
+    img { transition: opacity 0.4s ease; }
+
+    /* Nav link underline effect */
+    .nav-link {
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: #C97B5A;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Section divider wave */
+    .wave-top svg, .wave-bottom svg { display: block; }
+  </style>
+</head>
+
+<!-- =====================================================================
+     BODY — Alpine.js gestiona el menú mòbil i el formulari
+     ===================================================================== -->
+<body class="bg-cream font-body text-choc antialiased" x-data="{ menuOpen: false }">
+
+
+<!-- =====================================================================
+     BOTÓ FLOTANT WHATSAPP
+     EDITAR AQUÍ: el número +34638958517 ja és el real — no cal canviar res
+     ===================================================================== -->
+<a href="https://wa.me/34638958517?text=Hola%20Sweet%20Aury!%20M'agradaria%20informació%20sobre%20els%20vostres%20pastissos%20i%20tartes%20🍰"
+   target="_blank" rel="noopener noreferrer"
+   aria-label="Contactar per WhatsApp"
+   title="Escriu-nos per WhatsApp"
+   class="wa-pulse fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white pl-4 pr-5 py-3 rounded-full shadow-2xl hover:bg-[#1DAF57] hover:scale-105 transition-all duration-200">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 flex-shrink-0">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.571l5.88-1.54A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.857a9.847 9.847 0 01-5.021-1.371l-.36-.214-3.732.979.996-3.638-.234-.373A9.847 9.847 0 012.143 12C2.143 6.534 6.534 2.143 12 2.143S21.857 6.534 21.857 12 17.466 21.857 12 21.857z"/>
+  </svg>
+  <span class="text-sm font-semibold hidden sm:inline">Escriu-nos!</span>
+</a>
+
+
+<!-- =====================================================================
+     HEADER / NAV
+     ===================================================================== -->
+<header class="fixed top-0 left-0 right-0 z-40 transition-all duration-400"
+        x-data="{ scrolled: false }"
+        x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 50)"
+        :class="scrolled ? 'bg-cream/96 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-5'">
+
+  <nav class="max-w-6xl mx-auto px-5 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#inici" class="flex items-center gap-3 group">
+      <div class="w-11 h-11 rounded-full overflow-hidden shadow-lg ring-2 ring-rose/30 group-hover:ring-rose/70 transition-all">
+        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=88&h=88&q=80&fit=crop&auto=format"
+             alt="Sweet Aury logo" class="w-full h-full object-cover" />
+      </div>
+      <div class="leading-tight">
+        <span class="font-display block text-xl" :class="scrolled ? 'text-choc' : 'text-cream'">Sweet Aury</span>
+        <span class="text-xs tracking-[0.2em] uppercase" :class="scrolled ? 'text-rose' : 'text-gold-light'">Pastisseria · Pals</span>
+      </div>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-7">
+      <li><a href="#especialitats" class="nav-link text-sm tracking-wide" :class="scrolled ? 'text-choc' : 'text-cream/90'">Especialitats</a></li>
+      <li><a href="#llibre"        class="nav-link text-sm tracking-wide" :class="scrolled ? 'text-choc' : 'text-cream/90'">El Llibre</a></li>
+      <li><a href="#nosaltres"     class="nav-link text-sm tracking-wide" :class="scrolled ? 'text-choc' : 'text-cream/90'">Nosaltres</a></li>
+      <li><a href="#ressenyes"     class="nav-link text-sm tracking-wide" :class="scrolled ? 'text-choc' : 'text-cream/90'">Ressenyes</a></li>
+      <li>
+        <a href="https://wa.me/34638958517?text=Hola!%20Vull%20fer%20una%20comanda%20a%20Sweet%20Aury%20🍰"
+           target="_blank"
+           class="bg-rose hover:bg-rose-dark text-cream px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg hover:shadow-rose/30 transition-all duration-200 hover:scale-105">
+          Comanda ara
+        </a>
+      </li>
+    </ul>
+
+    <!-- Hamburger -->
+    <button @click="menuOpen = !menuOpen" class="md:hidden p-2 space-y-1.5 group" aria-label="Menú">
+      <span class="block w-6 h-0.5 transition-all duration-300 origin-center"
+            :class="[menuOpen ? 'rotate-45 translate-y-2' : '', scrolled ? 'bg-choc' : 'bg-cream']"></span>
+      <span class="block w-6 h-0.5 transition-all duration-300"
+            :class="[menuOpen ? 'opacity-0 scale-x-0' : '', scrolled ? 'bg-choc' : 'bg-cream']"></span>
+      <span class="block w-6 h-0.5 transition-all duration-300 origin-center"
+            :class="[menuOpen ? '-rotate-45 -translate-y-2' : '', scrolled ? 'bg-choc' : 'bg-cream']"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div x-show="menuOpen"
+       x-transition:enter="transition ease-out duration-250"
+       x-transition:enter-start="opacity-0 -translate-y-3"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-180"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 -translate-y-3"
+       @click.away="menuOpen = false"
+       class="md:hidden bg-cream/97 backdrop-blur border-t border-cream-dark shadow-xl">
+    <ul class="py-3">
+      <li><a href="#especialitats" @click="menuOpen=false" class="block px-6 py-3.5 text-choc hover:text-rose hover:pl-8 transition-all">Especialitats</a></li>
+      <li><a href="#llibre"        @click="menuOpen=false" class="block px-6 py-3.5 text-choc hover:text-rose hover:pl-8 transition-all">El Llibre</a></li>
+      <li><a href="#nosaltres"     @click="menuOpen=false" class="block px-6 py-3.5 text-choc hover:text-rose hover:pl-8 transition-all">Nosaltres</a></li>
+      <li><a href="#ressenyes"     @click="menuOpen=false" class="block px-6 py-3.5 text-choc hover:text-rose hover:pl-8 transition-all">Ressenyes</a></li>
+      <li><a href="#contacte"      @click="menuOpen=false" class="block px-6 py-3.5 text-choc hover:text-rose hover:pl-8 transition-all">Contacte</a></li>
+      <li class="px-6 pt-2 pb-5">
+        <a href="https://wa.me/34638958517?text=Hola!%20Vull%20fer%20una%20comanda%20a%20Sweet%20Aury%20🍰"
+           target="_blank"
+           class="block text-center bg-rose text-cream py-3.5 rounded-full font-semibold shadow-lg">
+          📲 Comanda per WhatsApp
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+
+<!-- =====================================================================
+     HERO
+     ===================================================================== -->
+<section id="inici" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  <!-- Imatge de fons real (Unsplash - pastisseria artesana) -->
+  <div class="absolute inset-0 hero-img"></div>
+  <!-- Overlay gradient fosc per llegibilitat -->
+  <div class="absolute inset-0 bg-gradient-to-b from-choc/75 via-choc/60 to-choc/85"></div>
+
+  <!-- Partícula decorativa -->
+  <div class="absolute top-1/3 left-16 w-64 h-64 rounded-full bg-gold/10 blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-1/4 right-16 w-80 h-80 rounded-full bg-rose/15 blur-3xl pointer-events-none"></div>
+
+  <!-- Contingut -->
+  <div class="relative z-10 text-center px-5 max-w-4xl mx-auto">
+
+    <p class="fade-up-1 font-script text-gold text-3xl md:text-4xl mb-4 leading-none">Obrador artesà · Pals, Baix Empordà</p>
+
+    <!-- EDITAR AQUÍ: títol principal del hero -->
+    <h1 class="fade-up-2 font-display text-cream text-5xl md:text-7xl lg:text-8xl leading-[1.1] mb-6">
+      Dolços fets<br/><em>amb ànima</em>
+    </h1>
+
+    <!-- EDITAR AQUÍ: subtítol hero -->
+    <p class="fade-up-3 text-cream/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+      Pastissos artesans elaborats cada dia al nostre obrador de Pals.
+      Tartes <strong class="text-gold font-semibold">personalitzades</strong>, opcions
+      <strong class="text-gold font-semibold">sense gluten</strong> i una cafeteria amb ànima mediterrània.
+    </p>
+
+    <div class="fade-up-4 flex flex-col sm:flex-row gap-4 justify-center mb-14">
+      <a href="https://wa.me/34638958517?text=Hola%20Sweet%20Aury!%20Vull%20encarregar%20una%20tarta%20especial%20🍰"
+         target="_blank"
+         class="inline-flex items-center justify-center gap-2.5 bg-rose hover:bg-rose-dark text-cream px-9 py-4 rounded-full font-semibold text-lg shadow-2xl hover:scale-105 transition-all duration-250">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.571l5.88-1.54A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.857a9.847 9.847 0 01-5.021-1.371l-.36-.214-3.732.979.996-3.638-.234-.373A9.847 9.847 0 012.143 12C2.143 6.534 6.534 2.143 12 2.143S21.857 6.534 21.857 12 17.466 21.857 12 21.857z"/>
+        </svg>
+        Encarrega la teva tarta
+      </a>
+      <a href="#especialitats"
+         class="inline-flex items-center justify-center gap-2 border-2 border-cream/50 text-cream px-9 py-4 rounded-full font-medium text-lg hover:bg-cream/10 hover:border-cream/80 transition-all duration-200">
+        Descobreix els dolços ↓
+      </a>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="fade-up-4 flex flex-wrap justify-center gap-6 md:gap-10 text-cream/70 text-sm border-t border-cream/15 pt-10">
+      <div class="flex items-center gap-2.5">
+        <span class="text-gold text-base">★★★★★</span>
+        <span>55 ressenyes Google</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <span>🌾</span>
+        <span>Opció sense gluten</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <span>🍰</span>
+        <span>Tartes personalitzades</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <span>📖</span>
+        <span>Autors del llibre Sweet Aury</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave de transició -->
+  <div class="wave-bottom absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,45 C480,90 960,0 1440,45 L1440,90 L0,90 Z" fill="#FDF6EC"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     ESPECIALITATS / PRODUCTES
+     ===================================================================== -->
+<section id="especialitats" class="py-24 px-5 bg-cream">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="font-script text-rose text-2xl mb-1">El nostre obrador</p>
+      <h2 class="font-display text-choc text-4xl md:text-5xl script-under">Les nostres especialitats</h2>
+      <p class="text-choc/55 mt-7 max-w-xl mx-auto">Tot elaborat cada dia des de zero, amb ingredients seleccionats i la mateixa cura de sempre.</p>
+    </div>
+
+    <!-- Grid 3 columnes -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- ================================================================
+           PRODUCTE 1 — Tartes Personalitzades
+           EDITAR AQUÍ: nom, descripció, i link WhatsApp de cada producte
+           ================================================================ -->
+      <article class="card-lift bg-white rounded-3xl overflow-hidden shadow border border-cream-dark group">
+        <div class="relative h-52 overflow-hidden">
+          <!-- Imatge real d'Unsplash — tarta artesana -->
+          <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=600&q=80&auto=format&fit=crop"
+               alt="Tartes personalitzades Sweet Aury Pals"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute top-3 left-3 bg-rose text-cream text-xs font-semibold px-3 py-1 rounded-full shadow">Estrella de la casa</div>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-choc text-2xl mb-2">Tartes Personalitzades</h3>
+          <p class="text-choc/60 text-sm leading-relaxed mb-5">Dissenyem la tarta dels teus somnis per a aniversaris, casaments i batejos. Consulteu sabors, mides i dissenys — fem cada peça única.</p>
+          <a href="https://wa.me/34638958517?text=Hola%20Sweet%20Aury!%20Vull%20informació%20sobre%20tartes%20personalitzades%20🍰"
+             target="_blank"
+             class="inline-flex items-center gap-1.5 text-rose font-semibold text-sm hover:gap-3 transition-all">
+            Encarrega ara <span class="text-base">→</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- PRODUCTE 2 — Pastissos del Dia -->
+      <article class="card-lift bg-white rounded-3xl overflow-hidden shadow border border-cream-dark group">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=600&q=80&auto=format&fit=crop"
+               alt="Pastissos del dia Sweet Aury"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute top-3 left-3 bg-gold text-white text-xs font-semibold px-3 py-1 rounded-full shadow">Cada dia frescos</div>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-choc text-2xl mb-2">Pastissos del Dia</h3>
+          <p class="text-choc/60 text-sm leading-relaxed mb-5">Una selecció diària de muffins, croissants, palmeres i dolços clàssics elaborats cada matí. Quan s'esgoten, s'esgoten!</p>
+          <a href="#contacte" class="inline-flex items-center gap-1.5 text-rose font-semibold text-sm hover:gap-3 transition-all">
+            Horaris i ubicació <span class="text-base">→</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- PRODUCTE 3 — Sense Gluten -->
+      <article class="card-lift bg-white rounded-3xl overflow-hidden shadow border border-cream-dark group">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80&auto=format&fit=crop"
+               alt="Pastissos sense gluten Sweet Aury Pals"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute top-3 left-3 bg-sage text-white text-xs font-semibold px-3 py-1 rounded-full shadow">🌾 Sense Gluten</div>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-choc text-2xl mb-2">Gamma Sense Gluten</h3>
+          <p class="text-choc/60 text-sm leading-relaxed mb-5">Una carta completa per a celíacs i sensibles al gluten. Mateix gust, zero preocupacions. Tots els pastissos disponibles també en versió SG.</p>
+          <a href="https://wa.me/34638958517?text=Hola!%20Vull%20saber%20quins%20productes%20teniu%20sense%20gluten%20a%20Sweet%20Aury%20🌾"
+             target="_blank"
+             class="inline-flex items-center gap-1.5 text-rose font-semibold text-sm hover:gap-3 transition-all">
+            Consulta la carta SG <span class="text-base">→</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- PRODUCTE 4 — Cafeteria -->
+      <article class="card-lift bg-white rounded-3xl overflow-hidden shadow border border-cream-dark group">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&auto=format&fit=crop"
+               alt="Cafeteria Sweet Aury Pals Girona"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute top-3 left-3 bg-choc text-cream text-xs font-semibold px-3 py-1 rounded-full shadow">☕ Cafeteria</div>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-choc text-2xl mb-2">Cafeteria & Sala</h3>
+          <p class="text-choc/60 text-sm leading-relaxed mb-5">Gaudeix d'un bon cafè o infusió al nostre espai acollidor mentre tries entre els dolços del dia. L'atur perfecte a Pals.</p>
+          <a href="#contacte" class="inline-flex items-center gap-1.5 text-rose font-semibold text-sm hover:gap-3 transition-all">
+            Horaris i ubicació <span class="text-base">→</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- PRODUCTE 5 — Casaments & Esdeveniments -->
+      <article class="card-lift bg-white rounded-3xl overflow-hidden shadow border border-cream-dark group">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1522767131594-6b7e96848fba?w=600&q=80&auto=format&fit=crop"
+               alt="Tartes de casament Sweet Aury"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute top-3 left-3 bg-rose text-cream text-xs font-semibold px-3 py-1 rounded-full shadow">💍 Casaments</div>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-choc text-2xl mb-2">Casaments & Grans Moments</h3>
+          <p class="text-choc/60 text-sm leading-relaxed mb-5">La tarta del vostre gran dia mereix ser única. Treballem amb cada parella per crear una peça artesana que emocionarà als convidats.</p>
+          <a href="https://wa.me/34638958517?text=Hola%20Sweet%20Aury!%20Vull%20informació%20sobre%20tartes%20de%20casament%20💍"
+             target="_blank"
+             class="inline-flex items-center gap-1.5 text-rose font-semibold text-sm hover:gap-3 transition-all">
+            Parla'ns del teu dia <span class="text-base">→</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- PRODUCTE 6 — Packs Regal -->
+      <article class="card-lift bg-white rounded-3xl overflow-hidden shadow border border-cream-dark group">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=600&q=80&auto=format&fit=crop"
+               alt="Packs regal pastissos Sweet Aury"
+               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          <div class="absolute top-3 left-3 bg-gold text-white text-xs font-semibold px-3 py-1 rounded-full shadow">🎁 Regala dolçor</div>
+        </div>
+        <div class="p-7">
+          <h3 class="font-display text-choc text-2xl mb-2">Packs Regal</h3>
+          <p class="text-choc/60 text-sm leading-relaxed mb-5">Capses de dolços artesans presentades amb gust per a regalar en qualsevol ocasió. Disponibles packs corporatius per a empreses.</p>
+          <a href="https://wa.me/34638958517?text=Hola!%20Vull%20informació%20sobre%20packs%20regal%20de%20Sweet%20Aury%20🎁"
+             target="_blank"
+             class="inline-flex items-center gap-1.5 text-rose font-semibold text-sm hover:gap-3 transition-all">
+            Demana informació <span class="text-base">→</span>
+          </a>
+        </div>
+      </article>
+
+    </div><!-- /grid productes -->
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     SECCIÓ DEL LLIBRE — nova secció
+     ===================================================================== -->
+<section id="llibre" class="relative py-24 px-5 overflow-hidden">
+
+  <!-- Fons ric fosc -->
+  <div class="absolute inset-0 bg-gradient-to-br from-choc via-choc-mid to-[#1A0C05]"></div>
+  <!-- Textura lleugera -->
+  <div class="absolute inset-0 opacity-5"
+       style="background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><circle cx=%2230%22 cy=%2230%22 r=%2224%22 fill=%22none%22 stroke=%22%23FDF6EC%22 stroke-width=%220.8%22/></svg>'); background-size:60px 60px;"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+    <!-- Imatge del llibre (amb efecte 3D) -->
+    <div class="relative flex justify-center lg:justify-end order-2 lg:order-1">
+      <div class="relative group">
+        <!-- Ombra del llibre -->
+        <div class="absolute -bottom-6 left-4 right-4 h-12 bg-black/40 blur-2xl rounded-full"></div>
+        <!-- Portada del llibre -->
+        <div class="relative w-72 md:w-80 rounded-xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.6)] group-hover:-translate-y-3 transition-transform duration-500 book-shine">
+          <!-- EDITAR AQUÍ: substitueix per la foto real de la portada del teu llibre -->
+          <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=640&q=85&auto=format&fit=crop"
+               alt="Llibre de pastisseria Sweet Aury"
+               class="w-full aspect-[3/4] object-cover" loading="lazy" />
+          <!-- Overlay daurada lleugera per efecte de coberta -->
+          <div class="absolute inset-0 bg-gradient-to-t from-choc/60 via-transparent to-transparent flex items-end p-6">
+            <div>
+              <!-- EDITAR AQUÍ: títol i subtítol del teu llibre -->
+              <p class="font-script text-gold text-2xl leading-none mb-1">Sweet Aury</p>
+              <p class="text-cream/90 text-xs tracking-widest uppercase">El llibre de la pastisseria artesana</p>
+            </div>
+          </div>
+        </div>
+        <!-- Shimmer de llum lateral (efecte 3D) -->
+        <div class="absolute top-0 right-0 w-6 h-full bg-gradient-to-r from-transparent via-cream/20 to-transparent rounded-r-xl pointer-events-none"></div>
+      </div>
+    </div>
+
+    <!-- Contingut text del llibre -->
+    <div class="order-1 lg:order-2">
+      <p class="font-script text-gold text-3xl mb-3">Ara disponible</p>
+      <!-- EDITAR AQUÍ: títol real del teu llibre -->
+      <h2 class="font-display text-cream text-4xl md:text-5xl leading-tight mb-6">
+        El nostre llibre de <em>pastisseria artesana</em>
+      </h2>
+      <!-- EDITAR AQUÍ: descripció real del teu llibre -->
+      <p class="text-cream/70 leading-relaxed mb-5">
+        Anys d'experiència a l'obrador condensats en un volum ple de receptes, tècniques i secrets de la pastisseria artesana catalana. Des de bàsics imprescindibles fins a les creacions més especials de Sweet Aury.
+      </p>
+      <p class="text-cream/70 leading-relaxed mb-8">
+        Perfecte tant per a amateurs que volen millorar com per a professionals que busquen inspiració. Amb fotografies de cada elaboració i explicacions pas a pas clares i accessibles.
+      </p>
+
+      <!-- Punts de valor -->
+      <ul class="space-y-3 mb-10">
+        <li class="flex items-center gap-3 text-cream/80 text-sm">
+          <span class="w-5 h-5 rounded-full bg-gold/20 flex items-center justify-center text-gold text-xs flex-shrink-0">✓</span>
+          <!-- EDITAR AQUÍ: característiques reals del llibre -->
+          Receptes artesanes autèntiques amb ingredients de temporada
+        </li>
+        <li class="flex items-center gap-3 text-cream/80 text-sm">
+          <span class="w-5 h-5 rounded-full bg-gold/20 flex items-center justify-center text-gold text-xs flex-shrink-0">✓</span>
+          Tècniques professionals explicades de forma entenedora
+        </li>
+        <li class="flex items-center gap-3 text-cream/80 text-sm">
+          <span class="w-5 h-5 rounded-full bg-gold/20 flex items-center justify-center text-gold text-xs flex-shrink-0">✓</span>
+          Opcions adaptades: sense gluten, sense lactosa
+        </li>
+        <li class="flex items-center gap-3 text-cream/80 text-sm">
+          <span class="w-5 h-5 rounded-full bg-gold/20 flex items-center justify-center text-gold text-xs flex-shrink-0">✓</span>
+          Fotografia artesana de cada elaboració
+        </li>
+      </ul>
+
+      <!-- Preu + CTA comprar -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+        <div>
+          <!-- EDITAR AQUÍ: preu real del teu llibre -->
+          <p class="text-cream/40 text-xs uppercase tracking-widest mb-1">Preu</p>
+          <p class="font-display text-cream text-4xl">29,90 €</p>
+          <p class="text-cream/40 text-xs mt-0.5">IVA inclòs · Enviament gratuït</p>
+        </div>
+        <!-- ================================================================
+             EDITAR AQUÍ: substitueix l'href per el teu link de Stripe
+             Crea el link a: dashboard.stripe.com → Payment Links → + New
+             ================================================================ -->
+        <a href="https://buy.stripe.com/XXXXXXXXXXXXXXXX"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2.5 bg-gold hover:bg-gold-light text-choc px-8 py-4 rounded-full font-bold text-base shadow-xl hover:scale-105 transition-all duration-200">
+          🛒 Compra el llibre
+        </a>
+      </div>
+
+      <!-- Alternativa WhatsApp per demanar -->
+      <p class="text-cream/40 text-xs mt-4">
+        Prefereixes recollir-lo a l'obrador? 
+        <a href="https://wa.me/34638958517?text=Hola!%20Vull%20comprar%20el%20llibre%20de%20Sweet%20Aury%20📖"
+           target="_blank" class="text-gold hover:underline">Escriu-nos per WhatsApp</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     SOBRE NOSALTRES
+     ===================================================================== -->
+<section id="nosaltres" class="py-24 px-5 bg-cream">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+    <!-- Imatge obrador -->
+    <div class="relative">
+      <div class="rounded-3xl overflow-hidden shadow-2xl aspect-square">
+        <!-- Imatge real: interior pastisseria acollidora -->
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop"
+             alt="Obrador Sweet Aury Pals Girona"
+             class="w-full h-full object-cover" loading="lazy" />
+      </div>
+      <!-- Badge flotant Google Reviews -->
+      <div class="absolute -bottom-6 -right-4 md:-right-8 bg-white rounded-2xl p-4 shadow-xl border border-cream-dark max-w-[190px]">
+        <div class="flex gap-1 text-gold text-sm mb-1">★★★★★</div>
+        <p class="font-semibold text-choc text-sm">55 ressenyes</p>
+        <p class="text-choc/45 text-xs">Google Business · 5/5</p>
+      </div>
+      <!-- Decoració geomètrica -->
+      <div class="absolute -top-5 -left-5 w-24 h-24 border-2 border-rose/20 rounded-2xl -z-10"></div>
+    </div>
+
+    <!-- Text -->
+    <div>
+      <p class="font-script text-rose text-2xl mb-2">La nostra història</p>
+      <h2 class="font-display text-choc text-4xl md:text-5xl leading-tight mb-6">
+        Un obrador fet<br/><em>amb passió</em>
+      </h2>
+      <!-- EDITAR AQUÍ: adapta el text a la teva història real -->
+      <p class="text-choc/65 leading-relaxed mb-5">
+        A <strong class="text-choc">Sweet Aury</strong> creiem que cada dolç conta una història. Des del nostre obrador al cor de Pals, al Baix Empordà, elaborem cada dia pastissos i tartes amb els millors ingredients, combinant les receptes tradicionals catalanes amb les tendències més actuals de la pastisseria.
+      </p>
+      <p class="text-choc/65 leading-relaxed mb-8">
+        La nostra gamma <strong class="text-choc">sense gluten</strong> va néixer de la voluntat de no deixar ningú fora. Perquè els moments dolços han de ser per a tothom, sense excepcions. El nostre obrador és petit, però la cura que posem a cada elaboració és immensa.
+      </p>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-4 bg-cream-dark/60 rounded-2xl p-6 mb-10">
+        <div class="text-center">
+          <p class="font-display text-choc text-4xl font-bold">100%</p>
+          <p class="text-choc/45 text-xs mt-1 uppercase tracking-wider">Artesà</p>
+        </div>
+        <div class="text-center border-x border-cream-dark">
+          <p class="font-display text-choc text-4xl font-bold">55+</p>
+          <p class="text-choc/45 text-xs mt-1 uppercase tracking-wider">Ressenyes 5★</p>
+        </div>
+        <div class="text-center">
+          <p class="font-display text-choc text-4xl font-bold">🍰</p>
+          <p class="text-choc/45 text-xs mt-1 uppercase tracking-wider">Cada dia</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <a href="https://wa.me/34638958517?text=Hola%20Sweet%20Aury!%20Vull%20conèixer-vos%20millor%20i%20fer%20una%20comanda%20🍰"
+           target="_blank"
+           class="inline-flex items-center gap-2 bg-choc hover:bg-choc-mid text-cream px-7 py-3 rounded-full font-semibold transition-all hover:scale-105">
+          Parla amb nosaltres
+        </a>
+        <a href="https://www.instagram.com/obrador.sweetaury/" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 border-2 border-choc/20 text-choc px-7 py-3 rounded-full font-medium hover:border-rose hover:text-rose transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BANNER MIG-PÀGINA
+     ===================================================================== -->
+<section class="relative py-20 px-5 overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&q=80&auto=format&fit=crop"
+         alt="" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-choc/82"></div>
+  </div>
+
+  <div class="relative z-10 max-w-3xl mx-auto text-center">
+    <p class="font-script text-gold text-3xl mb-3">Per a ocasions especials</p>
+    <h2 class="font-display text-cream text-4xl md:text-5xl mb-6">
+      La teva tarta somniada,<br/><em>feta realitat</em>
+    </h2>
+    <p class="text-cream/70 text-lg mb-10 max-w-xl mx-auto">
+      Casaments, aniversaris, batejos, comunions… Escriu-nos per WhatsApp i dissenyem junts el pastís perfecte.
+    </p>
+    <a href="https://wa.me/34638958517?text=Hola%20Sweet%20Aury!%20Vull%20encarregar%20una%20tarta%20per%20a%20una%20ocasió%20especial%20🍰"
+       target="_blank"
+       class="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1DAF57] text-white px-10 py-4 rounded-full text-lg font-bold shadow-2xl hover:scale-105 transition-all duration-200">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.571l5.88-1.54A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.857a9.847 9.847 0 01-5.021-1.371l-.36-.214-3.732.979.996-3.638-.234-.373A9.847 9.847 0 012.143 12C2.143 6.534 6.534 2.143 12 2.143S21.857 6.534 21.857 12 17.466 21.857 12 21.857z"/>
+      </svg>
+      Encarrega ara per WhatsApp
+    </a>
+    <p class="text-cream/40 text-xs mt-4">+34 638 95 85 17 · Resposta ràpida</p>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     RESSENYES
+     ===================================================================== -->
+<section id="ressenyes" class="py-24 px-5 bg-cream-dark/40">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="font-script text-rose text-2xl mb-1">El que diuen de nosaltres</p>
+      <h2 class="font-display text-choc text-4xl md:text-5xl script-under">Ressenyes ★★★★★</h2>
+      <p class="text-choc/45 mt-7">Valoració perfecta de 5/5 a Google · 55 ressenyes verificades</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- EDITAR AQUÍ: Substitueix per ressenyes reals de Google -->
+
+      <div class="card-lift bg-white rounded-3xl p-8 shadow border border-cream-dark">
+        <div class="flex gap-0.5 text-gold mb-4">★★★★★</div>
+        <p class="text-choc/65 italic leading-relaxed mb-6 text-sm">
+          "Una pastisseria absolutament meravellosa. La qualitat dels productes és excepcional i l'atenció és de 10. La tarta que ens van fer per l'aniversari va deixar tothom bocabadat!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-rose/15 flex items-center justify-center font-display text-rose font-bold">M</div>
+          <div>
+            <p class="font-semibold text-choc text-sm">Maria S.</p>
+            <p class="text-choc/35 text-xs">Ressenya Google ✓</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-lift bg-white rounded-3xl p-8 shadow border border-cream-dark">
+        <div class="flex gap-0.5 text-gold mb-4">★★★★★</div>
+        <p class="text-choc/65 italic leading-relaxed mb-6 text-sm">
+          "La millor pastisseria de la zona. Els pastissos del dia són increïbles, i l'opció sense gluten és perfecta per a la meva filla celíaca. Totalment recomanable!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center font-display text-choc font-bold">J</div>
+          <div>
+            <p class="font-semibold text-choc text-sm">Joan P.</p>
+            <p class="text-choc/35 text-xs">Ressenya Google ✓</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-lift bg-white rounded-3xl p-8 shadow border border-cream-dark">
+        <div class="flex gap-0.5 text-gold mb-4">★★★★★</div>
+        <p class="text-choc/65 italic leading-relaxed mb-6 text-sm">
+          "Cada vegada que venim a Pals de vacances, visitar Sweet Aury és obligatori. Local acollidor, productes deliciosos i tracte increïble. Una joia del Baix Empordà!"
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-sage/20 flex items-center justify-center font-display text-sage font-bold">A</div>
+          <div>
+            <p class="font-semibold text-choc text-sm">Anna R.</p>
+            <p class="text-choc/35 text-xs">Ressenya Google ✓</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA Google Reviews -->
+    <div class="text-center mt-10">
+      <!-- EDITAR AQUÍ: link al teu perfil Google Business -->
+      <a href="https://g.page/r/XXXXXXXX/review" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 border-2 border-choc/15 text-choc px-6 py-3 rounded-full text-sm hover:border-rose hover:text-rose transition-all">
+        Llegeix totes les ressenyes a Google →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     CONTACTE + FORMULARI
+     ===================================================================== -->
+<section id="contacte" class="py-24 px-5 bg-cream">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="font-script text-rose text-2xl mb-1">Parlem!</p>
+      <h2 class="font-display text-choc text-4xl md:text-5xl script-under">Contacte & Ubicació</h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+      <!-- Informació de contacte -->
+      <div class="space-y-7">
+
+        <div class="flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-2xl bg-rose/10 flex items-center justify-center text-rose flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-choc mb-0.5">Adreça</p>
+            <p class="text-choc/60 text-sm">Carrer Enginyer Algarra, 54<br/>17256 Pals, Girona</p>
+            <a href="https://maps.google.com/?q=Carrer+Enginyer+Algarra+54+Pals+Girona" target="_blank" class="text-rose text-sm mt-1 inline-block hover:underline">Obrir a Google Maps →</a>
+          </div>
+        </div>
+
+        <div class="flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-2xl bg-[#25D366]/10 flex items-center justify-center text-[#25D366] flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.571l5.88-1.54A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.857a9.847 9.847 0 01-5.021-1.371l-.36-.214-3.732.979.996-3.638-.234-.373A9.847 9.847 0 012.143 12C2.143 6.534 6.534 2.143 12 2.143S21.857 6.534 21.857 12 17.466 21.857 12 21.857z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-choc mb-0.5">WhatsApp</p>
+            <a href="https://wa.me/34638958517" target="_blank" class="text-choc/60 text-sm hover:text-rose transition-colors">+34 638 95 85 17</a>
+            <p class="text-choc/35 text-xs mt-0.5">Resposta ràpida · Comandes · Consultes</p>
+          </div>
+        </div>
+
+        <div class="flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-2xl bg-gold/10 flex items-center justify-center text-gold flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-choc mb-1">Horaris</p>
+            <!-- EDITAR AQUÍ: horaris reals -->
+            <div class="text-choc/60 text-sm space-y-0.5">
+              <p>Dimarts – Diumenge: 08:00 – 20:00</p>
+              <p class="text-rose font-medium">Dilluns: Tancat</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-2xl bg-rose/10 flex items-center justify-center text-rose flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-choc mb-0.5">Instagram</p>
+            <a href="https://www.instagram.com/obrador.sweetaury/" target="_blank" class="text-choc/60 text-sm hover:text-rose transition-colors">@obrador.sweetaury</a>
+            <p class="text-choc/35 text-xs mt-0.5">Segueix-nos per veure les novetats diàries</p>
+          </div>
+        </div>
+
+        <!-- Mapa placeholder -->
+        <!-- EDITAR AQUÍ: Google Maps > Compartir > Insertar mapa > enganxa l'iframe -->
+        <div class="rounded-2xl overflow-hidden h-44 border border-cream-dark bg-cream-dark/50 flex items-center justify-center">
+          <p class="text-center text-choc/35 text-xs px-5">
+            📍 Substitueix aquest quadre per l'embed de Google Maps:<br/>
+            Google Maps → Compartir → Insertar mapa → Copia l'iframe
+          </p>
+        </div>
+
+      </div><!-- /col contacte -->
+
+      <!-- Formulari Formspree -->
+      <div class="bg-white rounded-3xl p-8 shadow border border-cream-dark">
+        <h3 class="font-display text-choc text-2xl mb-1">Envia'ns un missatge</h3>
+        <p class="text-choc/45 text-sm mb-7">T'esperem! O contacta'ns directament per WhatsApp per a una resposta immediata.</p>
+
+        <!--
+          EDITAR AQUÍ — CONFIGURAR FORMSPREE:
+          1. Entra a https://formspree.io i crea un compte gratuït
+          2. Crea un nou formulari → obté l'endpoint → substitueix XXXXXXXX pel teu codi
+        -->
+        <form action="https://formspree.io/f/XXXXXXXX"
+              method="POST"
+              x-data="{ sent: false, sending: false }"
+              @submit.prevent="
+                sending = true;
+                fetch($el.action, {
+                  method: 'POST',
+                  body: new FormData($el),
+                  headers: { 'Accept': 'application/json' }
+                })
+                .then(r => { if(r.ok){ sent = true; $el.reset(); } })
+                .finally(() => sending = false)
+              "
+              class="space-y-4">
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="nom" class="block text-xs font-semibold text-choc/70 uppercase tracking-wider mb-1.5">Nom *</label>
+              <input type="text" id="nom" name="nom" required placeholder="El teu nom"
+                     class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-choc placeholder-choc/25 focus:outline-none focus:ring-2 focus:ring-rose/40 focus:border-rose transition-all" />
+            </div>
+            <div>
+              <label for="telefon" class="block text-xs font-semibold text-choc/70 uppercase tracking-wider mb-1.5">Telèfon</label>
+              <input type="tel" id="telefon" name="telefon" placeholder="+34 638 95 85 17"
+                     class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-choc placeholder-choc/25 focus:outline-none focus:ring-2 focus:ring-rose/40 focus:border-rose transition-all" />
+            </div>
+          </div>
+
+          <div>
+            <label for="assumpte" class="block text-xs font-semibold text-choc/70 uppercase tracking-wider mb-1.5">Motiu de la consulta *</label>
+            <select id="assumpte" name="assumpte" required
+                    class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-choc focus:outline-none focus:ring-2 focus:ring-rose/40 focus:border-rose transition-all bg-white">
+              <option value="">Selecciona una opció...</option>
+              <option>Tarta personalitzada</option>
+              <option>Tarta de casament</option>
+              <option>Pastissos del dia</option>
+              <option>Productes sense gluten</option>
+              <option>Compra del llibre</option>
+              <option>Pack regal / corporatiu</option>
+              <option>Altra consulta</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="missatge" class="block text-xs font-semibold text-choc/70 uppercase tracking-wider mb-1.5">Missatge *</label>
+            <textarea id="missatge" name="missatge" rows="4" required
+                      placeholder="Explica'ns la teva comanda o consulta..."
+                      class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-choc placeholder-choc/25 focus:outline-none focus:ring-2 focus:ring-rose/40 focus:border-rose transition-all resize-none"></textarea>
+          </div>
+
+          <input type="hidden" name="_subject" value="Nova consulta web · Sweet Aury Pals" />
+
+          <button type="submit" :disabled="sending || sent"
+                  class="w-full bg-rose hover:bg-rose-dark text-cream py-4 rounded-xl font-semibold text-sm tracking-wide shadow-lg hover:scale-[1.02] transition-all duration-200 disabled:opacity-50">
+            <span x-show="!sending && !sent">Enviar missatge →</span>
+            <span x-show="sending" x-cloak>Enviant...</span>
+            <span x-show="sent" x-cloak>✓ Missatge enviat! Gràcies.</span>
+          </button>
+
+          <div x-show="sent" x-cloak class="bg-sage/15 border border-sage/30 rounded-xl p-4 text-center text-xs text-choc/65">
+            Et responem aviat per email o WhatsApp. Mentrestant, segueix-nos a Instagram! 🍰
+          </div>
+
+        </form>
+
+        <div class="mt-6 pt-5 border-t border-cream-dark flex items-center gap-3">
+          <a href="https://wa.me/34638958517?text=Hola%20Sweet%20Aury!%20Tinc%20una%20consulta%20🍰"
+             target="_blank"
+             class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1DAF57] text-white py-3 rounded-xl text-sm font-semibold transition-all hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.571l5.88-1.54A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.857a9.847 9.847 0 01-5.021-1.371l-.36-.214-3.732.979.996-3.638-.234-.373A9.847 9.847 0 012.143 12C2.143 6.534 6.534 2.143 12 2.143S21.857 6.534 21.857 12 17.466 21.857 12 21.857z"/>
+            </svg>
+            WhatsApp directe
+          </a>
+          <a href="https://www.instagram.com/obrador.sweetaury/" target="_blank"
+             class="flex-1 inline-flex items-center justify-center gap-2 border border-cream-dark text-choc py-3 rounded-xl text-sm font-semibold hover:border-rose hover:text-rose transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     FOOTER
+     ===================================================================== -->
+<footer class="bg-choc text-cream/60 pt-16 pb-10 px-5">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+      <!-- Marca -->
+      <div class="md:col-span-2">
+        <p class="font-script text-cream/80 text-3xl mb-1">Sweet Aury</p>
+        <p class="text-xs tracking-widest uppercase text-cream/30 mb-4">Obrador Pastisseria Artesana · Pals, Girona</p>
+        <p class="text-sm leading-relaxed max-w-xs">
+          Pastissos artesans elaborats cada dia amb ingredients de qualitat i molt d'amor al cor del Baix Empordà. Des de l'obrador, fins a la teva taula.
+        </p>
+        <div class="flex gap-3 mt-5">
+          <a href="https://www.instagram.com/obrador.sweetaury/" target="_blank" aria-label="Instagram"
+             class="w-9 h-9 rounded-full bg-cream/8 hover:bg-rose flex items-center justify-center transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/34638958517" target="_blank" aria-label="WhatsApp"
+             class="w-9 h-9 rounded-full bg-cream/8 hover:bg-[#25D366] flex items-center justify-center transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.571l5.88-1.54A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.857a9.847 9.847 0 01-5.021-1.371l-.36-.214-3.732.979.996-3.638-.234-.373A9.847 9.847 0 012.143 12C2.143 6.534 6.534 2.143 12 2.143S21.857 6.534 21.857 12 17.466 21.857 12 21.857z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <p class="text-cream/80 font-semibold text-sm uppercase tracking-wider mb-4">Navegació</p>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#inici"         class="hover:text-rose transition-colors">Inici</a></li>
+          <li><a href="#especialitats" class="hover:text-rose transition-colors">Especialitats</a></li>
+          <li><a href="#llibre"        class="hover:text-rose transition-colors">El Llibre</a></li>
+          <li><a href="#nosaltres"     class="hover:text-rose transition-colors">Nosaltres</a></li>
+          <li><a href="#ressenyes"     class="hover:text-rose transition-colors">Ressenyes</a></li>
+          <li><a href="#contacte"      class="hover:text-rose transition-colors">Contacte</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacte ràpid -->
+      <div>
+        <p class="text-cream/80 font-semibold text-sm uppercase tracking-wider mb-4">Contacte</p>
+        <div class="space-y-2.5 text-sm">
+          <p>📍 Carrer Enginyer Algarra, 54<br/><span class="text-cream/40">17256 Pals, Girona</span></p>
+          <p>📱 <a href="https://wa.me/34638958517" class="hover:text-rose transition-colors">+34 638 95 85 17</a></p>
+          <p>📸 <a href="https://www.instagram.com/obrador.sweetaury/" target="_blank" class="hover:text-rose transition-colors">@obrador.sweetaury</a></p>
+          <p class="text-cream/40 text-xs pt-1">Dt–Dg: 08:00 – 20:00<br/>Dl: Tancat</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="border-t border-cream/8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-cream/25">
+      <p>© 2025 Sweet Aury · Obrador Pastisseria Artesana · Pals, Girona</p>
+      <p>Fet amb ❤️ i molt de sucre · Pàgina web estàtica allotjada a GitHub Pages</p>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
