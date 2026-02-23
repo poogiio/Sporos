@@ -1,0 +1,113 @@
+   <!-- Quick Links -->
+     <li><a href="#galeria" class="hover:text-orange-500 transition-colors">Galería</a></li>
+                
+<!-- Desktop Menu -->
+<a href="#galeria" class="text-gray-700 hover:text-orange-500 font-medium transition-colors">Galería</a>
+
+    <!-- Mobile Menu -->
+<a href="#galeria" class="block text-lg text-gray-700 hover:text-orange-500 font-medium transition-colors menu-link">Galería</a>
+
+
+  <!-- Gallery Section -->
+    <section id="galeria" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold mb-4 uppercase tracking-wider">
+                    Galería
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+                    Nuestro Trabajo en <span class="text-orange-500">Imágenes</span>
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80" 
+                         alt="Diagnóstico por ordenador" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Diagnóstico Digital</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=600&q=80" 
+                         alt="Reparación de motor" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Mecánica de Precisión</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=600&q=80" 
+                         alt="Sistema de frenos" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Sistema de Frenos</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&q=80" 
+                         alt="Cambio de neumáticos" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Neumáticos</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80" 
+                         alt="Interior del taller" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Nuestras Instalaciones</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://imagenes.autobild.es/files/image_1280_720/uploads/imagenes/2023/05/29/68cd7f38bff18.jpeg" 
+                         alt="Equipo de trabajo" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Equipamiento Moderno</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&q=80" 
+                         alt="Revisión completa" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Revisiones Completas</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&q=80" 
+                         alt="Mantenimiento preventivo" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="text-white font-semibold">Mantenimiento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

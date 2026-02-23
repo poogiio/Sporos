@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POOGI — Equipos directivos que crecen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #161616;
+      --border: #222222;
+      --muted: #444444;
+      --text-dim: #888888;
+      --text: #c8c2b8;
+      --light: #e8e2d8;
+      --white: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-dim: #a07830;
+      --gold-glow: rgba(201,168,76,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-cta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--muted);
+      padding-bottom: 2px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .nav-cta:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(201,168,76,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.03) 0%, transparent 60%),
+        linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%);
+    }
+
+    .hero-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+      opacity: 0.4;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      position: relative;
+      max-width: 900px;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 2.5rem;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      max-width: 540px;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      margin-top: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      position: relative;
+    }
+
+    .btn-primary {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 1rem 2.2rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .hero-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 3rem;
+      background: var(--muted);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.6); }
+    }
+
+    /* ── SECTION BASE ── */
+    section { position: relative; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── TRUTH SECTION ── */
+    .truth {
+      padding: 8rem 0;
+      background: var(--dark);
+    }
+
+    .truth-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .truth-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .truth-label::before {
+      content: '01';
+      color: var(--muted);
+    }
+
+    .truth-headline {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .truth-headline em { font-style: italic; color: var(--gold); }
+
+    .truth-body p {
+      color: var(--text);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .truth-body p strong {
+      color: var(--light);
+      font-weight: 400;
+    }
+
+    .truth-callout {
+      margin-top: 2.5rem;
+      padding: 1.8rem 2rem;
+      border-left: 2px solid var(--gold);
+      background: var(--gold-glow);
+    }
+    .truth-callout p {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--light);
+      margin: 0 !important;
+      line-height: 1.7;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 8rem 0;
+      background: var(--black);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .section-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .step {
+      padding: 2.8rem 2.5rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+      transition: background 0.3s;
+    }
+    .step:last-child { border-right: none; }
+    .step:hover { background: var(--card); }
+
+    .step-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .step-body {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ── RESULTS ── */
+    .results {
+      padding: 8rem 0;
+      background: var(--dark);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 4rem;
+      background: var(--border);
+    }
+
+    .result-card {
+      background: var(--dark);
+      padding: 3.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .result-card:hover { background: var(--card); }
+
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3rem;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .result-company {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .result-sector {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+
+    .result-metrics {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metric-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .metric-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    .result-quote {
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
+    .result-author {
+      margin-top: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      padding: 8rem 0;
+      background: var(--black);
+    }
+
+    .testi-list {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .testi-item {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: background 0.3s;
+    }
+    .testi-item:hover { background: rgba(255,255,255,0.01); }
+
+    .testi-who {
+      padding-right: 2rem;
+    }
+
+    .testi-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--light);
+      margin-bottom: 0.3rem;
+    }
+
+    .testi-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+    }
+
+    .testi-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .testi-text strong {
+      font-style: normal;
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 8rem 0;
+      background: var(--dark);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 7rem;
+      align-items: start;
+    }
+
+    .about-left {
+      position: sticky;
+      top: 6rem;
+    }
+
+    .about-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    .about-stat {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .about-stat:last-child { border-bottom: none; }
+
+    .about-stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .about-stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    .about-photo {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      margin-bottom: 2.5rem;
+      filter: grayscale(20%) contrast(1.05);
+    }
+
+    .about-right p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 1.8rem;
+      font-weight: 300;
+    }
+
+    .about-right p strong {
+      color: var(--light);
+      font-weight: 400;
+    }
+
+    .about-right p em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 10rem 0;
+      background: var(--black);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+    }
+
+    .cta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .cta-headline {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+    .cta-headline em { font-style: italic; color: var(--gold); }
+
+    .cta-sub {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin: 0 auto 3.5rem;
+      font-weight: 300;
+      position: relative;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      position: relative;
+    }
+
+    .btn-large {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 1.2rem 3rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      display: inline-block;
+    }
+    .btn-large:hover {
+      background: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(201,168,76,0.15);
+    }
+
+    .cta-fine {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--dark);
+    }
+
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.3s;
+    }
+    .footer-link:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .hero { padding: 0 1.5rem 5rem; }
+      .container { padding: 0 1.5rem; }
+      .truth-grid,
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-left { position: static; }
+      .how-steps { grid-template-columns: 1fr; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
+      .results-grid { grid-template-columns: 1fr; }
+      .testi-item { grid-template-columns: 1fr; gap: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">POOGI</a>
+    <a href="#contacto" class="nav-cta">Agenda una conversación</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-line"></div>
+
+    <div class="hero-eyebrow">Laboratorio de mejora continua para equipos gerenciales</div>
+
+    <h1 class="hero-headline">
+      Equipos directivos que discuten menos,<br>
+      deciden mejor<br>
+      y <em>crecen más.</em>
+    </h1>
+
+    <p class="hero-sub">
+      Los problemas de comunicación en tu equipo no son el problema. Son el síntoma.<br>
+      Trabajamos la causa.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-primary">Agenda una conversación</a>
+      <span class="hero-note">30 minutos · Sin compromiso</span>
+    </div>
+
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- TRUTH -->
+  <section class="truth">
+    <div class="container">
+      <div class="truth-grid">
+        <div class="fade-up">
+          <div class="truth-label">El problema real</div>
+          <h2 class="truth-headline">
+            Hay una pregunta que los dueños de PYMEs <em>nunca hacen</em> en voz alta.
+          </h2>
+        </div>
+        <div class="truth-body fade-up">
+          <p>
+            Nadie te lo dice cuando construyes una empresa. Que llegará el día en que tendrás equipo, clientes, operaciones — y aun así sentirás que algo fundamental no funciona.
+          </p>
+          <p>
+            Las mismas conversaciones se repiten sin resolverse. Trabajas más que nunca pero la empresa no avanza al ritmo que debería. Sin ti, todo se detiene.
+          </p>
+          <p>
+            Y esa pregunta — <strong>¿qué es exactamente lo que nos está frenando?</strong> — nadie en tu equipo puede responderla contigo. Porque cada quien tiene su versión. Cada quien defiende su área. Y tú terminas solo con el peso de una respuesta que no encuentras.
+          </p>
+          <p>
+            Eso no es un problema de liderazgo. No es un problema de comunicación. No es un problema de personas.
+          </p>
+          <div class="truth-callout">
+            <p>Es un problema de claridad sistémica. Y tiene solución.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Cómo funciona <em>POOGI</em></h2>
+      </div>
+
+      <div class="how-steps">
+        <div class="step fade-up">
+          <div class="step-num">— 01</div>
+          <div class="step-title">Encontramos la restricción central</div>
+          <p class="step-body">Usamos la Teoría de Restricciones — la única metodología que obliga a un equipo directivo a ponerse de acuerdo sobre qué es verdad antes de decidir qué hacer.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">— 02</div>
+          <div class="step-title">Laboratorio quincenal en vivo</div>
+          <p class="step-body">Sesiones de 90 minutos cada dos semanas con el equipo gerencial completo — entre 3 y 8 personas. Remotas. Guiadas. Con resultados medibles desde las primeras sesiones.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">— 03</div>
+          <div class="step-title">Mejora permanente, no puntual</div>
+          <p class="step-body">No es un taller. No es consultoría tradicional. Es un proceso continuo que instala capacidad de mejora permanente en tu equipo — sin depender indefinidamente de externos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- RESULTS -->
+  <section class="results">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Lo que logran los equipos <em>con los que trabajo</em></h2>
+      </div>
+
+      <div class="results-grid">
+        <div class="result-card fade-up">
+          <div class="result-company">Maloka</div>
+          <div class="result-sector">Centro Interactivo de Ciencia y Tecnología · Bogotá</div>
+          <div class="result-metrics">
+            <div class="metric">
+              <span class="metric-value">+44%</span>
+              <span class="metric-label">Resultados financieros</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">+70%</span>
+              <span class="metric-label">Proyectos a tiempo</span>
+            </div>
+          </div>
+          <p class="result-quote">De la incertidumbre a la claridad total. En 2 años, Maloka transformó la forma en que su equipo directivo toma decisiones — y los resultados lo reflejaron.</p>
+        </div>
+
+        <div class="result-card fade-up">
+          <div class="result-company">Manufactura · Itagüí</div>
+          <div class="result-sector">Empresa Metalmecánica · Antioquia, Colombia</div>
+          <div class="result-metrics">
+            <div class="metric">
+              <span class="metric-value">+45%</span>
+              <span class="metric-label">Utilidades</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">+15%</span>
+              <span class="metric-label">Ventas</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">−30%</span>
+              <span class="metric-label">Inventario en proceso</span>
+            </div>
+          </div>
+          <p class="result-quote">En 12 meses. Sin aumentar el equipo. Sin cambiar personas. Solo encontrando y eliminando lo que realmente los frenaba.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-number">04</span>
+        <h2 class="section-title">Lo que dicen los <em>equipos</em></h2>
+      </div>
+
+      <div class="testi-list">
+        <div class="testi-item fade-up">
+          <div class="testi-who">
+            <div class="testi-name">Alejandro Pérez</div>
+            <div class="testi-role">Gerente General<br>Crearmedia Colombia · México<br>E-Learning corporativo</div>
+          </div>
+          <p class="testi-text">
+            "POOGI ha integrado en nosotros como organización la cultura de la mejora. Esa cultura me llena de esperanza y me motiva. Creo que <strong>por primera vez en la historia estamos entendiendo que crecer es algo inevitable — no un deseo.</strong>"
+          </p>
+        </div>
+
+        <div class="testi-item fade-up">
+          <div class="testi-who">
+            <div class="testi-name">Juan Carlos Borda</div>
+            <div class="testi-role">Gerente General<br>Cooperativa Alianza<br>Servicios financieros</div>
+          </div>
+          <p class="testi-text">
+            "Me voy entusiasmado de que decididamente le vamos a meter muela a esto. <strong>Este ejercicio de laboratorio nos ayuda a debatir ideas, corroborar datos y darnos cuenta si estamos tomando decisiones por el camino correcto.</strong> Nos ayuda a visualizar las cosas para mejorar."
+          </p>
+        </div>
+
+        <div class="testi-item fade-up">
+          <div class="testi-who">
+            <div class="testi-name">Clara Pulido</div>
+            <div class="testi-role">Coordinadora de RRHH<br>Cooperativa Alianza<br>Servicios financieros</div>
+          </div>
+          <p class="testi-text">
+            "Hemos encontrado más claro hacia dónde debemos ir. <strong>Hemos encontrado algo con lo que podemos tener un impacto contundente en la organización.</strong>"
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-left fade-up">
+          <img src="foto_personal.png" alt="Hernán Sedano" class="about-photo" />
+          <div class="about-name">Hernán<br>Sedano</div>
+          <div class="about-title">Consultor TOC · Fundador POOGI</div>
+
+          <div class="about-stat">
+            <span class="about-stat-value">15+</span>
+            <span class="about-stat-label">Años implementando TOC</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-value">300+</span>
+            <span class="about-stat-label">Equipos gerenciales</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-value">1.050</span>
+            <span class="about-stat-label">PYMEs mejoradas</span>
+          </div>
+        </div>
+
+        <div class="about-right fade-up">
+          <p>
+            Llevo 15 años haciendo la pregunta que los dueños de PYMEs nunca pueden hacerse solos.
+          </p>
+          <p>
+            No soy coach. No facilito talleres de comunicación. Trabajo con la <em>lógica del sistema</em> — con los datos, con lo que la empresa está haciendo aunque nadie lo quiera ver — hasta encontrar la restricción central que está limitando todo lo demás.
+          </p>
+          <p>
+            Uso la <strong>Teoría de Restricciones</strong> porque es la única metodología que obliga a un equipo a ponerse de acuerdo sobre qué es verdad antes de decidir qué hacer. No porque esté de moda — sino porque funciona cuando todo lo demás ha fallado.
+          </p>
+          <p>
+            Lo que pasa cuando un equipo directivo tiene esa conversación por primera vez es que dejan de discutir sobre síntomas. Empiezan a resolver causas. Y el negocio empieza a moverse de una forma que ninguno había sentido antes.
+          </p>
+          <p>
+            <em>Ese momento existe para tu equipo también.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CTA -->
+  <section class="cta-section" id="contacto">
+    <div class="cta-bg"></div>
+    <div class="container">
+      <div class="cta-label">El primer paso</div>
+      <h2 class="cta-headline">
+        La conversación que nunca has tenido<br>
+        <em>te está esperando.</em>
+      </h2>
+      <p class="cta-sub">
+        30 minutos. Sin presentaciones ni propuestas. Solo la pregunta que importa: ¿qué está frenando realmente a tu empresa?
+      </p>
+      <div class="cta-actions">
+        <a href="mailto:contacto@poogi.io?subject=Quiero%20agendar%20una%20conversaci%C3%B3n" class="btn-large">
+          Agenda tu conversación
+        </a>
+        <span class="cta-fine">Sin compromiso · Completamente remoto · España y Latinoamérica</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">POOGI</span>
+    <span class="footer-copy">© 2026 POOGI — Hernán Sedano</span>
+    <a href="mailto:contacto@poogi.io" class="footer-link">contacto@poogi.io</a>
+  </footer>
+
+  <!-- SCROLL ANIMATIONS -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Stagger siblings
+    document.querySelectorAll('.how-steps, .results-grid, .testi-list').forEach(parent => {
+      const children = parent.querySelectorAll('.fade-up');
+      children.forEach((child, i) => {
+        child.style.transitionDelay = `${i * 0.12}s`;
+      });
+    });
+  </script>
+
+</body>
+</html>
