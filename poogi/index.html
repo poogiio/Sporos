@@ -14,15 +14,14 @@
       --black: #0a0a0a;
       --dark: #111111;
       --card: #161616;
-      --border: #222222;
-      --muted: #444444;
-      --text-dim: #888888;
-      --text: #c8c2b8;
-      --light: #e8e2d8;
+      --border: #242424;
+      --muted: #555555;
+      --text-dim: #999999;
+      --text: #ccc6bc;
+      --light: #eae4da;
       --white: #f5f0e8;
       --gold: #c9a84c;
-      --gold-dim: #a07830;
-      --gold-glow: rgba(201,168,76,0.12);
+      --gold-glow: rgba(201,168,76,0.10);
     }
 
     html { scroll-behavior: smooth; }
@@ -31,722 +30,587 @@
       background: var(--black);
       color: var(--text);
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18px;
-      line-height: 1.7;
+      font-size: 20px;
+      line-height: 1.75;
       overflow-x: hidden;
     }
 
-    /* ── GRAIN OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.6;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 1.5rem 3rem;
+      padding: 1.6rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+      background: linear-gradient(to bottom, rgba(10,10,10,0.98) 60%, transparent);
     }
-
     .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
       text-decoration: none;
-      text-transform: uppercase;
+      display: flex;
+      align-items: center;
     }
-
+    .nav-logo img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
     .nav-cta {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      color: var(--text-dim);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--black);
+      background: var(--gold);
       text-decoration: none;
       text-transform: uppercase;
-      border-bottom: 1px solid var(--muted);
-      padding-bottom: 2px;
-      transition: color 0.3s, border-color 0.3s;
+      padding: 0.65rem 1.6rem;
+      transition: background 0.3s;
     }
-    .nav-cta:hover { color: var(--gold); border-color: var(--gold); }
+    .nav-cta:hover { background: var(--white); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 3rem 6rem;
+      justify-content: center;
+      padding: 10rem 4rem 7rem;
       position: relative;
       overflow: hidden;
     }
-
     .hero-bg {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(201,168,76,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.03) 0%, transparent 60%),
-        linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%);
+        radial-gradient(ellipse 55% 55% at 75% 45%, rgba(201,168,76,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 45% at 15% 75%, rgba(201,168,76,0.03) 0%, transparent 55%);
     }
-
-    .hero-line {
-      position: absolute;
-      top: 0; bottom: 0;
-      left: 50%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
-      opacity: 0.4;
-    }
-
-    .hero-eyebrow {
+    .hero-tag {
       font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
       color: var(--gold);
       text-transform: uppercase;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       position: relative;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .hero-headline {
+      font-size: clamp(3.4rem, 6.5vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.06;
+      color: var(--white);
+      letter-spacing: -0.025em;
+      max-width: 880px;
+      position: relative;
+    }
+    .hero-headline em { font-style: italic; color: var(--gold); }
+    .hero-divider {
+      width: 3rem;
+      height: 1px;
+      background: var(--border);
+      margin: 2.8rem 0;
+      position: relative;
+    }
+    .hero-sub {
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      max-width: 520px;
+      line-height: 1.75;
+      position: relative;
+    }
+    .hero-cta {
+      margin-top: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      position: relative;
+    }
+    .btn-gold {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 1.1rem 2.8rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.25s, box-shadow 0.3s;
+      display: inline-block;
+    }
+    .btn-gold:hover {
+      background: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(201,168,76,0.18);
+    }
+    .btn-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* CONTAINER */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 4rem; }
+
+    hr.divider { border: none; border-top: 1px solid var(--border); }
+
+    /* SECTION TAG */
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
       gap: 1rem;
     }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 2rem;
-      height: 1px;
-      background: var(--gold);
-    }
+    .section-tag span { color: var(--muted); font-size: 0.6rem; }
 
-    .hero-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.2rem, 7vw, 7rem);
+    .section-heading { margin-bottom: 4rem; }
+    .section-heading h2 {
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
       font-weight: 300;
-      line-height: 1.05;
       color: var(--white);
-      letter-spacing: -0.02em;
-      position: relative;
-      max-width: 900px;
+      letter-spacing: -0.015em;
+      line-height: 1.15;
     }
+    .section-heading h2 em { font-style: italic; color: var(--gold); }
 
-    .hero-headline em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .hero-sub {
-      margin-top: 2.5rem;
-      font-size: 1.15rem;
-      font-weight: 300;
-      color: var(--text-dim);
-      max-width: 540px;
-      position: relative;
-      line-height: 1.8;
-    }
-
-    .hero-actions {
-      margin-top: 3.5rem;
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-      position: relative;
-    }
-
-    .btn-primary {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 0.82rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--black);
-      background: var(--gold);
-      padding: 1rem 2.2rem;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.2s;
-      display: inline-block;
-    }
-    .btn-primary:hover {
-      background: var(--white);
-      transform: translateY(-2px);
-    }
-
-    .hero-note {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-    }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 3rem;
-      right: 3rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      writing-mode: vertical-rl;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-    .hero-scroll::after {
-      content: '';
-      width: 1px;
-      height: 3rem;
-      background: var(--muted);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-    @keyframes scrollLine {
-      0%, 100% { opacity: 0.3; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(0.6); }
-    }
-
-    /* ── SECTION BASE ── */
-    section { position: relative; }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 3rem;
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* ── TRUTH SECTION ── */
-    .truth {
-      padding: 8rem 0;
-      background: var(--dark);
-    }
-
-    .truth-grid {
+    /* PAIN */
+    .pain { padding: 9rem 0; background: var(--dark); }
+    .pain-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+      gap: 7rem;
       align-items: start;
     }
-
-    .truth-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.25em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-    .truth-label::before {
-      content: '01';
-      color: var(--muted);
-    }
-
-    .truth-headline {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
+    .pain-headline {
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
       font-weight: 300;
-      line-height: 1.15;
+      line-height: 1.12;
       color: var(--white);
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
     }
-    .truth-headline em { font-style: italic; color: var(--gold); }
-
-    .truth-body p {
-      color: var(--text);
-      font-size: 1.05rem;
-      line-height: 1.85;
-      margin-bottom: 1.5rem;
+    .pain-headline em { font-style: italic; color: var(--gold); }
+    .pain-statement {
+      font-size: 1.2rem;
       font-weight: 300;
+      color: var(--text);
+      line-height: 1.8;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
     }
-
-    .truth-body p strong {
-      color: var(--light);
-      font-weight: 400;
-    }
-
-    .truth-callout {
+    .pain-statement:first-child { padding-top: 0; }
+    .pain-statement:last-of-type { border-bottom: none; }
+    .pain-statement strong { color: var(--light); font-weight: 400; }
+    .pain-conclusion {
       margin-top: 2.5rem;
-      padding: 1.8rem 2rem;
+      padding: 2rem 2.2rem;
       border-left: 2px solid var(--gold);
       background: var(--gold-glow);
-    }
-    .truth-callout p {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       font-style: italic;
       color: var(--light);
-      margin: 0 !important;
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
-    /* ── HOW IT WORKS ── */
-    .how {
-      padding: 8rem 0;
-      background: var(--black);
+    /* DIFF */
+    .diff { padding: 9rem 0; background: var(--black); }
+    .diff-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      margin-top: 0;
     }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 2rem;
-      margin-bottom: 5rem;
-    }
-
-    .section-number {
+    .diff-col { padding: 3.5rem 3rem; }
+    .diff-col.them { background: var(--dark); }
+    .diff-col.us { background: var(--black); }
+    .diff-label {
       font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.25em;
-      color: var(--muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
     }
-
-    .section-title {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
+    .diff-col.them .diff-label { color: var(--muted); }
+    .diff-col.us .diff-label { color: var(--gold); }
+    .diff-item {
+      font-size: 1.1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.6;
       font-weight: 300;
-      color: var(--white);
-      letter-spacing: -0.01em;
     }
-    .section-title em { font-style: italic; color: var(--gold); }
+    .diff-item:last-child { border-bottom: none; }
+    .diff-col.them .diff-item { color: var(--text-dim); }
+    .diff-col.them .diff-item::before { content: '× '; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.8rem; }
+    .diff-col.us .diff-item { color: var(--light); }
+    .diff-col.us .diff-item::before { content: '→ '; color: var(--gold); font-family: 'DM Mono', monospace; font-size: 0.8rem; }
 
+    /* HOW */
+    .how { padding: 9rem 0; background: var(--dark); }
     .how-steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
       border: 1px solid var(--border);
+      margin-top: 0;
     }
-
     .step {
-      padding: 2.8rem 2.5rem;
+      padding: 3rem 2.8rem;
       border-right: 1px solid var(--border);
-      position: relative;
       transition: background 0.3s;
     }
     .step:last-child { border-right: none; }
     .step:hover { background: var(--card); }
-
     .step-num {
       font-family: 'DM Mono', monospace;
       font-size: 0.65rem;
       color: var(--gold);
       letter-spacing: 0.2em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
+      display: block;
     }
-
     .step-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 400;
       color: var(--white);
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       line-height: 1.3;
     }
-
     .step-body {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       color: var(--text-dim);
       line-height: 1.8;
       font-weight: 300;
     }
 
-    /* ── RESULTS ── */
-    .results {
-      padding: 8rem 0;
-      background: var(--dark);
-    }
-
+    /* RESULTS */
+    .results { padding: 9rem 0; background: var(--black); }
     .results-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2px;
-      margin-top: 4rem;
       background: var(--border);
     }
-
     .result-card {
-      background: var(--dark);
-      padding: 3.5rem 3rem;
+      background: var(--black);
+      padding: 3.8rem 3.2rem;
       position: relative;
       overflow: hidden;
       transition: background 0.3s;
     }
     .result-card:hover { background: var(--card); }
-
     .result-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
-      width: 3rem;
-      height: 2px;
+      width: 3.5rem; height: 2px;
       background: var(--gold);
     }
-
     .result-company {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
-
     .result-sector {
       font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.66rem;
       color: var(--muted);
-      letter-spacing: 0.1em;
-      margin-bottom: 2rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 2.5rem;
     }
-
     .result-metrics {
       display: flex;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
       flex-wrap: wrap;
     }
-
-    .metric {
-      display: flex;
-      flex-direction: column;
-    }
-
     .metric-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
+      font-size: 3.2rem;
       font-weight: 300;
       color: var(--white);
       line-height: 1;
       letter-spacing: -0.02em;
+      display: block;
     }
-
     .metric-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 0.3rem;
-    }
-
-    .result-quote {
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--text-dim);
-      line-height: 1.75;
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
-    }
-
-    .result-author {
-      margin-top: 1rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* ── TESTIMONIALS ── */
-    .testimonials {
-      padding: 8rem 0;
-      background: var(--black);
-    }
-
-    .testi-list {
-      margin-top: 4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .testi-item {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 4rem;
-      padding: 3rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
-      transition: background 0.3s;
-    }
-    .testi-item:hover { background: rgba(255,255,255,0.01); }
-
-    .testi-who {
-      padding-right: 2rem;
-    }
-
-    .testi-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--light);
-      margin-bottom: 0.3rem;
-    }
-
-    .testi-role {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      line-height: 1.6;
-    }
-
-    .testi-text {
-      font-size: 1.1rem;
-      font-style: italic;
-      color: var(--text);
-      line-height: 1.85;
-      font-weight: 300;
-    }
-
-    .testi-text strong {
-      font-style: normal;
-      font-weight: 400;
-      color: var(--gold);
-    }
-
-    /* ── ABOUT ── */
-    .about {
-      padding: 8rem 0;
-      background: var(--dark);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 7rem;
-      align-items: start;
-    }
-
-    .about-left {
-      position: sticky;
-      top: 6rem;
-    }
-
-    .about-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
-      font-weight: 300;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.5rem;
-    }
-
-    .about-title {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--gold);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 2.5rem;
-    }
-
-    .about-stat {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1.8rem;
-      padding-bottom: 1.8rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .about-stat:last-child { border-bottom: none; }
-
-    .about-stat-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--white);
-      line-height: 1;
-    }
-
-    .about-stat-label {
       font-family: 'DM Mono', monospace;
       font-size: 0.62rem;
       color: var(--muted);
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-top: 0.4rem;
+      display: block;
+    }
+    .result-quote {
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      border-top: 1px solid var(--border);
+      padding-top: 1.8rem;
     }
 
+    /* TESTIMONIALS */
+    .testimonials { padding: 9rem 0; background: var(--dark); }
+    .testi-list { margin-top: 4rem; border-top: 1px solid var(--border); }
+    .testi-item {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 5rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .testi-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--light);
+      margin-bottom: 0.4rem;
+    }
+    .testi-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.64rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+    }
+    .testi-text {
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+    .testi-text strong { font-style: normal; font-weight: 400; color: var(--gold); }
+
+    /* ABOUT */
+    .about { padding: 9rem 0; background: var(--black); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 7rem;
+      align-items: start;
+    }
     .about-photo {
       width: 100%;
-      max-width: 320px;
       aspect-ratio: 4/5;
       object-fit: cover;
       object-position: center top;
       display: block;
-      margin-bottom: 2.5rem;
-      filter: grayscale(20%) contrast(1.05);
+      margin-bottom: 2.8rem;
+      filter: grayscale(15%) contrast(1.05);
     }
-
-    .about-right p {
-      font-size: 1.1rem;
-      line-height: 1.9;
-      color: var(--text);
-      margin-bottom: 1.8rem;
-      font-weight: 300;
-    }
-
-    .about-right p strong {
-      color: var(--light);
-      font-weight: 400;
-    }
-
-    .about-right p em {
-      color: var(--gold);
-      font-style: italic;
-    }
-
-    /* ── CTA ── */
-    .cta-section {
-      padding: 10rem 0;
-      background: var(--black);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-bg {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
-    }
-
-    .cta-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.3em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .cta-headline {
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
+    .about-name {
+      font-size: 2.6rem;
       font-weight: 300;
       color: var(--white);
       line-height: 1.1;
-      letter-spacing: -0.02em;
-      max-width: 700px;
-      margin: 0 auto 1.5rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.4rem;
+    }
+    .about-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid var(--border);
+    }
+    .about-stat {
+      padding: 1.5rem 1rem 1.5rem 0;
+      border-right: 1px solid var(--border);
+      margin-right: 1rem;
+    }
+    .about-stat:last-child { border-right: none; margin-right: 0; }
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+      display: block;
+    }
+    .about-right { padding-top: 1rem; }
+    .about-right p {
+      font-size: 1.2rem;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .about-right p:last-child { margin-bottom: 0; }
+    .about-right strong { color: var(--light); font-weight: 400; }
+    .about-right em { color: var(--gold); font-style: italic; }
+
+    /* CTA */
+    .cta-section {
+      padding: 11rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--dark);
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 65% 55% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 65%);
+    }
+    .cta-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 2.2rem;
+      position: relative;
+    }
+    .cta-headline {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      max-width: 740px;
+      margin: 0 auto 1.8rem;
       position: relative;
     }
     .cta-headline em { font-style: italic; color: var(--gold); }
-
     .cta-sub {
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       color: var(--text-dim);
-      max-width: 480px;
-      margin: 0 auto 3.5rem;
+      max-width: 460px;
+      margin: 0 auto 4rem;
       font-weight: 300;
+      line-height: 1.75;
       position: relative;
     }
-
-    .cta-actions {
+    .cta-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1.4rem;
       position: relative;
     }
-
     .btn-large {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--black);
       background: var(--gold);
-      padding: 1.2rem 3rem;
+      padding: 1.3rem 3.5rem;
       text-decoration: none;
-      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      transition: background 0.3s, transform 0.25s, box-shadow 0.3s;
       display: inline-block;
     }
     .btn-large:hover {
       background: var(--white);
       transform: translateY(-3px);
-      box-shadow: 0 20px 40px rgba(201,168,76,0.15);
+      box-shadow: 0 20px 50px rgba(201,168,76,0.2);
     }
-
     .cta-fine {
       font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.67rem;
       color: var(--muted);
       letter-spacing: 0.1em;
     }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
-      padding: 3rem;
+      padding: 2.5rem 4rem;
       border-top: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--dark);
+      background: var(--black);
     }
-
-    .footer-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
+    .footer-logo img {
+      height: 22px;
+      width: auto;
+      display: block;
     }
-
     .footer-copy {
       font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.64rem;
       color: var(--muted);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
     }
-
     .footer-link {
       font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.64rem;
       color: var(--text-dim);
       text-decoration: none;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       transition: color 0.3s;
     }
     .footer-link:hover { color: var(--gold); }
 
-    /* ── ANIMATIONS ── */
+    /* ANIMATIONS */
     .fade-up {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
     }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .hero { padding: 0 1.5rem 5rem; }
-      .container { padding: 0 1.5rem; }
-      .truth-grid,
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-left { position: static; }
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 1.2rem 1.8rem; }
+      .hero { padding: 9rem 1.8rem 6rem; }
+      .container { padding: 0 1.8rem; }
+      .pain-grid,
+      .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+      .diff-inner { grid-template-columns: 1fr; }
       .how-steps { grid-template-columns: 1fr; }
       .step { border-right: none; border-bottom: 1px solid var(--border); }
       .step:last-child { border-bottom: none; }
@@ -758,65 +622,56 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">POOGI</a>
+    <a href="#" class="nav-logo"><img src="logo_poogi.png" alt="POOGI" /></a>
     <a href="#contacto" class="nav-cta">Agenda una conversación</a>
   </nav>
 
-  <!-- HERO -->
+  <!-- ① HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
-    <div class="hero-line"></div>
-
-    <div class="hero-eyebrow">Laboratorio de mejora continua para equipos gerenciales</div>
-
+    <div class="hero-tag">Laboratorio de mejora continua para equipos gerenciales</div>
     <h1 class="hero-headline">
-      Equipos directivos que discuten menos,<br>
+      Equipos directivos<br>
+      que discuten menos,<br>
       deciden mejor<br>
       y <em>crecen más.</em>
     </h1>
-
+    <div class="hero-divider"></div>
     <p class="hero-sub">
-      Los problemas de comunicación en tu equipo no son el problema. Son el síntoma.<br>
-      Trabajamos la causa.
+      Los problemas de comunicación en tu equipo no son el problema. Son el síntoma. Trabajamos la causa.
     </p>
-
-    <div class="hero-actions">
-      <a href="#contacto" class="btn-primary">Agenda una conversación</a>
-      <span class="hero-note">30 minutos · Sin compromiso</span>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn-gold">Agenda una conversación</a>
+      <span class="btn-note">30 minutos · Sin compromiso</span>
     </div>
-
-    <div class="hero-scroll">Scroll</div>
   </section>
 
   <hr class="divider" />
 
-  <!-- TRUTH -->
-  <section class="truth">
+  <!-- ② LA VERDAD INCÓMODA -->
+  <section class="pain">
     <div class="container">
-      <div class="truth-grid">
+      <div class="pain-grid">
         <div class="fade-up">
-          <div class="truth-label">El problema real</div>
-          <h2 class="truth-headline">
-            Hay una pregunta que los dueños de PYMEs <em>nunca hacen</em> en voz alta.
+          <div class="section-tag"><span>01</span> El problema real</div>
+          <h2 class="pain-headline">
+            Hay una pregunta que nunca<br>
+            puedes hacer <em>en voz alta.</em>
           </h2>
         </div>
-        <div class="truth-body fade-up">
-          <p>
-            Nadie te lo dice cuando construyes una empresa. Que llegará el día en que tendrás equipo, clientes, operaciones — y aun así sentirás que algo fundamental no funciona.
-          </p>
-          <p>
-            Las mismas conversaciones se repiten sin resolverse. Trabajas más que nunca pero la empresa no avanza al ritmo que debería. Sin ti, todo se detiene.
-          </p>
-          <p>
-            Y esa pregunta — <strong>¿qué es exactamente lo que nos está frenando?</strong> — nadie en tu equipo puede responderla contigo. Porque cada quien tiene su versión. Cada quien defiende su área. Y tú terminas solo con el peso de una respuesta que no encuentras.
-          </p>
-          <p>
-            Eso no es un problema de liderazgo. No es un problema de comunicación. No es un problema de personas.
-          </p>
-          <div class="truth-callout">
-            <p>Es un problema de claridad sistémica. Y tiene solución.</p>
+        <div class="fade-up">
+          <div class="pain-statement">
+            Tienes equipo, clientes, operaciones. Y aun así sientes que <strong>sin ti, todo se detiene.</strong>
+          </div>
+          <div class="pain-statement">
+            Las mismas discusiones se repiten. Cada directivo tiene su versión de la realidad. <strong>Nadie puede responder contigo la pregunta que más importa.</strong>
+          </div>
+          <div class="pain-statement">
+            No es un problema de personas. No es un problema de comunicación.
+          </div>
+          <div class="pain-conclusion">
+            Es un problema de claridad sistémica. Y tiene solución.
           </div>
         </div>
       </div>
@@ -825,29 +680,29 @@
 
   <hr class="divider" />
 
-  <!-- HOW IT WORKS -->
-  <section class="how">
+  <!-- ③ DIFERENCIACIÓN -->
+  <section class="diff">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-number">02</span>
-        <h2 class="section-title">Cómo funciona <em>POOGI</em></h2>
+      <div class="section-heading fade-up">
+        <div class="section-tag"><span>02</span> Por qué POOGI es diferente</div>
+        <h2>Lo que otros hacen.<br><em>Lo que hacemos nosotros.</em></h2>
       </div>
-
-      <div class="how-steps">
-        <div class="step fade-up">
-          <div class="step-num">— 01</div>
-          <div class="step-title">Encontramos la restricción central</div>
-          <p class="step-body">Usamos la Teoría de Restricciones — la única metodología que obliga a un equipo directivo a ponerse de acuerdo sobre qué es verdad antes de decidir qué hacer.</p>
+      <div class="diff-inner fade-up">
+        <div class="diff-col them">
+          <div class="diff-label">Coaching y talleres</div>
+          <div class="diff-item">Trabajan las relaciones entre personas</div>
+          <div class="diff-item">Mejoran el ambiente temporalmente</div>
+          <div class="diff-item">El problema vuelve en meses</div>
+          <div class="diff-item">Intervención puntual, sin continuidad</div>
+          <div class="diff-item">Dinámicas y opiniones</div>
         </div>
-        <div class="step fade-up">
-          <div class="step-num">— 02</div>
-          <div class="step-title">Laboratorio quincenal en vivo</div>
-          <p class="step-body">Sesiones de 90 minutos cada dos semanas con el equipo gerencial completo — entre 3 y 8 personas. Remotas. Guiadas. Con resultados medibles desde las primeras sesiones.</p>
-        </div>
-        <div class="step fade-up">
-          <div class="step-num">— 03</div>
-          <div class="step-title">Mejora permanente, no puntual</div>
-          <p class="step-body">No es un taller. No es consultoría tradicional. Es un proceso continuo que instala capacidad de mejora permanente en tu equipo — sin depender indefinidamente de externos.</p>
+        <div class="diff-col us">
+          <div class="diff-label">POOGI</div>
+          <div class="diff-item">Trabaja la lógica del sistema</div>
+          <div class="diff-item">Encuentra la causa raíz</div>
+          <div class="diff-item">Resultados permanentes y medibles</div>
+          <div class="diff-item">Laboratorio quincenal continuo</div>
+          <div class="diff-item">Teoría de Restricciones (TOC)</div>
         </div>
       </div>
     </div>
@@ -855,49 +710,76 @@
 
   <hr class="divider" />
 
-  <!-- RESULTS -->
+  <!-- ④ CÓMO FUNCIONA -->
+  <section class="how">
+    <div class="container">
+      <div class="section-heading fade-up">
+        <div class="section-tag"><span>03</span> El proceso</div>
+        <h2>Cómo funciona <em>POOGI</em></h2>
+      </div>
+      <div class="how-steps">
+        <div class="step fade-up">
+          <span class="step-num">— 01</span>
+          <div class="step-title">Encontramos la restricción central</div>
+          <p class="step-body">La única metodología que obliga a un equipo directivo a ponerse de acuerdo sobre qué es verdad — antes de decidir qué hacer.</p>
+        </div>
+        <div class="step fade-up">
+          <span class="step-num">— 02</span>
+          <div class="step-title">Laboratorio quincenal en vivo</div>
+          <p class="step-body">90 minutos cada dos semanas. Equipo de 3 a 8 personas. Remoto. Guiado. Con resultados medibles desde las primeras sesiones.</p>
+        </div>
+        <div class="step fade-up">
+          <span class="step-num">— 03</span>
+          <div class="step-title">Mejora permanente</div>
+          <p class="step-body">No un taller. Un proceso continuo que instala capacidad de mejora en tu equipo — sin depender indefinidamente de externos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ⑤ RESULTADOS -->
   <section class="results">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-number">03</span>
-        <h2 class="section-title">Lo que logran los equipos <em>con los que trabajo</em></h2>
+      <div class="section-heading fade-up">
+        <div class="section-tag"><span>04</span> Resultados</div>
+        <h2>Lo que logran los equipos<br><em>con los que trabajo</em></h2>
       </div>
-
       <div class="results-grid">
         <div class="result-card fade-up">
           <div class="result-company">Maloka</div>
           <div class="result-sector">Centro Interactivo de Ciencia y Tecnología · Bogotá</div>
           <div class="result-metrics">
-            <div class="metric">
+            <div>
               <span class="metric-value">+44%</span>
               <span class="metric-label">Resultados financieros</span>
             </div>
-            <div class="metric">
+            <div>
               <span class="metric-value">+70%</span>
               <span class="metric-label">Proyectos a tiempo</span>
             </div>
           </div>
-          <p class="result-quote">De la incertidumbre a la claridad total. En 2 años, Maloka transformó la forma en que su equipo directivo toma decisiones — y los resultados lo reflejaron.</p>
+          <p class="result-quote">De la incertidumbre a la claridad total. En 2 años, el equipo directivo de Maloka transformó la forma en que decide — y los resultados lo reflejaron.</p>
         </div>
-
         <div class="result-card fade-up">
           <div class="result-company">Manufactura · Itagüí</div>
           <div class="result-sector">Empresa Metalmecánica · Antioquia, Colombia</div>
           <div class="result-metrics">
-            <div class="metric">
+            <div>
               <span class="metric-value">+45%</span>
               <span class="metric-label">Utilidades</span>
             </div>
-            <div class="metric">
+            <div>
               <span class="metric-value">+15%</span>
               <span class="metric-label">Ventas</span>
             </div>
-            <div class="metric">
+            <div>
               <span class="metric-value">−30%</span>
-              <span class="metric-label">Inventario en proceso</span>
+              <span class="metric-label">Inventario</span>
             </div>
           </div>
-          <p class="result-quote">En 12 meses. Sin aumentar el equipo. Sin cambiar personas. Solo encontrando y eliminando lo que realmente los frenaba.</p>
+          <p class="result-quote">En 12 meses. Sin aumentar el equipo. Solo encontrando y eliminando lo que realmente los frenaba.</p>
         </div>
       </div>
     </div>
@@ -905,43 +787,34 @@
 
   <hr class="divider" />
 
-  <!-- TESTIMONIALS -->
+  <!-- ⑥ TESTIMONIOS -->
   <section class="testimonials">
     <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-number">04</span>
-        <h2 class="section-title">Lo que dicen los <em>equipos</em></h2>
+      <div class="section-heading fade-up">
+        <div class="section-tag"><span>05</span> Testimonios</div>
+        <h2>Lo que dicen<br><em>los equipos</em></h2>
       </div>
-
       <div class="testi-list">
         <div class="testi-item fade-up">
-          <div class="testi-who">
+          <div>
             <div class="testi-name">Alejandro Pérez</div>
-            <div class="testi-role">Gerente General<br>Crearmedia Colombia · México<br>E-Learning corporativo</div>
+            <div class="testi-role">Gerente General<br>Crearmedia Colombia · México</div>
           </div>
-          <p class="testi-text">
-            "POOGI ha integrado en nosotros como organización la cultura de la mejora. Esa cultura me llena de esperanza y me motiva. Creo que <strong>por primera vez en la historia estamos entendiendo que crecer es algo inevitable — no un deseo.</strong>"
-          </p>
+          <p class="testi-text">"Por primera vez en la historia estamos entendiendo que <strong>crecer es algo inevitable — no un deseo.</strong>"</p>
         </div>
-
         <div class="testi-item fade-up">
-          <div class="testi-who">
+          <div>
             <div class="testi-name">Juan Carlos Borda</div>
-            <div class="testi-role">Gerente General<br>Cooperativa Alianza<br>Servicios financieros</div>
+            <div class="testi-role">Gerente General<br>Cooperativa Alianza</div>
           </div>
-          <p class="testi-text">
-            "Me voy entusiasmado de que decididamente le vamos a meter muela a esto. <strong>Este ejercicio de laboratorio nos ayuda a debatir ideas, corroborar datos y darnos cuenta si estamos tomando decisiones por el camino correcto.</strong> Nos ayuda a visualizar las cosas para mejorar."
-          </p>
+          <p class="testi-text">"Este ejercicio de laboratorio nos ayuda a <strong>debatir ideas, corroborar datos y darnos cuenta si estamos tomando decisiones por el camino correcto.</strong>"</p>
         </div>
-
         <div class="testi-item fade-up">
-          <div class="testi-who">
+          <div>
             <div class="testi-name">Clara Pulido</div>
-            <div class="testi-role">Coordinadora de RRHH<br>Cooperativa Alianza<br>Servicios financieros</div>
+            <div class="testi-role">Coordinadora RRHH<br>Cooperativa Alianza</div>
           </div>
-          <p class="testi-text">
-            "Hemos encontrado más claro hacia dónde debemos ir. <strong>Hemos encontrado algo con lo que podemos tener un impacto contundente en la organización.</strong>"
-          </p>
+          <p class="testi-text">"Hemos encontrado algo con lo que podemos tener <strong>un impacto contundente en la organización.</strong>"</p>
         </div>
       </div>
     </div>
@@ -949,45 +822,30 @@
 
   <hr class="divider" />
 
-  <!-- ABOUT -->
+  <!-- ⑦ QUIÉN SOY -->
   <section class="about">
     <div class="container">
       <div class="about-grid">
-        <div class="about-left fade-up">
+        <div class="fade-up">
           <img src="foto_personal.png" alt="Hernán Sedano" class="about-photo" />
-          <div class="about-name">Hernán<br>Sedano</div>
-          <div class="about-title">Consultor TOC · Fundador POOGI</div>
-
-          <div class="about-stat">
-            <span class="about-stat-value">15+</span>
-            <span class="about-stat-label">Años implementando TOC</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-value">300+</span>
-            <span class="about-stat-label">Equipos gerenciales</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-value">1.050</span>
-            <span class="about-stat-label">PYMEs mejoradas</span>
+          <div class="about-name">Hernán Sedano</div>
+          <div class="about-role">Consultor TOC · Fundador POOGI</div>
+          <div class="about-stats">
+            <div class="about-stat">
+              <span class="stat-value">15+</span>
+              <span class="stat-label">Años en TOC</span>
+            </div>
+            <div class="about-stat">
+              <span class="stat-value">300+</span>
+              <span class="stat-label">Equipos gerenciales</span>
+            </div>
           </div>
         </div>
-
         <div class="about-right fade-up">
-          <p>
-            Llevo 15 años haciendo la pregunta que los dueños de PYMEs nunca pueden hacerse solos.
-          </p>
-          <p>
-            No soy coach. No facilito talleres de comunicación. Trabajo con la <em>lógica del sistema</em> — con los datos, con lo que la empresa está haciendo aunque nadie lo quiera ver — hasta encontrar la restricción central que está limitando todo lo demás.
-          </p>
-          <p>
-            Uso la <strong>Teoría de Restricciones</strong> porque es la única metodología que obliga a un equipo a ponerse de acuerdo sobre qué es verdad antes de decidir qué hacer. No porque esté de moda — sino porque funciona cuando todo lo demás ha fallado.
-          </p>
-          <p>
-            Lo que pasa cuando un equipo directivo tiene esa conversación por primera vez es que dejan de discutir sobre síntomas. Empiezan a resolver causas. Y el negocio empieza a moverse de una forma que ninguno había sentido antes.
-          </p>
-          <p>
-            <em>Ese momento existe para tu equipo también.</em>
-          </p>
+          <p>Llevo 15 años haciendo la pregunta que los dueños de PYMEs nunca pueden hacerse solos.</p>
+          <p>No soy coach. No facilito talleres. Trabajo con la <em>lógica del sistema</em> — con los datos, con lo que la empresa está haciendo aunque nadie lo quiera ver — hasta encontrar la restricción central que limita todo lo demás.</p>
+          <p>Uso la <strong>Teoría de Restricciones</strong> porque es la única metodología que obliga a un equipo a ponerse de acuerdo sobre qué es verdad antes de decidir qué hacer.</p>
+          <p><em>Ese momento de claridad compartida existe para tu equipo también.</em></p>
         </div>
       </div>
     </div>
@@ -995,57 +853,49 @@
 
   <hr class="divider" />
 
-  <!-- CTA -->
+  <!-- ⑧ CTA FINAL -->
   <section class="cta-section" id="contacto">
-    <div class="cta-bg"></div>
     <div class="container">
-      <div class="cta-label">El primer paso</div>
-      <h2 class="cta-headline">
+      <div class="cta-tag">El primer paso</div>
+      <h2 class="cta-headline fade-up">
         La conversación que nunca has tenido<br>
         <em>te está esperando.</em>
       </h2>
-      <p class="cta-sub">
-        30 minutos. Sin presentaciones ni propuestas. Solo la pregunta que importa: ¿qué está frenando realmente a tu empresa?
+      <p class="cta-sub fade-up">
+        30 minutos. Sin presentaciones ni propuestas. Solo una pregunta: ¿qué está frenando realmente a tu empresa?
       </p>
-      <div class="cta-actions">
+      <div class="cta-wrap fade-up">
         <a href="mailto:contacto@poogi.io?subject=Quiero%20agendar%20una%20conversaci%C3%B3n" class="btn-large">
           Agenda tu conversación
         </a>
-        <span class="cta-fine">Sin compromiso · Completamente remoto · España y Latinoamérica</span>
+        <span class="cta-fine">Sin compromiso · Remoto · España y Latinoamérica</span>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <span class="footer-logo">POOGI</span>
+    <span class="footer-logo"><img src="logo_poogi.png" alt="POOGI" /></span>
     <span class="footer-copy">© 2026 POOGI — Hernán Sedano</span>
     <a href="mailto:contacto@poogi.io" class="footer-link">contacto@poogi.io</a>
   </footer>
 
-  <!-- SCROLL ANIMATIONS -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, 100);
-          observer.unobserve(entry.target);
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), 80);
+          obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-    // Stagger siblings
     document.querySelectorAll('.how-steps, .results-grid, .testi-list').forEach(parent => {
-      const children = parent.querySelectorAll('.fade-up');
-      children.forEach((child, i) => {
-        child.style.transitionDelay = `${i * 0.12}s`;
+      parent.querySelectorAll('.fade-up').forEach((child, i) => {
+        child.style.transitionDelay = `${i * 0.1}s`;
       });
     });
   </script>
-
 </body>
 </html>
