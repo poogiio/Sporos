@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es" x-data="{ menuOpen: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 60">
+<head>
+  <!-- ============================================================
+       DESPENTINA'T · Peluquería & Salón de Belleza · Pals, Girona
+       ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       EDITAR AQUÍ: Título y descripción SEO principal
+       ============================================================ -->
+  <title>Despentina't – Peluquería y Salón de Belleza en Pals, Girona | Costa Brava</title>
+  <meta name="description" content="Despentina't, tu peluquería y salón de belleza en Pals, Baix Empordà. Cortes, color experto, tratamientos capilares, manicura y peinados de novia. ¡Reserva ahora por WhatsApp!" />
+  <meta name="keywords" content="peluquería Pals, salón belleza Pals, peluquería Girona, peluquería Costa Brava, peluquería Baix Empordà, Despentinat Pals, corte cabello Pals" />
+  <meta name="robots" content="index, follow" />
+  <!-- EDITAR AQUÍ: Tu URL real en GitHub Pages -->
+  <link rel="canonical" href="https://despentinat.github.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="business.business" />
+  <meta property="og:title" content="Despentina't – Peluquería y Salón de Belleza en Pals" />
+  <meta property="og:description" content="Tu espacio de belleza en el corazón del Baix Empordà. Cortes, color, tratamientos y mucho cuidado personal. ¡Reserva por WhatsApp!" />
+  <meta property="og:image" content="https://despentinat.github.io/img/og-image.jpg" />
+  <meta property="og:url" content="https://despentinat.github.io/" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- ============================================================
+       JSON-LD Schema LocalBusiness (SEO local avanzado)
+       EDITAR AQUÍ: dirección exacta, horarios, coordenadas GPS
+       ============================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Despentina't",
+    "description": "Peluquería y salón de belleza en Pals, Baix Empordà. Especialistas en cortes, coloración, tratamientos capilares y peinados de novia.",
+    "url": "https://despentinat.github.io/",
+    "telephone": "+34657646062",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "EDITAR AQUÍ: Calle y número",
+      "addressLocality": "Pals",
+      "addressRegion": "Girona",
+      "postalCode": "17256",
+      "addressCountry": "ES"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": "41.9784", "longitude": "3.1537" },
+    "sameAs": ["https://www.instagram.com/despentinat/"],
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "14:00" }
+    ],
+    "priceRange": "€€",
+    "image": "https://despentinat.github.io/img/hero-bg.jpg"
+  }
+  </script>
+
+  <!-- Fuentes Google: Playfair Display + DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js v3 CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- ============================================================
+       PALETA DE COLORES — EDITAR AQUÍ si deseas cambiarlos
+       Inspirada en la piedra medieval de Pals + calidez del salón
+       ============================================================ -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            stone:  { DEFAULT: '#C4A882', light: '#D8C4A6', dark: '#A08860', faint: '#C4A88215' },
+            terra:  { DEFAULT: '#B5644A', light: '#CC8568', dark: '#904E39', faint: '#B5644A12' },
+            sage:   { DEFAULT: '#7A8F72', light: '#96A98F', dark: '#5E7258', faint: '#7A8F7212' },
+            cream:  { DEFAULT: '#FAF6F0', dark: '#F0E8DC', deep: '#E5D8C8' },
+            ink:    { DEFAULT: '#1E1A17', mid: '#3D3730', muted: '#7A7068', lighter: '#B0A99F' },
+            sand:   { DEFAULT: '#D4B896', light: '#E4CDB2', dark: '#B09070' },
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body  { font-family: 'DM Sans', system-ui, sans-serif; background: #FAF6F0; color: #1E1A17; }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; }
+    html  { scroll-behavior: smooth; }
+
+    /* ── Hero con la foto del salón ── */
+    .hero-section {
+      background-image: url('img/hero-bg.jpg');
+      background-size: cover;
+      background-position: center 30%;
+    }
+    /* Filtro warm cinematográfico sobre la foto */
+    .hero-overlay {
+      background: linear-gradient(
+        160deg,
+        rgba(30,26,23,0.72) 0%,
+        rgba(181,100,74,0.30) 50%,
+        rgba(122,143,114,0.18) 100%
+      );
+    }
+    /* Si no hay foto, degradado fallback elegante */
+    .hero-fallback {
+      background: linear-gradient(135deg, #3D3730 0%, #B5644A 50%, #7A8F72 100%);
+    }
+
+    /* Vignette sutil CSS sobre la foto */
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(20,16,12,0.45) 100%);
+      pointer-events: none;
+    }
+
+    /* Cards */
+    .card-lift { transition: transform .3s ease, box-shadow .3s ease; }
+    .card-lift:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(30,26,23,.12); }
+
+    /* WhatsApp pulse */
+    @keyframes wa-pulse { 0%,100%{ box-shadow:0 0 0 0 rgba(37,211,102,.5); } 60%{ box-shadow:0 0 0 14px rgba(37,211,102,0); } }
+    .wa-btn { animation: wa-pulse 2.6s infinite; }
+
+    /* Reveal on scroll */
+    .reveal { opacity:0; transform:translateY(26px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.shown { opacity:1; transform:translateY(0); }
+
+    /* Bounce */
+    @keyframes bd { 0%,100%{transform:translateY(0)} 50%{transform:translateY(9px)} }
+    .bounce { animation: bd 2s infinite; }
+
+    /* Decorative divider */
+    .deco-line { display:flex; align-items:center; gap:10px; }
+    .deco-line::before,.deco-line::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,#B5644A44,transparent); }
+
+    /* Tag badge */
+    .tag { display:inline-flex; align-items:center; gap:6px; font-size:.65rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:.3rem .9rem; border-radius:999px; }
+
+    /* Nav link */
+    .nav-link { position:relative; font-size:.875rem; font-weight:500; color:#3D3730; transition:color .2s; }
+    .nav-link::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:2px; background:#B5644A; border-radius:1px; transition:width .25s ease; }
+    .nav-link:hover { color:#B5644A; }
+    .nav-link:hover::after { width:100%; }
+
+    /* Service icon container */
+    .svc-icon { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; transition:transform .3s ease; }
+    .card-lift:hover .svc-icon { transform:scale(1.08) rotate(-4deg); }
+
+    /* Grain texture overlay */
+    body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.028'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ============================================================
+       BARRA SUPERIOR
+       EDITAR AQUÍ: texto y número
+       ============================================================ -->
+  <div class="bg-terra text-white text-center text-xs py-2 px-4 font-body">
+    Reserva tu cita ahora mismo —
+    <a href="https://wa.me/34657646062?text=Hola!%20Me%20gustar%C3%ADa%20pedir%20cita%20en%20Despentina't%20💇"
+       target="_blank" rel="noopener" class="font-semibold underline underline-offset-2 hover:text-sand transition-colors">
+      657 646 062
+    </a>
+    &nbsp;·&nbsp; WhatsApp disponible
+  </div>
+
+  <!-- ============================================================
+       HEADER / NAVEGACIÓN
+       ============================================================ -->
+  <header
+    class="sticky top-0 z-50 transition-all duration-300"
+    :class="scrolled ? 'bg-cream shadow-lg border-b border-cream-dark py-2' : 'bg-cream/96 backdrop-blur border-b border-cream-dark py-3'"
+  >
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+
+      <!-- LOGOTIPO -->
+      <!-- EDITAR AQUÍ: Si tienes logo SVG, reemplaza por <img src="img/logo.svg" alt="Despentina't" class="h-10" /> -->
+      <a href="#inicio" class="group flex items-center gap-2.5">
+        <!-- Icono marca decorativo -->
+        <div class="w-8 h-8 rounded-lg bg-terra flex items-center justify-center flex-shrink-0 group-hover:bg-terra-dark transition-colors">
+          <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke-dasharray="2 2"/>
+            <path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4"/>
+            <path d="M12 8v1M12 15v1"/>
+          </svg>
+        </div>
+        <div>
+          <!-- EDITAR AQUÍ: Nombre del negocio -->
+          <span class="font-display text-xl font-bold text-terra leading-none block group-hover:text-terra-dark transition-colors">Despentina't</span>
+          <span class="text-ink-lighter text-[10px] font-body uppercase tracking-widest">Pals · Girona</span>
+        </div>
+      </a>
+
+      <!-- NAV DESKTOP -->
+      <nav class="hidden md:flex items-center gap-8" aria-label="Navegación principal">
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#nosotros"  class="nav-link">Nosotros</a>
+        <a href="#contacto"  class="nav-link">Contacto</a>
+        <a href="https://wa.me/34657646062?text=Hola!%20Me%20gustar%C3%ADa%20pedir%20cita%20en%20Despentina't%20💇"
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 bg-terra hover:bg-terra-dark text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md hover:shadow-terra/30 hover:shadow-lg transition-all duration-200">
+          <!-- WhatsApp icon -->
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Reservar cita
+        </a>
+      </nav>
+
+      <!-- HAMBURGER -->
+      <button @click="menuOpen=!menuOpen" :aria-expanded="menuOpen" aria-label="Abrir menú" class="md:hidden p-2 text-ink-mid hover:text-terra transition-colors">
+        <svg x-show="!menuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg x-show="menuOpen"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- MENÚ MOBILE -->
+    <div x-show="menuOpen"
+      x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 -translate-y-2"
+      class="md:hidden bg-cream border-t border-cream-dark shadow-xl">
+      <nav class="flex flex-col" aria-label="Menú móvil">
+        <a href="#servicios" @click="menuOpen=false" class="px-6 py-3.5 border-b border-cream-dark text-ink-mid hover:text-terra hover:bg-terra/5 font-medium text-sm transition-colors">Servicios</a>
+        <a href="#nosotros"  @click="menuOpen=false" class="px-6 py-3.5 border-b border-cream-dark text-ink-mid hover:text-terra hover:bg-terra/5 font-medium text-sm transition-colors">Nosotros</a>
+        <a href="#contacto"  @click="menuOpen=false" class="px-6 py-3.5 border-b border-cream-dark text-ink-mid hover:text-terra hover:bg-terra/5 font-medium text-sm transition-colors">Contacto</a>
+        <a href="https://wa.me/34657646062?text=Hola!%20Me%20gustar%C3%ADa%20pedir%20cita%20en%20Despentina't%20💇"
+           target="_blank" rel="noopener" @click="menuOpen=false"
+           class="m-4 bg-terra text-white text-center py-3.5 rounded-full font-semibold text-sm shadow-md flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Reservar por WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+  <!-- /HEADER -->
+
+
+  <!-- ============================================================
+       HERO — La foto del salón como fondo
+       EDITAR AQUÍ: La imagen hero-bg.jpg ya incluye la foto del salón
+       con filtro cálido CSS aplicado (sepia + brightness + contrast)
+       ============================================================ -->
+  <section id="inicio" class="hero-section relative min-h-[93vh] flex items-center justify-center overflow-hidden hero-fallback">
+
+    <!--
+      INSTRUCCIÓN TÉCNICA: La foto del salón (fachada con piedra medieval)
+      se carga desde img/hero-bg.jpg con los siguientes filtros CSS aplicados:
+      - Warmth: sepia(0.18) para tono cálido mediterráneo
+      - Contrast: 1.12 para definición
+      - Brightness: 1.06 para luminosidad
+      Efecto: la piedra medieval de Pals queda dorada y cinematográfica.
+    -->
+    <div class="absolute inset-0 overflow-hidden">
+      <img src="img/hero-bg.jpg"
+           alt="Entrada del salón Despentina't en Pals, piedra medieval Costa Brava"
+           class="w-full h-full object-cover object-center"
+           style="filter: sepia(0.14) contrast(1.14) brightness(1.06) saturate(1.1);"
+           onerror="this.style.display='none'" />
+    </div>
+
+    <!-- Overlay degradado cálido -->
+    <div class="hero-overlay absolute inset-0"></div>
+
+    <!-- Contenido -->
+    <div class="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
+
+      <!-- Badge ubicación -->
+      <div class="tag bg-white/12 backdrop-blur border border-white/20 text-white/90 mb-8 mx-auto w-fit">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <!-- EDITAR AQUÍ: Subtítulo del hero -->
+        Peluquería & Belleza · Pals, Girona
+      </div>
+
+      <!-- Título principal -->
+      <!-- EDITAR AQUÍ: Slogan principal del negocio -->
+      <h1 class="font-display text-5xl sm:text-6xl md:text-[5.5rem] font-bold leading-[1.05] mb-6 drop-shadow-2xl">
+        Tu pelo,<br/>
+        <em class="text-sand-light italic font-normal">nuestra pasión</em>
+      </h1>
+
+      <!-- Subtítulo -->
+      <!-- EDITAR AQUÍ: Descripción breve -->
+      <p class="text-white/85 text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto font-body font-light">
+        Cortes, colores y tratamientos en el corazón del Baix Empordà. Ven a sentirte especial.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="https://wa.me/34657646062?text=Hola!%20Me%20gustar%C3%ADa%20pedir%20cita%20en%20Despentina't%20💇"
+           target="_blank" rel="noopener"
+           class="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-terra hover:bg-terra-dark text-white font-semibold text-base px-9 py-4 rounded-full shadow-2xl hover:shadow-xl hover:scale-[1.03] transition-all duration-200">
+          <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Reservar cita ahora
+        </a>
+        <a href="#servicios"
+           class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/12 backdrop-blur border border-white/28 hover:bg-white/22 text-white font-semibold text-base px-9 py-4 rounded-full transition-all duration-200">
+          Ver servicios
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="mt-16 bounce opacity-40">
+        <svg class="w-6 h-6 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </div>
+    </div>
+  </section>
+  <!-- /HERO -->
+
+
+  <!-- ============================================================
+       CREDENCIALES RÁPIDAS
+       EDITAR AQUÍ: cambia números y textos por los reales
+       ============================================================ -->
+  <section class="bg-ink text-white py-10">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <p class="font-display text-4xl font-bold text-sand leading-none">+10</p>
+        <p class="text-white/55 text-xs mt-2 uppercase tracking-wide">Años de experiencia</p>
+      </div>
+      <div>
+        <p class="font-display text-4xl font-bold text-sand leading-none">+500</p>
+        <p class="text-white/55 text-xs mt-2 uppercase tracking-wide">Clientes satisfechas</p>
+      </div>
+      <div>
+        <p class="font-display text-4xl font-bold text-sand leading-none">100%</p>
+        <p class="text-white/55 text-xs mt-2 uppercase tracking-wide">Productos premium</p>
+      </div>
+      <div>
+        <p class="font-display text-4xl font-bold text-sand leading-none">★ 5.0</p>
+        <p class="text-white/55 text-xs mt-2 uppercase tracking-wide">Valoración Google</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SERVICIOS
+       EDITAR AQUÍ: añade, elimina o modifica servicios y precios
+       ============================================================ -->
+  <section id="servicios" class="py-24 bg-cream">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <div class="text-center mb-16 reveal">
+        <p class="text-terra text-xs font-semibold uppercase tracking-[.2em] mb-3">Lo que hacemos</p>
+        <h2 class="font-display text-5xl md:text-6xl text-ink">Nuestros servicios</h2>
+        <div class="deco-line max-w-xs mx-auto mt-4 mb-6">
+          <svg class="w-3 h-3 text-terra flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="text-ink-muted max-w-md mx-auto">Cada tratamiento, pensado para ti. Productos de alta gama y manos expertas a tu servicio.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- ── Servicio 1: Corte ── -->
+        <!-- EDITAR AQUÍ: Duplica o elimina estos bloques para añadir/quitar servicios -->
+        <article class="card-lift bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="svc-icon bg-terra/10 group-hover:bg-terra/18">
+            <!-- Icono moderno: tijeras -->
+            <svg class="w-6 h-6 text-terra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+              <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Corte de pelo</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Corte de mujer, hombre y niño. Estilos clásicos o las últimas tendencias, siempre adaptados a ti y a tu tipo de cabello.</p>
+          <!-- EDITAR AQUÍ: Precio -->
+          <p class="text-terra font-semibold text-sm">Desde 20 €</p>
+        </article>
+
+        <!-- ── Servicio 2: Color ── -->
+        <article class="card-lift bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="svc-icon bg-sage/10 group-hover:bg-sage/18">
+            <!-- Icono: paleta de color -->
+            <svg class="w-6 h-6 text-sage-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2c4.478 0 8 2.91 8 6.5 0 2.21-1.343 3.5-3 3.5h-1.5c-1.38 0-2.5 1.12-2.5 2.5 0 .828.672 1.5 1.5 1.5C17.523 16 22 18.477 22 12" stroke-linecap="round"/>
+              <circle cx="7.5" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="10.5" cy="7.5" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="13.5" cy="7.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Color & Mechas</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Tintes, mechas, balayage y efectos de luz. Coloración con técnicas avanzadas y productos de primera calidad.</p>
+          <p class="text-terra font-semibold text-sm">Desde 45 €</p>
+        </article>
+
+        <!-- ── Servicio 3: Tratamientos ── -->
+        <article class="card-lift bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="svc-icon bg-sand/15 group-hover:bg-sand/25">
+            <!-- Icono: hoja / tratamiento natural -->
+            <svg class="w-6 h-6 text-sand-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M6.5 12c0-4.97 4.03-9 9-9 0 4.97-4.03 9-9 9z" stroke-linejoin="round"/>
+              <path d="M6.5 12c0 4.97 4.03 9 9 9 0-4.97-4.03-9-9-9z" stroke-linejoin="round"/>
+              <path d="M6.5 12H3M6.5 12c1.5 0 3 .5 4.5 1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Tratamientos Capilares</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Hidratación profunda, keratina, botox capilar y tratamientos reparadores para un cabello sano y brillante.</p>
+          <p class="text-terra font-semibold text-sm">Desde 35 €</p>
+        </article>
+
+        <!-- ── Servicio 4: Peinados ── -->
+        <article class="card-lift bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="svc-icon bg-terra/8 group-hover:bg-terra/15">
+            <!-- Icono: flores / novia -->
+            <svg class="w-6 h-6 text-terra" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 3c0 0-3 2-3 5s3 5 3 5-3 2-3 5" stroke-linecap="round"/>
+              <path d="M12 3c0 0 3 2 3 5s-3 5-3 5 3 2 3 5" stroke-linecap="round"/>
+              <path d="M5 8c0 0 2-3 5-3s5 3 5 3-2 3-5 3-5-3-5-3z" stroke-linejoin="round"/>
+              <path d="M5 16c0 0 2-3 5-3s5 3 5 3-2 3-5 3-5-3-5-3z" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Peinados & Recogidos</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Peinados para novias, eventos especiales y ceremonias. Hacemos que te sientas única en tu gran día.</p>
+          <p class="text-terra font-semibold text-sm">Desde 40 €</p>
+        </article>
+
+        <!-- ── Servicio 5: Manicura ── -->
+        <article class="card-lift bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="svc-icon bg-sage/8 group-hover:bg-sage/15">
+            <!-- Icono: mano / uñas -->
+            <svg class="w-6 h-6 text-sage-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 11V6a2 2 0 00-2-2v0a2 2 0 00-2 2v0M14 10V4a2 2 0 00-2-2v0a2 2 0 00-2 2v2M10 10.5V6a2 2 0 00-2-2v0a2 2 0 00-2 2v8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 11a2 2 0 012 2v2a6 6 0 01-12 0v-5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Manicura & Uñas</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Manicura clásica, semipermanente y decoración de uñas. Manos perfectas para cada ocasión especial.</p>
+          <p class="text-terra font-semibold text-sm">Desde 18 €</p>
+        </article>
+
+        <!-- ── CTA Card ── -->
+        <article class="card-lift rounded-2xl p-7 shadow-md group flex flex-col justify-between"
+                 style="background: linear-gradient(135deg, #B5644A 0%, #904E39 100%);">
+          <div>
+            <div class="svc-icon bg-white/15">
+              <!-- Icono: spark / estrella -->
+              <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-white mb-3">¿No encuentras lo que buscas?</h3>
+            <p class="text-white/75 text-sm leading-relaxed">Consúltanos sin compromiso. Te ayudamos a encontrar el mejor tratamiento para ti.</p>
+          </div>
+          <a href="https://wa.me/34657646062?text=Hola!%20Quer%C3%ADa%20informaci%C3%B3n%20sobre%20vuestros%20servicios%20y%20precios"
+             target="_blank" rel="noopener"
+             class="mt-7 inline-flex items-center gap-2 bg-white text-terra font-semibold text-sm px-5 py-3 rounded-full hover:bg-cream transition-colors shadow-lg">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Preguntar por WhatsApp
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+  <!-- /SERVICIOS -->
+
+
+  <!-- ============================================================
+       SOBRE NOSOTROS
+       EDITAR AQUÍ: Cambia el texto por la historia real del salón
+       ============================================================ -->
+  <section id="nosotros" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Foto del salón — la entrada con la piedra medieval -->
+        <div class="relative reveal">
+          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+            <!--
+              ESTA ES LA FOTO DE LA ENTRADA DEL SALÓN QUE NOS HAS COMPARTIDO
+              El filtro CSS aplica: tono cálido + contraste + saturación
+              para que la piedra medieval luzca dorada y cinematográfica
+              EDITAR AQUÍ: Puedes cambiar los valores del filter si quieres otro look
+            -->
+            <img src="img/hero-bg.jpg"
+                 alt="Entrada de Despentina't, peluquería en Pals con fachada de piedra medieval"
+                 class="w-full h-full object-cover object-center"
+                 style="filter: sepia(0.1) contrast(1.15) brightness(1.05) saturate(1.15); object-position: center 20%;"
+                 onerror="this.parentElement.style.background='linear-gradient(135deg,#E5D8C8,#B5644A33)'" />
+          </div>
+
+          <!-- Badge flotante años -->
+          <div class="absolute -bottom-5 -right-3 sm:-right-5 bg-terra text-white rounded-2xl shadow-2xl px-6 py-4 text-center">
+            <p class="font-display text-3xl font-bold leading-none">+10</p>
+            <p class="text-white/75 text-xs mt-1">Años en Pals</p>
+          </div>
+
+          <!-- Badge Instagram -->
+          <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener"
+             class="absolute -top-3 -left-3 sm:-left-5 bg-white rounded-2xl shadow-xl px-4 py-3 flex items-center gap-2.5 hover:shadow-2xl transition-shadow border border-cream-dark">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 to-orange-400 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-ink leading-none">@despentinat</p>
+              <p class="text-[10px] text-ink-muted mt-0.5">Síguenos</p>
+            </div>
+          </a>
+
+          <!-- Sticker MEDAVITA — detalle que aparece en la foto -->
+          <div class="absolute bottom-16 left-5 bg-white/90 backdrop-blur rounded-xl px-3 py-2 shadow-lg border border-cream-dark">
+            <p class="text-[10px] text-ink-muted uppercase tracking-wide">Productos</p>
+            <p class="text-xs font-bold text-ink">MEDAVITA · Premium</p>
+          </div>
+        </div>
+
+        <!-- Texto -->
+        <div class="reveal">
+          <p class="text-terra text-xs font-semibold uppercase tracking-[.2em] mb-3">Quiénes somos</p>
+          <h2 class="font-display text-5xl md:text-[3.5rem] text-ink leading-tight mb-6">
+            Belleza y bienestar<br/>
+            <em class="text-terra">en el centro de Pals</em>
+          </h2>
+
+          <!-- EDITAR AQUÍ: Historia y descripción real del salón -->
+          <p class="text-ink-muted leading-relaxed mb-4">
+            En <strong class="text-ink">Despentina't</strong> somos un equipo apasionado por la belleza y el bienestar. Ubicados en el corazón del Baix Empordà, llevamos años cuidando el cabello y la imagen de los vecinos de Pals y de toda la Costa Brava.
+          </p>
+          <p class="text-ink-muted leading-relaxed mb-8">
+            <!-- EDITAR AQUÍ: Adapta a tu historia real -->
+            Creemos que el cabello es expresión, identidad y confianza. Por eso escuchamos a cada cliente, entendemos sus necesidades y trabajamos con los mejores productos del mercado para ofrecer resultados que duran. Todo en un ambiente cálido, moderno y completamente dedicado a ti.
+          </p>
+
+          <!-- Valores diferenciales -->
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <!-- EDITAR AQUÍ: Modifica los valores y descripciones -->
+            <div class="flex items-start gap-3 p-3 rounded-xl hover:bg-cream transition-colors">
+              <div class="w-8 h-8 rounded-lg bg-terra/12 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-terra" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"/></svg>
+              </div>
+              <p class="text-sm text-ink"><strong class="block mb-0.5">Productos premium</strong><span class="text-ink-muted text-xs">MEDAVITA, Wella, L'Oréal</span></p>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-xl hover:bg-cream transition-colors">
+              <div class="w-8 h-8 rounded-lg bg-sage/12 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-sage-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="text-sm text-ink"><strong class="block mb-0.5">Formación continua</strong><span class="text-ink-muted text-xs">Siempre al día en tendencias</span></p>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-xl hover:bg-cream transition-colors">
+              <div class="w-8 h-8 rounded-lg bg-sand/15 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-sand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round"/></svg>
+              </div>
+              <p class="text-sm text-ink"><strong class="block mb-0.5">Trato personalizado</strong><span class="text-ink-muted text-xs">Te escuchamos de verdad</span></p>
+            </div>
+            <div class="flex items-start gap-3 p-3 rounded-xl hover:bg-cream transition-colors">
+              <div class="w-8 h-8 rounded-lg bg-terra/12 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-terra" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <p class="text-sm text-ink"><strong class="block mb-0.5">Cita por WhatsApp</strong><span class="text-ink-muted text-xs">Respuesta inmediata</span></p>
+            </div>
+          </div>
+
+          <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2.5 border-2 border-terra text-terra hover:bg-terra hover:text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-200 text-sm">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Síguenos en Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /NOSOTROS -->
+
+
+
+
+
+  <!-- ============================================================
+       TESTIMONIOS
+       EDITAR AQUÍ: Reemplaza por opiniones reales de clientes
+       ============================================================ -->
+  <section class="py-24 bg-ink text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <p class="text-sand text-xs font-semibold uppercase tracking-[.2em] mb-3">Lo que dicen nuestras clientas</p>
+        <h2 class="font-display text-5xl text-white">Experiencias reales</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- EDITAR AQUÍ: Cambia nombre, texto y ciudad por reseñas reales (Google, Instagram) -->
+        <div class="bg-white/6 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+          <div class="flex items-center gap-1 text-sand mb-4">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="text-white/80 text-sm leading-relaxed mb-5 italic">"Me hicieron exactamente lo que quería. Salí encantada con el corte y el color. Muy profesionales y una atención inmejorable. ¡100% recomendado!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-terra/40 flex items-center justify-center font-display font-bold text-terra-light text-sm">M</div>
+            <div><p class="font-semibold text-sm leading-none">María G.</p><p class="text-white/45 text-xs mt-0.5">Pals</p></div>
+          </div>
+        </div>
+        <div class="bg-white/6 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+          <div class="flex items-center gap-1 text-sand mb-4">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="text-white/80 text-sm leading-relaxed mb-5 italic">"El mejor salón de la zona, sin ninguna duda. Atención personalizada, productos de calidad y ambiente muy agradable. ¡Siempre salgo felicísima!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-sage/40 flex items-center justify-center font-display font-bold text-sage-light text-sm">A</div>
+            <div><p class="font-semibold text-sm leading-none">Ana P.</p><p class="text-white/45 text-xs mt-0.5">Begur</p></div>
+          </div>
+        </div>
+        <div class="bg-white/6 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+          <div class="flex items-center gap-1 text-sand mb-4">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="text-white/80 text-sm leading-relaxed mb-5 italic">"Hicieron mi peinado de boda y quedó perfecto. Muy detallistas y profesionales. ¡Me hicieron sentir única en el día más especial de mi vida!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-sand/30 flex items-center justify-center font-display font-bold text-sand-light text-sm">L</div>
+            <div><p class="font-semibold text-sm leading-none">Laura S.</p><p class="text-white/45 text-xs mt-0.5">Palafrugell</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /TESTIMONIOS -->
+
+
+  <!-- ============================================================
+       CONTACTO
+       EDITAR AQUÍ: configurar Formspree (ver instrucciones README)
+       ============================================================ -->
+  <section id="contacto" class="py-24 bg-cream">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+
+        <!-- Info de contacto -->
+        <div class="reveal">
+          <p class="text-terra text-xs font-semibold uppercase tracking-[.2em] mb-3">Hablemos</p>
+          <h2 class="font-display text-5xl md:text-[3.2rem] text-ink leading-tight mb-6">
+            Reserva tu<br/><em class="text-terra">cita ahora</em>
+          </h2>
+          <p class="text-ink-muted leading-relaxed mb-8">La forma más rápida es por WhatsApp. Te respondemos al momento y confirmamos tu cita en seguida.</p>
+
+          <div class="space-y-3">
+
+            <!-- WhatsApp — principal CTA -->
+            <!-- EDITAR AQUÍ: número de teléfono -->
+            <a href="https://wa.me/34657646062?text=Hola!%20Me%20gustar%C3%ADa%20pedir%20cita%20en%20Despentina't%20💇"
+               target="_blank" rel="noopener"
+               class="flex items-center gap-4 bg-white rounded-2xl p-4 border border-cream-dark shadow-sm hover:border-green-300 hover:shadow-md transition-all group">
+              <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
+                <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div class="flex-1">
+                <p class="font-semibold text-ink group-hover:text-green-700 transition-colors">657 646 062</p>
+                <p class="text-xs text-ink-muted">WhatsApp · Respuesta inmediata</p>
+              </div>
+              <svg class="w-4 h-4 text-ink-lighter group-hover:text-green-500 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener"
+               class="flex items-center gap-4 bg-white rounded-2xl p-4 border border-cream-dark shadow-sm hover:border-pink-200 hover:shadow-md transition-all group">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-orange-400 flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </div>
+              <div class="flex-1"><p class="font-semibold text-ink">@despentinat</p><p class="text-xs text-ink-muted">Instagram</p></div>
+              <svg class="w-4 h-4 text-ink-lighter group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+
+            <!-- Horario -->
+            <!-- EDITAR AQUÍ: Cambia por tu horario real -->
+            <div class="flex items-center gap-4 bg-white rounded-2xl p-4 border border-cream-dark shadow-sm">
+              <div class="w-12 h-12 bg-terra/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-terra" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-ink text-sm">Horario</p>
+                <p class="text-xs text-ink-muted">Lun–Vie: 9:00–19:00 · Sáb: 9:00–14:00</p>
+              </div>
+            </div>
+
+            <!-- Dirección -->
+            <!-- EDITAR AQUÍ: Añade la dirección exacta -->
+            <div class="flex items-center gap-4 bg-white rounded-2xl p-4 border border-cream-dark shadow-sm">
+              <div class="w-12 h-12 bg-terra/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-terra" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-ink text-sm">Dónde estamos</p>
+                <!-- EDITAR AQUÍ: dirección completa -->
+                <p class="text-xs text-ink-muted">Pals, 17256 · Baix Empordà, Girona</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============================================================
+             FORMULARIO — conectar con Formspree
+             EDITAR AQUÍ:
+             1. Ve a https://formspree.io → crea cuenta gratuita
+             2. Crea un formulario nuevo y copia tu Form ID
+             3. Reemplaza YOUR_FORM_ID en la línea action=""
+                Ejemplo: action="https://formspree.io/f/xdoqkpnv"
+             Los mensajes te llegan al email con nombre + teléfono del cliente.
+             ============================================================ -->
+        <div x-data="{
+              sent: false, sending: false, error: false,
+              submit(e) {
+                this.sending = true; this.error = false;
+                fetch(e.target.action, {
+                  method: 'POST',
+                  body: new FormData(e.target),
+                  headers: { 'Accept': 'application/json' }
+                }).then(r => {
+                  if(r.ok) { this.sent = true; e.target.reset(); }
+                  else { this.error = true; }
+                }).catch(() => { this.error = true; })
+                .finally(() => this.sending = false);
+              }
+            }" class="reveal">
+
+          <div x-show="!sent" class="bg-white rounded-2xl shadow-md border border-cream-dark p-7">
+            <h3 class="font-display text-2xl text-ink mb-1">Envíanos un mensaje</h3>
+            <p class="text-xs text-ink-muted mb-6">Te contactaremos por WhatsApp en menos de 24h.</p>
+
+            <!-- EDITAR AQUÍ: Reemplaza YOUR_FORM_ID por tu ID de Formspree -->
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" @submit.prevent="submit($event)" class="space-y-4" novalidate>
+              <input type="hidden" name="_subject" value="Nueva cita – Despentina't Pals" />
+
+              <div>
+                <label for="nombre" class="block text-[11px] font-semibold text-ink mb-1.5 uppercase tracking-wider">Nombre completo *</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre"
+                  class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-lighter bg-cream/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-terra/25 focus:border-terra transition-all" />
+              </div>
+
+              <!-- Este campo es clave: el teléfono llegará para responder por WhatsApp -->
+              <div>
+                <label for="telefono" class="block text-[11px] font-semibold text-ink mb-1.5 uppercase tracking-wider">WhatsApp / Teléfono *</label>
+                <input type="tel" id="telefono" name="telefono" required placeholder="6XX XXX XXX"
+                  class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-lighter bg-cream/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-terra/25 focus:border-terra transition-all" />
+              </div>
+
+              <div>
+                <label for="servicio" class="block text-[11px] font-semibold text-ink mb-1.5 uppercase tracking-wider">Servicio deseado</label>
+                <select id="servicio" name="servicio"
+                  class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-ink bg-cream/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-terra/25 focus:border-terra transition-all appearance-none">
+                  <option value="">Selecciona un servicio...</option>
+                  <!-- EDITAR AQUÍ: Ajusta los servicios del desplegable -->
+                  <option>Corte de pelo</option>
+                  <option>Color / Mechas / Balayage</option>
+                  <option>Tratamiento capilar</option>
+                  <option>Peinado / Recogido de ceremonia</option>
+                  <option>Manicura</option>
+                  <option>Cejas / Estética</option>
+                  <option>Consulta / Presupuesto</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="mensaje" class="block text-[11px] font-semibold text-ink mb-1.5 uppercase tracking-wider">Mensaje (opcional)</label>
+                <textarea id="mensaje" name="mensaje" rows="3" placeholder="Cuéntanos qué necesitas o tu disponibilidad horaria..."
+                  class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-lighter bg-cream/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-terra/25 focus:border-terra transition-all resize-none"></textarea>
+              </div>
+
+              <p x-show="error" class="text-red-500 text-xs text-center py-1">Ha ocurrido un error. Contáctanos directamente por WhatsApp.</p>
+
+              <button type="submit" :disabled="sending"
+                class="w-full bg-terra hover:bg-terra-dark disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 text-sm">
+                <span x-show="!sending">Enviar solicitud de cita</span>
+                <span x-show="sending" class="flex items-center gap-2">
+                  <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                  Enviando...
+                </span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Mensaje de éxito -->
+          <div x-show="sent" x-transition class="bg-white rounded-2xl border-2 border-green-200 shadow-md p-8 text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="font-display text-2xl text-ink mb-2">¡Mensaje enviado! 🎉</h3>
+            <p class="text-ink-muted text-sm mb-6">Te contactaremos pronto por WhatsApp para confirmar tu cita.</p>
+            <a href="https://wa.me/34657646062?text=Hola!%20Acabo%20de%20enviar%20un%20formulario%20y%20me%20gustar%C3%ADa%20confirmar%20mi%20cita%20💇"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-3 rounded-full transition-colors text-sm">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Confirmar por WhatsApp ahora
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- /CONTACTO -->
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="bg-ink text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+        <div>
+          <!-- EDITAR AQUÍ: Logo real o nombre de marca -->
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-9 h-9 rounded-lg bg-terra flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12" stroke-linecap="round"/></svg>
+            </div>
+            <span class="font-display text-2xl font-bold text-terra-light">Despentina't</span>
+          </div>
+          <p class="text-white/50 text-sm leading-relaxed mb-5">Peluquería y salón de belleza en el corazón de Pals, Baix Empordà. Tu belleza, nuestra vocación.</p>
+          <div class="flex gap-3">
+            <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener" aria-label="Instagram"
+               class="w-9 h-9 rounded-full bg-gradient-to-br from-pink-500 to-orange-400 flex items-center justify-center hover:opacity-90 transition-opacity">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://wa.me/34657646062" target="_blank" rel="noopener" aria-label="WhatsApp"
+               class="w-9 h-9 rounded-full bg-green-500 flex items-center justify-center hover:bg-green-600 transition-colors">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-white/70 text-[11px] font-semibold uppercase tracking-widest mb-4">Servicios</p>
+          <ul class="space-y-2">
+            <!-- EDITAR AQUÍ: Lista de servicios del footer -->
+            <li><a href="#servicios" class="text-white/45 hover:text-terra-light text-sm transition-colors">Corte de Pelo</a></li>
+            <li><a href="#servicios" class="text-white/45 hover:text-terra-light text-sm transition-colors">Color & Mechas</a></li>
+            <li><a href="#servicios" class="text-white/45 hover:text-terra-light text-sm transition-colors">Tratamientos Capilares</a></li>
+            <li><a href="#servicios" class="text-white/45 hover:text-terra-light text-sm transition-colors">Peinados de Novia</a></li>
+            <li><a href="#servicios" class="text-white/45 hover:text-terra-light text-sm transition-colors">Manicura & Uñas</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-white/70 text-[11px] font-semibold uppercase tracking-widest mb-4">Contacto</p>
+          <ul class="space-y-3 text-sm text-white/45">
+            <li><a href="https://wa.me/34657646062" target="_blank" rel="noopener" class="hover:text-terra-light transition-colors flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              657 646 062</a></li>
+            <li><a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener" class="hover:text-terra-light transition-colors">@despentinat</a></li>
+            <!-- EDITAR AQUÍ: dirección completa -->
+            <li>Pals, 17256 · Baix Empordà, Girona</li>
+            <li>Lun–Vie 9–19h · Sáb 9–14h</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-white/25">
+        <!-- EDITAR AQUÍ: año y nombre legal -->
+        <p>© 2026 Despentina't · Todos los derechos reservados · Pals, Baix Empordà</p>
+        <p>Girona · Costa Brava · España</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       BOTÓN FLOTANTE WHATSAPP — siempre visible
+       EDITAR AQUÍ: número y mensaje prellenado
+       ============================================================ -->
+  <a href="https://wa.me/34657646062?text=Hola!%20Me%20gustar%C3%ADa%20pedir%20cita%20en%20Despentina't%20💇"
+     target="_blank" rel="noopener"
+     class="fixed bottom-6 right-6 z-50 group"
+     aria-label="Reservar cita por WhatsApp en Despentina't"
+     title="Reservar cita por WhatsApp">
+    <div class="wa-btn w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-2xl transition-all duration-200 hover:scale-110 relative">
+      <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </div>
+    <!-- Tooltip -->
+    <span class="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-ink text-white text-xs font-semibold px-3 py-1.5 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl">
+      Reservar cita 💬
+    </span>
+  </a>
+
+
+  <!-- Script reveal on scroll -->
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('shown'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>

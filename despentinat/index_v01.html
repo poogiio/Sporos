@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="ca" x-data="{ menuOpen: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 60">
+<head>
+  <!-- ============================================================
+       DESPENTINAT · Perruqueria & Salon de Bellesa · Pals, Girona
+       Última actualització: 2026
+       ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       EDITAR AQUÍ: Títol i descripció SEO principal
+       ============================================================ -->
+  <title>Despentinat – Perruqueria i Salon de Bellesa a Pals, Girona | Costa Brava</title>
+  <meta name="description" content="Despentinat, la teva perruqueria i salón de bellesa a Pals, Baix Empordà. Talls, color expert, tractaments capil·lars, manicura i peinats de núvia. Reserva ara per WhatsApp!" />
+  <meta name="keywords" content="perruqueria Pals, salon de bellesa Pals, peluquería Pals Girona, perruqueria Costa Brava, perruqueria Baix Empordà, Despentinat Pals, talls cabell Pals" />
+  <meta name="robots" content="index, follow" />
+  <!-- EDITAR AQUÍ: Canvia per la teva URL real -->
+  <link rel="canonical" href="https://despentinat.github.io/" />
+
+  <!-- ============================================================
+       Open Graph (Facebook, Instagram, WhatsApp previews)
+       EDITAR AQUÍ: Canvia l'URL de og:image per una foto real del saló
+       ============================================================ -->
+  <meta property="og:type" content="business.business" />
+  <meta property="og:title" content="Despentinat – Perruqueria i Salon de Bellesa a Pals" />
+  <meta property="og:description" content="El teu espai de bellesa al cor del Baix Empordà. Talls, color expert, tractaments i molta cura personal. Reserva per WhatsApp!" />
+  <meta property="og:image" content="https://despentinat.github.io/img/og-image.jpg" />
+  <meta property="og:url" content="https://despentinat.github.io/" />
+  <meta property="og:locale" content="ca_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Despentinat – Perruqueria a Pals, Girona" />
+  <meta name="twitter:description" content="El teu espai de bellesa al cor del Baix Empordà." />
+
+  <!-- ============================================================
+       JSON-LD Schema – LocalBusiness (SEO local avançat)
+       EDITAR AQUÍ: Adreça exacta, horaris, coordenades GPS
+       ============================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Despentinat",
+    "description": "Perruqueria i salon de bellesa a Pals, Baix Empordà. Especialitzats en talls, color, tractaments capil·lars i peinats de núvia.",
+    "url": "https://despentinat.github.io/",
+    "telephone": "+34657646062",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "EDITAR: Carrer i número",
+      "addressLocality": "Pals",
+      "addressRegion": "Girona",
+      "postalCode": "17256",
+      "addressCountry": "ES"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "41.9784",
+      "longitude": "3.1537"
+    },
+    "sameAs": ["https://www.instagram.com/despentinat/"],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "14:00"
+      }
+    ],
+    "priceRange": "€€",
+    "image": "https://despentinat.github.io/img/og-image.jpg"
+  }
+  </script>
+
+  <!-- ============================================================
+       FONTS: Cormorant Garamond (elegant display) + Plus Jakarta Sans (modern body)
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js v3 via CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- ============================================================
+       CONFIGURACIÓ TAILWIND: paleta Despentinat
+       Terracota càlid + crema marfil + verd salvia + or suau
+       EDITAR AQUÍ: Pots canviar els colors hexadecimales
+       ============================================================ -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:     { DEFAULT: '#FAF5EE', 50: '#FDFAF6', dark: '#F0E8DA' },
+            terra:     { DEFAULT: '#B5644A', light: '#CC8066', dark: '#954F3A', faint: '#B5644A1A' },
+            sage:      { DEFAULT: '#6E8060', light: '#8FA380', dark: '#536148', faint: '#6E80601A' },
+            sand:      { DEFAULT: '#C9A86C', light: '#DFC28E', dark: '#A98845', faint: '#C9A86C1A' },
+            ink:       { DEFAULT: '#28231F', mid: '#4A453F', muted: '#79736C', lighter: '#ABA6A0' },
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Base */
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #FAF5EE; color: #28231F; }
+    h1,h2,h3,h4 { font-family: 'Cormorant Garamond', Georgia, serif; }
+    html { scroll-behavior: smooth; }
+
+    /* Decoració títol */
+    .ornament::before, .ornament::after { content: '✦'; color: #B5644A; font-size: 0.5em; vertical-align: middle; margin: 0 0.5em; opacity: 0.7; }
+
+    /* Hero */
+    .hero-bg { background: linear-gradient(160deg, rgba(40,35,31,0.78) 0%, rgba(181,100,74,0.38) 55%, rgba(110,128,96,0.18) 100%); }
+
+    /* Cards */
+    .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(40,35,31,0.12); }
+
+    /* WhatsApp pulse */
+    @keyframes wa-ring { 0%,100%{ box-shadow:0 0 0 0 rgba(37,211,102,.55); } 50%{ box-shadow:0 0 0 14px rgba(37,211,102,0); } }
+    .wa-btn { animation: wa-ring 2.8s infinite; }
+
+    /* Fade-in scroll */
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.shown { opacity:1; transform:translateY(0); }
+
+    /* Bounce scroll indicator */
+    @keyframes bd { 0%,100%{transform:translateY(0)} 50%{transform:translateY(9px)} }
+    .bounce { animation: bd 2s infinite; }
+
+    /* Textura sutil de fons */
+    .grain::after { content:''; position:fixed; inset:0; pointer-events:none; opacity:.025;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    /* Separador decorativo */
+    .floral-divider { display:flex; align-items:center; gap:12px; }
+    .floral-divider::before,.floral-divider::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,#B5644A55,transparent); }
+  </style>
+</head>
+
+<body class="antialiased grain">
+
+  <!-- ============================================================
+       BARRA SUPERIOR WHATSAPP (aparece arriba del todo)
+       ============================================================ -->
+  <div class="bg-terra text-white text-center text-xs sm:text-sm py-2 px-4 font-body">
+    <!-- EDITAR AQUÍ: Text de la barra superior -->
+    📞 Reserva la teva cita ara per WhatsApp —
+    <a href="https://wa.me/34657646062?text=Hola!%20M'agradaria%20demanar%20cita%20%F0%9F%92%87" target="_blank" rel="noopener" class="underline font-semibold hover:text-sand-light transition-colors">657 646 062</a>
+  </div>
+
+  <!-- ============================================================
+       HEADER / NAVEGACIÓ PRINCIPAL
+       ============================================================ -->
+  <header
+    class="sticky top-0 z-50 transition-all duration-300 border-b"
+    :class="scrolled ? 'bg-cream shadow-md border-cream-dark py-2' : 'bg-cream/95 backdrop-blur border-cream-dark py-3'"
+  >
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+
+      <!-- LOGOTIP / NOM -->
+      <!-- EDITAR AQUÍ: Si tens logotip, substitueix per <img src="img/logo.svg" alt="Despentinat" class="h-10"> -->
+      <a href="#inici" class="group flex items-baseline gap-1">
+        <span class="font-display text-2xl sm:text-3xl font-bold text-terra leading-none tracking-tight group-hover:text-terra-dark transition-colors">Despentinat</span>
+        <span class="hidden sm:inline text-ink-lighter text-xs font-body ml-1 tracking-widest uppercase">Pals</span>
+      </a>
+
+      <!-- NAV DESKTOP -->
+      <nav class="hidden md:flex items-center gap-7" aria-label="Navegació principal">
+        <a href="#serveis"         class="text-sm font-medium text-ink-mid hover:text-terra transition-colors tracking-wide">Serveis</a>
+        <a href="#nosaltres"       class="text-sm font-medium text-ink-mid hover:text-terra transition-colors tracking-wide">Nosaltres</a>
+        <a href="#galeria"         class="text-sm font-medium text-ink-mid hover:text-terra transition-colors tracking-wide">Galeria</a>
+        <a href="#contacte"        class="text-sm font-medium text-ink-mid hover:text-terra transition-colors tracking-wide">Contacte</a>
+        <a
+          href="https://wa.me/34657646062?text=Hola!%20M'agradaria%20demanar%20cita%20a%20Despentinat%20%F0%9F%92%87"
+          target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 bg-terra hover:bg-terra-dark text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-200"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Reserva ara
+        </a>
+      </nav>
+
+      <!-- HAMBURGER MÒBIL -->
+      <button @click="menuOpen=!menuOpen" :aria-expanded="menuOpen" aria-label="Obrir menú" class="md:hidden p-2 text-ink hover:text-terra transition-colors rounded-lg">
+        <svg x-show="!menuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg x-show="menuOpen"  class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- MENÚ MÒBIL -->
+    <div
+      x-show="menuOpen"
+      x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+      class="md:hidden bg-cream border-t border-cream-dark shadow-xl"
+    >
+      <nav class="flex flex-col" aria-label="Menú mòbil">
+        <a href="#serveis"   @click="menuOpen=false" class="px-6 py-3.5 border-b border-cream-dark text-ink-mid hover:text-terra hover:bg-terra/5 font-medium text-sm transition-colors">Serveis</a>
+        <a href="#nosaltres" @click="menuOpen=false" class="px-6 py-3.5 border-b border-cream-dark text-ink-mid hover:text-terra hover:bg-terra/5 font-medium text-sm transition-colors">Nosaltres</a>
+        <a href="#galeria"   @click="menuOpen=false" class="px-6 py-3.5 border-b border-cream-dark text-ink-mid hover:text-terra hover:bg-terra/5 font-medium text-sm transition-colors">Galeria</a>
+        <a href="#contacte"  @click="menuOpen=false" class="px-6 py-3.5 border-b border-cream-dark text-ink-mid hover:text-terra hover:bg-terra/5 font-medium text-sm transition-colors">Contacte</a>
+        <a href="https://wa.me/34657646062?text=Hola!%20M'agradaria%20demanar%20cita%20a%20Despentinat%20%F0%9F%92%87"
+           target="_blank" rel="noopener" @click="menuOpen=false"
+           class="m-4 bg-terra text-white font-semibold text-center py-3 rounded-full shadow-md">
+          Reserva per WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+  <!-- /HEADER -->
+
+
+  <!-- ============================================================
+       SECCIÓN HERO
+       EDITAR AQUÍ: Canvia 'img/hero-bg.jpg' per una foto real del saló
+       La imatge ha de tenir mida mínima 1920x1080px
+       ============================================================ -->
+  <section id="inici" class="relative min-h-[92vh] flex items-center justify-center overflow-hidden"
+    style="background-image:url('img/hero-bg.jpg'); background-size:cover; background-position:center;">
+    <!-- Overlay -->
+    <div class="hero-bg absolute inset-0"></div>
+
+    <div class="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto pt-8">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 text-xs sm:text-sm uppercase tracking-widest font-body mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-sand inline-block"></span>
+        <!-- EDITAR AQUÍ: Text del badge -->
+        Perruqueria & Bellesa · Pals, Baix Empordà
+      </div>
+
+      <!-- Títol -->
+      <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-bold leading-[1.05] mb-6 text-white drop-shadow-lg">
+        <!-- EDITAR AQUÍ: Slogan principal -->
+        El teu cabell,<br/><em class="text-sand-light italic">la nostra ànima</em>
+      </h1>
+
+      <!-- Subtítol -->
+      <!-- EDITAR AQUÍ: Frase descriptiva curta -->
+      <p class="text-white/85 text-base sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto font-body font-light">
+        Talls, colors i tractaments al cor del Baix Empordà. Vine a sentir-te especial a Pals.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="https://wa.me/34657646062?text=Hola!%20M'agradaria%20demanar%20cita%20a%20Despentinat%20%F0%9F%92%87"
+           target="_blank" rel="noopener"
+           class="w-full sm:w-auto flex items-center justify-center gap-2.5 bg-terra hover:bg-terra-dark text-white font-semibold text-base px-9 py-4 rounded-full shadow-2xl hover:shadow-terra/40 transition-all duration-200 hover:scale-[1.03]">
+          <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Reserva cita ara
+        </a>
+        <a href="#serveis"
+           class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/10 backdrop-blur border border-white/30 hover:bg-white/20 text-white font-semibold text-base px-9 py-4 rounded-full transition-all duration-200">
+          Veure serveis
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="mt-16 bounce opacity-50">
+        <svg class="w-6 h-6 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </div>
+    </div>
+  </section>
+  <!-- /HERO -->
+
+
+  <!-- ============================================================
+       FRANJA DE CREDENCIALS
+       EDITAR AQUÍ: Canvia xifres i textos per les reals
+       ============================================================ -->
+  <section class="bg-ink text-white py-10">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div><p class="font-display text-4xl font-bold text-sand">+10</p><p class="text-white/60 text-sm mt-1">Anys d'experiència</p></div>
+      <div><p class="font-display text-4xl font-bold text-sand">+500</p><p class="text-white/60 text-sm mt-1">Clients satisfets</p></div>
+      <div><p class="font-display text-4xl font-bold text-sand">100%</p><p class="text-white/60 text-sm mt-1">Productes premium</p></div>
+      <div><p class="font-display text-4xl font-bold text-sand">★ 5.0</p><p class="text-white/60 text-sm mt-1">Valoració Google</p></div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SERVEIS
+       EDITAR AQUÍ: Afegeix, elimina o modifica serveis i preus
+       ============================================================ -->
+  <section id="serveis" class="py-24 bg-cream">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <div class="text-center mb-16 reveal">
+        <p class="text-terra text-xs font-semibold uppercase tracking-[.2em] mb-3">El que fem</p>
+        <h2 class="font-display text-5xl md:text-6xl text-ink mb-4"><span class="ornament">Els nostres serveis</span></h2>
+        <p class="text-ink-muted max-w-md mx-auto leading-relaxed">Cada tractament, pensat per a tu. Productes d'alta qualitat i mans expertes al teu servei.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- EDITAR AQUÍ: Cada bloc és un servei. Dupplica o elimina els que necessitis -->
+
+        <!-- Tall -->
+        <article class="card-hover bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="w-14 h-14 rounded-2xl bg-terra/10 flex items-center justify-center text-3xl mb-5 group-hover:bg-terra/20 transition-colors" role="img" aria-label="Tisores">✂️</div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Talls de Cabell</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Tall de dona, home i nen. Estils clàssics o últimes tendències, sempre adaptats a tu i al teu tipus de cabell.</p>
+          <!-- EDITAR AQUÍ: Preu -->
+          <p class="text-terra font-semibold text-sm">Des de 20 €</p>
+        </article>
+
+        <!-- Color -->
+        <article class="card-hover bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="w-14 h-14 rounded-2xl bg-sage/10 flex items-center justify-center text-3xl mb-5 group-hover:bg-sage/20 transition-colors" role="img" aria-label="Paleta">🎨</div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Color & Mechas</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Tints, mechas, balayage i efectes de llum. Coloració amb tècniques avançades i productes de primera qualitat.</p>
+          <p class="text-terra font-semibold text-sm">Des de 45 €</p>
+        </article>
+
+        <!-- Tractaments -->
+        <article class="card-hover bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="w-14 h-14 rounded-2xl bg-sand/10 flex items-center justify-center text-3xl mb-5 group-hover:bg-sand/20 transition-colors" role="img" aria-label="Tractament">💆</div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Tractaments Capil·lars</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Hidratació profunda, queratina, bòtox capilar i tractaments reparadors per a un cabell sa i brillant.</p>
+          <p class="text-terra font-semibold text-sm">Des de 35 €</p>
+        </article>
+
+        <!-- Peinats -->
+        <article class="card-hover bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="w-14 h-14 rounded-2xl bg-terra/10 flex items-center justify-center text-3xl mb-5 group-hover:bg-terra/20 transition-colors" role="img" aria-label="Núvia">👰</div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Peinats & Recollits</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Peinats per a núvies, events especials i cerimònies. Fem que et sentis única en el teu gran dia.</p>
+          <p class="text-terra font-semibold text-sm">Des de 40 €</p>
+        </article>
+
+        <!-- Manicura -->
+        <article class="card-hover bg-white rounded-2xl p-7 border border-cream-dark shadow-sm group">
+          <div class="w-14 h-14 rounded-2xl bg-sage/10 flex items-center justify-center text-3xl mb-5 group-hover:bg-sage/20 transition-colors" role="img" aria-label="Manicura">💅</div>
+          <h3 class="font-display text-2xl font-semibold text-ink mb-2">Manicura & Ungles</h3>
+          <p class="text-ink-muted text-sm leading-relaxed mb-4">Manicura clàssica, semipermanent i decoració d'ungles. Mans perfectes per a cada ocasió especial.</p>
+          <p class="text-terra font-semibold text-sm">Des de 18 €</p>
+        </article>
+
+        <!-- CTA card -->
+        <article class="card-hover bg-terra rounded-2xl p-7 shadow-sm group flex flex-col justify-between">
+          <div>
+            <p class="text-white/80 text-xs uppercase tracking-widest font-semibold mb-3">Tinc altres necessitats</p>
+            <h3 class="font-display text-2xl font-semibold text-white mb-3">¿No trobes el que busques?</h3>
+            <p class="text-white/75 text-sm leading-relaxed">Consulta'ns sense compromís. T'ajudem a trobar el millor tractament per a tu.</p>
+          </div>
+          <a href="https://wa.me/34657646062?text=Hola!%20Voldria%20informació%20sobre%20els%20vostres%20serveis%20i%20preus"
+             target="_blank" rel="noopener"
+             class="mt-6 inline-flex items-center gap-2 bg-white text-terra font-semibold text-sm px-5 py-3 rounded-full hover:bg-cream transition-colors shadow-md">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Preguntar per WhatsApp
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+  <!-- /SERVEIS -->
+
+
+  <!-- ============================================================
+       SOBRE NOSALTRES
+       EDITAR AQUÍ: Canvia el text per la història real del saló
+       ============================================================ -->
+  <section id="nosaltres" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Foto del saló / equip -->
+        <div class="relative reveal">
+          <div class="aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-cream-dark">
+            <!--
+              EDITAR AQUÍ: Quan tinguis la foto, substitueix per:
+              <img src="img/equip.jpg" alt="L'equip de Despentinat a Pals" class="w-full h-full object-cover" />
+            -->
+            <div class="w-full h-full bg-gradient-to-br from-terra/15 via-cream to-sage/15 flex flex-col items-center justify-center p-8">
+              <span class="text-9xl block mb-6">💇‍♀️</span>
+              <p class="text-ink-muted text-sm text-center font-body italic">Afegeix aquí la foto del saló o l'equip</p>
+            </div>
+          </div>
+          <!-- Badge flotant -->
+          <div class="absolute -bottom-5 -right-3 sm:-right-5 bg-terra text-white rounded-2xl shadow-xl p-5 text-center">
+            <p class="font-display text-3xl font-bold leading-none">+10</p>
+            <p class="text-white/80 text-xs mt-1">Anys a Pals</p>
+          </div>
+          <!-- Sticker Instagram -->
+          <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener"
+             class="absolute -top-3 -left-3 sm:-left-5 bg-white border border-cream-dark rounded-2xl shadow-lg px-4 py-3 flex items-center gap-2 hover:shadow-xl transition-shadow">
+            <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span class="text-xs font-semibold text-ink">@despentinat</span>
+          </a>
+        </div>
+
+        <!-- Text -->
+        <div class="reveal">
+          <p class="text-terra text-xs font-semibold uppercase tracking-[.2em] mb-3">Qui som</p>
+          <h2 class="font-display text-5xl md:text-6xl text-ink mb-6">
+            Bellesa i benestar<br/><em class="text-terra">al centre de Pals</em>
+          </h2>
+
+          <!-- EDITAR AQUÍ: Canvia per la història real del saló -->
+          <p class="text-ink-muted leading-relaxed mb-4">
+            A <strong class="text-ink">Despentinat</strong> som un equip apassionat per la bellesa i el benestar. Ubicats al bell mig del Baix Empordà, portem anys cuidant el cabell i la imatge de clients de Pals i de tota la Costa Brava.
+          </p>
+          <p class="text-ink-muted leading-relaxed mb-8">
+            <!-- EDITAR AQUÍ: Adapta als teus valors reals -->
+            Creiem que el cabell és expressió, identitat i confiança. Per això escoltem cada client, entenem les seves necessitats i treballem amb els millors productes per oferir resultats que duren. En un ambient càlid, modern i completament dedicat a tu.
+          </p>
+
+          <!-- Valors -->
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <!-- EDITAR AQUÍ: Modifica els valors diferencials -->
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-terra/15 text-terra flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</span>
+              <p class="text-sm text-ink"><strong>Productes premium</strong><br/><span class="text-ink-muted text-xs">L'Oréal, Wella, Goldwell</span></p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-terra/15 text-terra flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</span>
+              <p class="text-sm text-ink"><strong>Formació contínua</strong><br/><span class="text-ink-muted text-xs">Sempre actualitzats</span></p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-terra/15 text-terra flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</span>
+              <p class="text-sm text-ink"><strong>Tracte personalitzat</strong><br/><span class="text-ink-muted text-xs">T'escoltem de debò</span></p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-terra/15 text-terra flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</span>
+              <p class="text-sm text-ink"><strong>Cita ràpida</strong><br/><span class="text-ink-muted text-xs">Reserves per WhatsApp</span></p>
+            </div>
+          </div>
+
+          <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 border-2 border-terra text-terra hover:bg-terra hover:text-white font-semibold px-7 py-3 rounded-full transition-all duration-200">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Segueix-nos a Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /SOBRE NOSALTRES -->
+
+
+  <!-- ============================================================
+       GALERIA
+       EDITAR AQUÍ: Reemplaza placeholders amb fotos reals
+       Guarda les imatges a la carpeta img/ i canvia els src
+       ============================================================ -->
+  <section id="galeria" class="py-24 bg-cream">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14 reveal">
+        <p class="text-terra text-xs font-semibold uppercase tracking-[.2em] mb-3">El nostre treball</p>
+        <h2 class="font-display text-5xl md:text-6xl text-ink mb-4"><span class="ornament">Galeria</span></h2>
+        <p class="text-ink-muted max-w-sm mx-auto">Cada resultat explica una història. Descobreix alguns dels nostres treballs.</p>
+      </div>
+
+      <!-- Grid galeria -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <!--
+          EDITAR AQUÍ: Per afegir fotos reals:
+          1. Guarda la imatge a la carpeta img/  (ex: img/treball-1.jpg)
+          2. Canvia src="img/galeria-1.jpg" pel nom del teu arxiu
+          3. Escriu un alt descriptiu per SEO (ex: "Balayage a Despentinat Pals")
+          Si la imatge no carrega, es mostra un placeholder automàticament.
+        -->
+        <div class="overflow-hidden rounded-2xl aspect-square bg-terra/10 group">
+          <img src="img/galeria-1.jpg" alt="Tall de cabell a Despentinat, Pals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-terra/15 to-sand/10\'><span class=\'text-5xl\'>✂️</span></div>'" />
+        </div>
+        <div class="overflow-hidden rounded-2xl aspect-square bg-sage/10 group md:row-span-2">
+          <img src="img/galeria-2.jpg" alt="Color balayage a Despentinat Pals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-sage/15 to-sand/10\'><span class=\'text-5xl\'>🎨</span></div>'" />
+        </div>
+        <div class="overflow-hidden rounded-2xl aspect-square bg-sand/10 group">
+          <img src="img/galeria-3.jpg" alt="Tractament capilar a Despentinat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-sand/15 to-terra/10\'><span class=\'text-5xl\'>💆</span></div>'" />
+        </div>
+        <div class="overflow-hidden rounded-2xl aspect-square bg-terra/10 group">
+          <img src="img/galeria-4.jpg" alt="Peinat de núvia a Despentinat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-terra/10 to-cream-dark\'><span class=\'text-5xl\'>👰</span></div>'" />
+        </div>
+        <div class="overflow-hidden rounded-2xl aspect-square bg-sage/10 group">
+          <img src="img/galeria-5.jpg" alt="Manicura semipermanent Despentinat Pals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-sage/15 to-sand/10\'><span class=\'text-5xl\'>💅</span></div>'" />
+        </div>
+        <div class="overflow-hidden rounded-2xl aspect-square bg-sand/10 group">
+          <img src="img/galeria-6.jpg" alt="Resultat final al saló Despentinat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-sand/15 to-terra/10\'><span class=\'text-5xl\'>✨</span></div>'" />
+        </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 text-ink hover:text-terra font-semibold text-sm transition-colors group">
+          <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Veure més treballs a @despentinat
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- /GALERIA -->
+
+
+  <!-- ============================================================
+       TESTIMONIOS
+       EDITAR AQUÍ: Substitueix per reviews reals de clients
+       ============================================================ -->
+  <section class="py-24 bg-ink text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <p class="text-sand text-xs font-semibold uppercase tracking-[.2em] mb-3">Experiències reals</p>
+        <h2 class="font-display text-5xl text-white"><span class="ornament" style="--tw-text-opacity:1">El que diuen</span></h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- EDITAR AQUÍ: Canvia nom, text i lloc per reviews reals de Google o clients -->
+        <div class="bg-white/6 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+          <div class="text-sand text-lg mb-3">★★★★★</div>
+          <p class="text-white/80 text-sm leading-relaxed mb-5 italic">"Em van fer exactament el que volia. Vaig sortir encantada amb el tall i el color. Molt professionals i atenció immillorable. 100% recomanat!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-terra/40 flex items-center justify-center font-display font-bold text-terra-light">M</div>
+            <div><p class="font-semibold text-sm">Maria G.</p><p class="text-white/45 text-xs">Pals</p></div>
+          </div>
+        </div>
+        <div class="bg-white/6 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+          <div class="text-sand text-lg mb-3">★★★★★</div>
+          <p class="text-white/80 text-sm leading-relaxed mb-5 italic">"El millor salon de la zona, sense cap dubte. Atenció personalitzada, productes de qualitat i ambient molt agradable. Sempre surto felicíssima!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-sage/40 flex items-center justify-center font-display font-bold text-sage-light">A</div>
+            <div><p class="font-semibold text-sm">Anna P.</p><p class="text-white/45 text-xs">Begur</p></div>
+          </div>
+        </div>
+        <div class="bg-white/6 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+          <div class="text-sand text-lg mb-3">★★★★★</div>
+          <p class="text-white/80 text-sm leading-relaxed mb-5 italic">"Van fer el meu peinat de casament i quedà perfecte! Molt detallistes i professionals. Un dia inoblidable gràcies a vosaltres."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-sand/30 flex items-center justify-center font-display font-bold text-sand-light">L</div>
+            <div><p class="font-semibold text-sm">Laura S.</p><p class="text-white/45 text-xs">Palafrugell</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /TESTIMONIOS -->
+
+
+  <!-- ============================================================
+       CONTACTE + FORMULARI
+       EDITAR AQUÍ: Configura Formspree (veure instruccions al final)
+       ============================================================ -->
+  <section id="contacte" class="py-24 bg-cream">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+
+        <!-- Info contacte -->
+        <div class="reveal">
+          <p class="text-terra text-xs font-semibold uppercase tracking-[.2em] mb-3">Parlem!</p>
+          <h2 class="font-display text-5xl md:text-6xl text-ink mb-6">Reserva la teva<br/><em class="text-terra">cita ara</em></h2>
+          <p class="text-ink-muted leading-relaxed mb-8">La manera més ràpida és per WhatsApp. Et responem al moment i confirmem la cita de seguida.</p>
+
+          <div class="space-y-4">
+
+            <!-- WhatsApp -->
+            <!-- EDITAR AQUÍ: Canvia el número de telèfon -->
+            <a href="https://wa.me/34657646062?text=Hola!%20M'agradaria%20demanar%20cita%20a%20Despentinat%20%F0%9F%92%87"
+               target="_blank" rel="noopener"
+               class="flex items-center gap-4 bg-white rounded-xl p-4 border border-cream-dark shadow-sm hover:border-green-300 hover:shadow-md transition-all group">
+              <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
+                <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-ink group-hover:text-green-700 transition-colors">657 646 062</p>
+                <p class="text-xs text-ink-muted">WhatsApp · Resposta immediata</p>
+              </div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener"
+               class="flex items-center gap-4 bg-white rounded-xl p-4 border border-cream-dark shadow-sm hover:border-pink-300 hover:shadow-md transition-all group">
+              <div class="w-12 h-12 bg-pink-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-pink-100 transition-colors">
+                <svg class="w-6 h-6 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </div>
+              <div><p class="font-semibold text-ink">@despentinat</p><p class="text-xs text-ink-muted">Instagram</p></div>
+            </a>
+
+            <!-- Horari -->
+            <!-- EDITAR AQUÍ: Canvia per el teu horari real -->
+            <div class="flex items-center gap-4 bg-white rounded-xl p-4 border border-cream-dark shadow-sm">
+              <div class="w-12 h-12 bg-terra/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-terra" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-ink text-sm">Horari</p>
+                <p class="text-xs text-ink-muted">Dl–Dv: 9:00–19:00 · Ds: 9:00–14:00</p>
+              </div>
+            </div>
+
+            <!-- Ubicació -->
+            <!-- EDITAR AQUÍ: Afegeix la teva adreça exacta -->
+            <div class="flex items-center gap-4 bg-white rounded-xl p-4 border border-cream-dark shadow-sm">
+              <div class="w-12 h-12 bg-terra/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-terra" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-ink text-sm">On som</p>
+                <!-- EDITAR AQUÍ: Afegeix l'adreça completa -->
+                <p class="text-xs text-ink-muted">Pals, 17256 · Baix Empordà, Girona</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============================================================
+             FORMULARI DE CONTACTE
+             EDITAR AQUÍ:
+             1. Ves a https://formspree.io i crea un compte gratuït
+             2. Crea un nou formulari i copia el teu Form ID
+             3. Substitueix "YOUR_FORM_ID" per el teu ID real
+                Exemple: action="https://formspree.io/f/xdoqkpnv"
+             Un cop enviat el formulari, rebràs un email. Activa
+             la integració amb WhatsApp Business si vols.
+             ============================================================ -->
+        <div x-data="{
+              sent: false,
+              sending: false,
+              error: false,
+              submit(e) {
+                this.sending = true; this.error = false;
+                const form = e.target;
+                fetch(form.action, {
+                  method: 'POST',
+                  body: new FormData(form),
+                  headers: { 'Accept': 'application/json' }
+                }).then(r => {
+                  if(r.ok) { this.sent = true; form.reset(); }
+                  else { this.error = true; }
+                }).catch(() => { this.error = true; })
+                .finally(() => { this.sending = false; });
+              }
+            }" class="reveal">
+
+          <div x-show="!sent" class="bg-white rounded-2xl shadow-md border border-cream-dark p-7">
+            <h3 class="font-display text-2xl text-ink mb-1">Envia'ns un missatge</h3>
+            <p class="text-xs text-ink-muted mb-6">Et contactarem per WhatsApp en menys de 24h.</p>
+
+            <!-- EDITAR AQUÍ: Substitueix YOUR_FORM_ID pel teu ID de Formspree -->
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" @submit.prevent="submit($event)" class="space-y-4" novalidate>
+              <input type="hidden" name="_subject" value="Nova cita – Despentinat Pals" />
+
+              <div>
+                <label for="nom" class="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Nom *</label>
+                <input type="text" id="nom" name="nom" required placeholder="El teu nom complet"
+                  class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-lighter focus:outline-none focus:ring-2 focus:ring-terra/30 focus:border-terra transition-colors" />
+              </div>
+
+              <!-- EDITAR AQUÍ: Aquest camp és clau – el número arribarà per poder trucar o enviar WA -->
+              <div>
+                <label for="telefon" class="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">WhatsApp / Telèfon *</label>
+                <input type="tel" id="telefon" name="telefon" required placeholder="6XX XXX XXX"
+                  class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-lighter focus:outline-none focus:ring-2 focus:ring-terra/30 focus:border-terra transition-colors" />
+              </div>
+
+              <div>
+                <label for="servei" class="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Servei desitjat</label>
+                <select id="servei" name="servei"
+                  class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-terra/30 focus:border-terra transition-colors bg-white">
+                  <option value="">Selecciona un servei...</option>
+                  <!-- EDITAR AQUÍ: Afegeix o elimina les opcions del desplegable -->
+                  <option>Tall de cabell</option>
+                  <option>Color / Mechas / Balayage</option>
+                  <option>Tractament capilar</option>
+                  <option>Peinat / Recollit de cerimònia</option>
+                  <option>Manicura</option>
+                  <option>Celles / Estètica</option>
+                  <option>Consulta / Pressupost</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="missatge" class="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wide">Missatge (opcional)</label>
+                <textarea id="missatge" name="missatge" rows="3" placeholder="Diga'ns el que necessites o la teva disponibilitat horària..."
+                  class="w-full border border-cream-dark rounded-xl px-4 py-3 text-sm text-ink placeholder-ink-lighter focus:outline-none focus:ring-2 focus:ring-terra/30 focus:border-terra transition-colors resize-none"></textarea>
+              </div>
+
+              <!-- Error state -->
+              <p x-show="error" class="text-red-500 text-xs text-center">Hi ha hagut un error. Contacta directament per WhatsApp.</p>
+
+              <button type="submit" :disabled="sending"
+                class="w-full bg-terra hover:bg-terra-dark disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                <span x-show="!sending">Enviar sol·licitud de cita</span>
+                <span x-show="sending" class="flex items-center gap-2">
+                  <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                  Enviant...
+                </span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Èxit -->
+          <div x-show="sent" x-transition class="bg-white rounded-2xl border border-green-200 shadow-md p-8 text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="font-display text-2xl text-ink mb-2">Missatge enviat! 🎉</h3>
+            <p class="text-ink-muted text-sm mb-6">Et contactarem aviat per WhatsApp per confirmar la teva cita.</p>
+            <a href="https://wa.me/34657646062?text=Hola!%20Acabo%20d'enviar%20un%20formulari%20i%20m'agradaria%20confirmar%20la%20cita%20%F0%9F%92%87"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-3 rounded-full transition-colors">
+              Confirmar per WhatsApp ara
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- /CONTACTE -->
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="bg-ink text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+        <!-- Marca -->
+        <div>
+          <!-- EDITAR AQUÍ: Substitueix per logo real si en tens -->
+          <p class="font-display text-3xl font-bold text-terra-light mb-3">Despentinat</p>
+          <p class="text-white/55 text-sm leading-relaxed mb-5">Perruqueria i salon de bellesa al cor de Pals, Baix Empordà. La teva bellesa, la nostra vocació.</p>
+          <div class="flex gap-3">
+            <a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener"
+               class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Instagram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://wa.me/34657646062" target="_blank" rel="noopener"
+               class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="WhatsApp">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Serveis -->
+        <div>
+          <p class="text-white/80 text-xs font-semibold uppercase tracking-widest mb-4">Serveis</p>
+          <ul class="space-y-2">
+            <!-- EDITAR AQUÍ: Actualitza la llista de serveis -->
+            <li><a href="#serveis" class="text-white/50 hover:text-terra-light text-sm transition-colors">Talls de Cabell</a></li>
+            <li><a href="#serveis" class="text-white/50 hover:text-terra-light text-sm transition-colors">Color & Mechas</a></li>
+            <li><a href="#serveis" class="text-white/50 hover:text-terra-light text-sm transition-colors">Tractaments Capil·lars</a></li>
+            <li><a href="#serveis" class="text-white/50 hover:text-terra-light text-sm transition-colors">Peinats de Núvia</a></li>
+            <li><a href="#serveis" class="text-white/50 hover:text-terra-light text-sm transition-colors">Manicura & Ungles</a></li>
+          </ul>
+        </div>
+
+        <!-- Contacte -->
+        <div>
+          <p class="text-white/80 text-xs font-semibold uppercase tracking-widest mb-4">Contacte</p>
+          <ul class="space-y-3">
+            <li><a href="https://wa.me/34657646062" target="_blank" rel="noopener" class="text-white/50 hover:text-terra-light text-sm transition-colors flex items-center gap-2">📱 657 646 062</a></li>
+            <li><a href="https://www.instagram.com/despentinat/" target="_blank" rel="noopener" class="text-white/50 hover:text-terra-light text-sm transition-colors">📸 @despentinat</a></li>
+            <!-- EDITAR AQUÍ: Adreça completa -->
+            <li><span class="text-white/50 text-sm">📍 Pals, 17256 – Girona</span></li>
+            <li><span class="text-white/50 text-sm">🕐 Dl-Dv 9–19h · Ds 9–14h</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/30">
+        <!-- EDITAR AQUÍ: Any i nom legal -->
+        <p>© 2026 Despentinat · Tots els drets reservats · Pals, Baix Empordà</p>
+        <p>Girona · Costa Brava · España</p>
+      </div>
+    </div>
+  </footer>
+  <!-- /FOOTER -->
+
+
+  <!-- ============================================================
+       BOTÓ FLOTANT WHATSAPP — sempre visible
+       EDITAR AQUÍ: Canvia el número i el missatge prellenat si cal
+       ============================================================ -->
+  <a href="https://wa.me/34657646062?text=Hola!%20M'agradaria%20demanar%20cita%20a%20Despentinat%20%F0%9F%92%87"
+     target="_blank" rel="noopener"
+     class="fixed bottom-6 right-6 z-50 w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-2xl wa-btn transition-all duration-200 hover:scale-110 group"
+     aria-label="Reserva cita per WhatsApp a Despentinat"
+     title="Parla amb nosaltres per WhatsApp">
+    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <!-- Tooltip etiqueta visible en hover, desktop -->
+    <span class="absolute right-full mr-3 bg-ink text-white text-xs font-semibold px-3 py-1.5 rounded-full whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+      Reserva cita 💬
+    </span>
+  </a>
+  <!-- /WHATSAPP FLOTANT -->
+
+
+  <!-- ============================================================
+       SCRIPTS: Animació fade-in al fer scroll
+       ============================================================ -->
+  <script>
+    // Intersection Observer per revelar elements en scroll
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) { e.target.classList.add('shown'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>
