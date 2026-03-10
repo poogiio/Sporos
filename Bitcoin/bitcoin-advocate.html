@@ -4,448 +4,286 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>₿ Bitcoin Advocate</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap');
-
-  :root {
-    --btc: #F7931A;
-    --btc-dim: #a85f0f;
-    --bg: #0a0a08;
-    --surface: #111109;
-    --surface2: #1a1a14;
-    --border: #2a2a1e;
-    --text: #e8e8d8;
-    --text-dim: #888876;
-    --green: #4ade80;
-    --red: #f87171;
-  }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Space Mono', monospace;
-    background: var(--bg);
-    color: var(--text);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* HEADER */
-  header {
-    border-bottom: 1px solid var(--border);
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: var(--surface);
-    flex-shrink: 0;
-  }
-
-  .logo {
-    width: 36px; height: 36px;
-    background: var(--btc);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    color: #000;
-    flex-shrink: 0;
-    box-shadow: 0 0 20px rgba(247,147,26,0.4);
-  }
-
-  .header-info h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--btc);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .header-info p {
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.08em;
-    margin-top: 2px;
-  }
-
-  .status-dot {
-    width: 7px; height: 7px;
-    background: var(--green);
-    border-radius: 50%;
-    margin-left: auto;
-    box-shadow: 0 0 8px var(--green);
-    animation: pulse 2s ease infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-
-  /* TOPIC PILLS */
-  .topics-bar {
-    padding: 10px 20px;
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-    flex-shrink: 0;
-    scrollbar-width: none;
-  }
-  .topics-bar::-webkit-scrollbar { display: none; }
-
-  .topic-pill {
-    padding: 5px 12px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    white-space: nowrap;
-    color: var(--text-dim);
-    background: transparent;
-    transition: all 0.2s;
-    font-family: 'Space Mono', monospace;
-  }
-  .topic-pill:hover {
-    border-color: var(--btc);
-    color: var(--btc);
-    background: rgba(247,147,26,0.06);
-  }
-
-  /* MESSAGES */
-  #chat {
-    flex: 1;
-    overflow-y: auto;
-    padding: 24px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border) transparent;
-  }
-
-  .msg {
-    display: flex;
-    gap: 12px;
-    max-width: 820px;
-    animation: fadeUp 0.3s ease;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  html, body { height: 100%; }
+  body { font-family: 'Space Mono', monospace; background: #0a0a08; color: #e8e8d8; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-thumb { background: #2a2a1e; border-radius: 2px; }
+  header { background: #111109; border-bottom: 1px solid #2a2a1e; padding: 14px 22px; display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+  .logo { width: 36px; height: 36px; background: #F7931A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: #000; box-shadow: 0 0 20px rgba(247,147,26,0.4); flex-shrink: 0; }
+  .header-text h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px; color: #F7931A; letter-spacing: 0.06em; text-transform: uppercase; }
+  .header-text p { font-size: 10px; color: #888876; letter-spacing: 0.08em; margin-top: 2px; }
+  .status { margin-left: auto; width: 7px; height: 7px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80; animation: pulse 2s ease infinite; }
+  .topics { background: #111109; border-bottom: 1px solid #2a2a1e; padding: 10px 18px; display: flex; gap: 8px; overflow-x: auto; flex-shrink: 0; scrollbar-width: none; }
+  .topics::-webkit-scrollbar { display: none; }
+  .pill { padding: 5px 12px; border: 1px solid #2a2a1e; border-radius: 20px; font-size: 10px; letter-spacing: 0.05em; cursor: pointer; white-space: nowrap; color: #888876; background: transparent; font-family: 'Space Mono', monospace; transition: all 0.2s; }
+  .pill:hover { border-color: #F7931A; color: #F7931A; background: rgba(247,147,26,0.07); }
+  #chat { flex: 1; overflow-y: auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 18px; }
+  .msg { display: flex; gap: 12px; max-width: 720px; animation: fadeUp 0.3s ease; }
   .msg.user { flex-direction: row-reverse; align-self: flex-end; }
-
-  .avatar {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-  }
-
-  .msg.bot .avatar { background: var(--btc); color: #000; }
-  .msg.user .avatar { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
-
-  .bubble {
-    padding: 14px 18px;
-    border-radius: 4px;
-    font-size: 13px;
-    line-height: 1.7;
-    max-width: 680px;
-  }
-
-  .msg.bot .bubble {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 2px solid var(--btc);
-    color: var(--text);
-  }
-
-  .msg.user .bubble {
-    background: rgba(247,147,26,0.08);
-    border: 1px solid rgba(247,147,26,0.2);
-    color: var(--text);
-    text-align: right;
-  }
-
-  .bubble strong { color: var(--btc); }
-  .bubble em { color: var(--text-dim); font-style: normal; font-size: 11px; }
-
-  /* SOURCE TAG */
-  .source-tag {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 2px 8px;
-    background: rgba(247,147,26,0.1);
-    border: 1px solid rgba(247,147,26,0.2);
-    border-radius: 3px;
-    font-size: 10px;
-    color: var(--btc-dim);
-    letter-spacing: 0.05em;
-  }
-
-  /* TYPING */
-  .typing-indicator {
-    display: flex; gap: 4px; align-items: center; padding: 14px 18px;
-    background: var(--surface); border: 1px solid var(--border);
-    border-left: 2px solid var(--btc); border-radius: 4px;
-  }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--btc); animation: bounce 1.2s ease infinite; }
-  .dot:nth-child(2) { animation-delay: 0.2s; }
-  .dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes bounce { 0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)} }
-
-  /* INPUT */
-  #input-area {
-    border-top: 1px solid var(--border);
-    padding: 16px 20px;
-    display: flex;
-    gap: 10px;
-    background: var(--surface);
-    flex-shrink: 0;
-  }
-
-  #user-input {
-    flex: 1;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text);
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    padding: 12px 16px;
-    resize: none;
-    outline: none;
-    transition: border-color 0.2s;
-    height: 48px;
-    max-height: 120px;
-  }
-  #user-input:focus { border-color: var(--btc); }
-  #user-input::placeholder { color: var(--text-dim); }
-
-  #send-btn {
-    width: 48px; height: 48px;
-    background: var(--btc);
-    border: none; border-radius: 4px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: #000;
-    font-size: 18px;
-    transition: all 0.2s;
-    flex-shrink: 0;
-  }
-  #send-btn:hover { background: #ffaa40; transform: scale(1.04); }
-  #send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-  /* Error */
-  .error-bubble {
-    background: rgba(248,113,113,0.08);
-    border: 1px solid rgba(248,113,113,0.25);
-    border-left: 2px solid var(--red);
-    color: var(--red);
-    font-size: 12px;
-    padding: 10px 14px;
-    border-radius: 4px;
-  }
+  .msg.bot { align-self: flex-start; }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+  .msg.bot .avatar { background: #F7931A; color: #000; }
+  .msg.user .avatar { background: #1a1a14; color: #888876; border: 1px solid #2a2a1e; }
+  .bubble { padding: 13px 17px; border-radius: 4px; font-size: 13px; line-height: 1.8; }
+  .msg.bot .bubble { background: #111109; border: 1px solid #2a2a1e; border-left: 2px solid #F7931A; }
+  .msg.user .bubble { background: rgba(247,147,26,0.07); border: 1px solid rgba(247,147,26,0.2); }
+  .bubble b { color: #F7931A; }
+  #input-area { border-top: 1px solid #2a2a1e; padding: 14px 20px; display: flex; gap: 10px; background: #111109; flex-shrink: 0; }
+  #user-input { flex: 1; background: #0a0a08; border: 1px solid #2a2a1e; border-radius: 4px; color: #e8e8d8; font-family: 'Space Mono', monospace; font-size: 13px; padding: 12px 16px; resize: none; height: 48px; outline: none; transition: border-color 0.2s; }
+  #user-input:focus { border-color: #F7931A; }
+  #user-input::placeholder { color: #555544; }
+  #send-btn { width: 48px; height: 48px; background: #F7931A; border: none; border-radius: 4px; cursor: pointer; color: #000; font-size: 16px; flex-shrink: 0; transition: background 0.2s; }
+  #send-btn:hover { background: #ffaa40; }
+  #send-btn:disabled { background: #2a2a1e; color: #555; cursor: not-allowed; }
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">₿</div>
-  <div class="header-info">
+  <div class="header-text">
     <h1>Bitcoin Advocate</h1>
-    <p>ARGUMENTOS PROFUNDOS · DEBATE REAL · SIN TÓPICOS</p>
+    <p>ARGUMENTOS PROFUNDOS · SIN TÓPICOS · SIN IA</p>
   </div>
-  <div class="status-dot"></div>
+  <div class="status"></div>
 </header>
 
-<div class="topics-bar">
-  <button class="topic-pill" onclick="askTopic('¿Por qué Bitcoin no es solo escasez digital? ¿Qué lo hace verdaderamente valioso?')">Más allá de los 21M</button>
-  <button class="topic-pill" onclick="askTopic('Explícame la seguridad de la red Bitcoin desde un punto de vista técnico profundo')">Seguridad de red</button>
-  <button class="topic-pill" onclick="askTopic('¿Cómo resuelve Bitcoin el problema del doble gasto sin confianza central?')">Doble gasto</button>
-  <button class="topic-pill" onclick="askTopic('¿Cuáles son las críticas más serias a Bitcoin y cómo las rebates?')">Críticas serias</button>
-  <button class="topic-pill" onclick="askTopic('¿Cuál es la política monetaria de Bitcoin y por qué importa más que la oferta fija?')">Política monetaria</button>
-  <button class="topic-pill" onclick="askTopic('Bitcoin y consumo energético: argumenta desde datos reales, no propaganda')">Energía y PoW</button>
-  <button class="topic-pill" onclick="askTopic('¿Qué hace que Bitcoin sea distinto a todas las altcoins, técnica y filosóficamente?')">Bitcoin vs altcoins</button>
-  <button class="topic-pill" onclick="askTopic('Explica la teoría de juegos detrás de Bitcoin y el equilibrio de Nash en minería')">Teoría de juegos</button>
-  <button class="topic-pill" onclick="askTopic('¿Qué es el tiempo en Bitcoin? Explica el papel de los bloques como reloj global')">Tiempo y bloques</button>
-</div>
-
-<div id="chat">
-  <div class="msg bot">
-    <div class="avatar">₿</div>
-    <div class="bubble">
-      Soy tu abogado del diablo de Bitcoin — pero con argumentos de verdad.<br><br>
-      Nada de "<strong>solo quedan 21 millones</strong>" como si eso lo explicara todo. Aquí hablamos de <strong>teoría de juegos</strong>, <strong>política monetaria comparada</strong>, <strong>proof-of-work como anclaje físico</strong>, <strong>descentralización real vs narrativa</strong>, <strong>críticas legítimas</strong> y cómo responderlas.<br><br>
-      Pregúntame lo que quieras. Cuanto más difícil, mejor.
-    </div>
-  </div>
-</div>
+<div class="topics" id="topics"></div>
+<div id="chat"></div>
 
 <div id="input-area">
-  <textarea id="user-input" placeholder="Desafíame con una pregunta seria sobre Bitcoin..." rows="1"></textarea>
-  <button id="send-btn" onclick="sendMessage()">➤</button>
+  <textarea id="user-input" placeholder="Pregunta algo sobre Bitcoin..."></textarea>
+  <button id="send-btn" onclick="handleSend()">➤</button>
 </div>
 
 <script>
-const SYSTEM_PROMPT = `Eres un experto defensor de Bitcoin con conocimiento profundo en:
-- Criptografía y protocolo técnico (UTXO, PoW, Merkle trees, firma digital)
-- Teoría monetaria austriaca y keynesiana aplicada a Bitcoin
-- Historia del dinero y patrones monetarios (oro, Bretton Woods, petrodólar)
-- Teoría de juegos: incentivos de mineros, ataques del 51%, equilibrio de Nash
-- Halvings: no solo como "escasez" sino como política monetaria predecible y auditada en tiempo real
-- Energía: PoW como ancla física, comparación con sistema bancario tradicional, Bitcoin como comprador de última instancia de energía renovable residual
-- Lightning Network, Layer 2, escalabilidad
-- Descentralización real: nodos, geografía de hashrate, soft forks vs hard forks
-- Críticas serias: centralización de minería, MEV, quantum computing, gobernanza, volatilidad como medio de pago
-- Filosofía: separación del dinero y el Estado, soberanía individual, censura-resistencia
+const RESPONSES = [
+  {
+    keys: ["21 millon","escasez","oferta fija","supply","cuantos hay"],
+    title: "La oferta fija: mucho más que un número",
+    text: `Los 21 millones no son un argumento en sí mismos — son una <b>consecuencia del diseño</b>, no su causa.
 
-REGLAS ABSOLUTAS:
-1. NUNCA uses "solo hay 21 millones" como argumento principal o como relleno. Si mencionas la oferta fija, explica POR QUÉ importa en el contexto más amplio (política monetaria verificable, desinflación predecible, game theory del halving...).
-2. Argumenta con PROFUNDIDAD. Cita datos, mecanismos técnicos, comparaciones históricas.
-3. Reconoce las críticas legítimas a Bitcoin antes de rebatirlas. No seas un fanático que niega todo.
-4. Sé directo, sin relleno. Cada párrafo debe aportar algo nuevo.
-5. Usa lenguaje técnico cuando corresponda pero explica los conceptos.
-6. Máximo 350 palabras por respuesta. Sé denso, no extenso.
-7. Habla en español.`;
+Lo relevante es que Bitcoin es la primera forma de dinero cuya política monetaria es <b>verificable en tiempo real por cualquiera</b>. No hay banco central, no hay votación, no hay decreto. Miles de nodos independientes auditan el código en este momento.
 
-const history = [];
+Compara con el oro: también tiene escasez, pero nadie sabe exactamente cuánto queda en la Tierra. Con Bitcoin, la curva de emisión está escrita en el protocolo y es públicamente verificable.
 
-async function sendMessage() {
-  const input = document.getElementById('user-input');
-  const text = input.value.trim();
-  if (!text) return;
+El halving no es "menos oferta = más precio". Es un experimento en <b>política monetaria predecible</b>: cada cuatro años la recompensa de minería se reduce a la mitad, forzando a la red a ajustar su equilibrio económico sin que nadie tome esa decisión.
 
-  appendMsg('user', text);
-  input.value = '';
-  input.style.height = '48px';
-  history.push({ role: 'user', content: text });
+La pregunta profunda no es cuántos hay, sino: <b>¿puede alguien cambiar las reglas?</b> Cambiar el límite requeriría que la mayoría de nodos, mineros y usuarios acepten simultáneamente — algo que ha demostrado ser casi imposible, como vimos en la guerra de bloques de 2017.`
+  },
+  {
+    keys: ["seguridad","hack","ataque","51%","vulnerable","robar"],
+    title: "Seguridad: el sistema más robusto jamás construido",
+    text: `Bitcoin lleva funcionando sin interrupción desde enero de 2009. Ningún protocolo financiero ha soportado ataques continuos de esta magnitud durante tanto tiempo.
 
-  const typingEl = appendTyping();
-  setDisabled(true);
+La seguridad no viene de la oscuridad sino de la <b>transparencia total</b>. El código es abierto, cualquiera puede auditarlo, y precisamente por eso los fallos se encuentran y corrigen.
 
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: history
-      })
-    });
+Un ataque del 51% requeriría controlar más hashrate que toda la red. Hoy eso equivale a fabricar hardware que no existe, consumir más electricidad que varios países medianos, y aun así solo podrías hacer doble gasto de tus propias transacciones recientes — no robar fondos ajenos, no cambiar el historial profundo.
 
-    const data = await response.json();
-    typingEl.remove();
+El protocolo separa tres capas: las <b>firmas digitales ECDSA</b> protegen la propiedad, la <b>prueba de trabajo</b> hace costoso reescribir la historia, y la <b>red de nodos</b> valida las reglas independientemente.
 
-    if (data.error) throw new Error(data.error.message);
+La crítica legítima es la concentración geográfica del hashrate. Es un riesgo real que la comunidad monitorea. Pero desde que China prohibió la minería en 2021, la tendencia es hacia mayor distribución global.`
+  },
+  {
+    keys: ["doble gasto","confianza","trustless","consenso","nakamoto","satoshi"],
+    title: "El problema del doble gasto: la solución de Satoshi",
+    text: `Durante décadas, el problema del dinero digital era: si el dinero es información, ¿qué impide copiarlo y gastarlo dos veces? La solución era siempre un <b>intermediario de confianza</b> — un banco que lleva el registro.
 
-    const reply = data.content.map(b => b.text || '').join('');
-    history.push({ role: 'assistant', content: reply });
-    appendMsg('bot', reply);
-  } catch (err) {
-    typingEl.remove();
-    appendError('Error al conectar con la API: ' + err.message);
+Satoshi combinó tres ideas preexistentes de forma original: <b>funciones hash criptográficas</b>, <b>firmas digitales</b> y <b>prueba de trabajo</b> para crear un registro público que es costoso de alterar pero barato de verificar.
+
+Cambiar una transacción pasada requiere recalcular ese bloque y todos los posteriores, más rápido que el resto de la red sigue añadiendo bloques nuevos. Es físicamente costoso — requiere energía real — lo que ancla el mundo digital a restricciones físicas.
+
+La genialidad no es técnica sino de <b>teoría de juegos</b>: los mineros que hacen trampa pierden la recompensa de bloque. El incentivo económico alinea el comportamiento honesto con el beneficio propio.
+
+Esto resolvió el <b>Problema de los Generales Bizantinos</b> en redes abiertas y sin permisos — algo que la informática distribuida consideraba imposible hasta 2008.`
+  },
+  {
+    keys: ["critica","problema","debilidad","malo","contra","fallo","defecto","riesgo"],
+    title: "Las críticas más serias a Bitcoin (sin filtros)",
+    text: `Las críticas superficiales son fáciles de descartar. Las serias merecen respuesta honesta.
+
+<b>Volatilidad:</b> Real. Bitcoin es un activo en proceso de monetización — pasó de cero a billones en 15 años. La volatilidad es el precio de ese proceso. La pregunta es si la tendencia a largo plazo compensa la volatilidad a corto. Históricamente, sí.
+
+<b>Escalabilidad:</b> 7 transacciones por segundo no bastan para el comercio global. Es un límite real y deliberado — prioriza descentralización sobre velocidad. Lightning Network es la respuesta, imperfecta pero arquitectónicamente sólida.
+
+<b>Concentración de riqueza:</b> Los datos on-chain muestran distribución muy desigual. Pero comparado con el sistema actual — donde los bancos centrales crean dinero que diluye a quienes no tienen activos — Bitcoin tiene reglas iguales para todos desde el día cero.
+
+<b>Computación cuántica:</b> Amenaza real a largo plazo para ECDSA. Es un problema conocido con investigación activa, y afecta a TODO el sistema financiero digital, no solo a Bitcoin.
+
+<b>Gobernanza:</b> Los cambios en Bitcoin son lentos. Algunos lo ven como fortaleza (resistencia a cambios no consensuados), otros como parálisis. No hay respuesta perfecta aquí.`
+  },
+  {
+    keys: ["energia","medioambiente","co2","carbono","electricidad","consume","contamina","verde"],
+    title: "Energía y Proof of Work: el debate real",
+    text: `El consumo energético de Bitcoin es real y medible. La pregunta correcta no es "¿consume energía?" sino <b>¿qué valor produce comparado con alternativas?</b>
+
+El sistema bancario tradicional — sucursales, servidores, cajeros, transporte de efectivo, edificios — consume estimadamente entre 3 y 5 veces más energía que Bitcoin. Rara vez se menciona en el debate público.
+
+Más relevante: Bitcoin es el <b>único comprador de energía que puede operar en cualquier lugar del mundo</b>, incluyendo lugares sin red eléctrica. Esto crea incentivos para monetizar energía renovable que de otro modo se desperdiciaría — excedentes hidráulicos en Islandia, excedentes eólicos en Texas. Hoy aproximadamente el 50-60% del hashrate usa energía renovable.
+
+La Proof of Work no es un gasto inútil — es el <b>mecanismo que ancla Bitcoin a la realidad física</b>. Sin coste real, no hay resistencia real a la manipulación. Es el equivalente al esfuerzo que hace imposible falsificar oro.
+
+La crítica legítima: Proof of Stake podría ofrecer seguridad similar con menos energía. Es un debate técnico abierto, pero Bitcoin prioriza la simplicidad y el historial probado sobre la eficiencia teórica.`
+  },
+  {
+    keys: ["altcoin","ethereum","solana","xrp","diferencia","comparar","mejor que"],
+    title: "Bitcoin vs altcoins: diferencia filosófica y técnica",
+    text: `La mayoría de altcoins replican la forma de Bitcoin pero abandonan su propiedad más valiosa: la <b>descentralización real</b>.
+
+Ethereum tiene un fundador activo que puede influir en el protocolo — lo hizo en el hard fork de The DAO en 2016. Solana ha sufrido múltiples caídas de red completas. XRP es controlado por una empresa privada. Ninguno tiene la neutralidad de Bitcoin.
+
+<b>Técnicamente:</b> Bitcoin optimiza para una cosa — ser dinero digital resistente a la censura y verificable sin confianza. Las altcoins intentan ser plataformas de propósito general, lo que aumenta la superficie de ataque y la complejidad de gobernanza.
+
+<b>Inmutabilidad:</b> El historial de Bitcoin desde 2009 no ha sido alterado. Es el activo digital con el historial más largo de operación sin interrupción y sin cambios de reglas arbitrarios.
+
+<b>Efecto Lindy:</b> Cada día que Bitcoin sobrevive aumenta la probabilidad de que siga existiendo. La mayoría de altcoins tienen menos de 5 años de historia.
+
+La crítica honesta: Bitcoin no innova rápido. Eso es un coste real. Pero en dinero, el conservadurismo técnico es una característica, no un defecto.`
+  },
+  {
+    keys: ["teoria de juegos","incentivos","minero","nash","equilibrio","game theory","minar"],
+    title: "Teoría de juegos: por qué Bitcoin se auto-sostiene",
+    text: `Bitcoin no requiere que los participantes sean honestos — requiere que sean <b>racionales y egoístas</b>. Es su mayor fortaleza.
+
+Los mineros invierten millones en hardware (ASICs) que solo sirve para minar Bitcoin. Esto crea un <b>compromiso irreversible</b>: un minero que ataca la red destruye el valor de su propia inversión.
+
+La recompensa de bloque crea un salario para los guardianes de la red. Intentar un ataque del 51% cuesta más en hardware y electricidad de lo que se puede robar — y el precio de BTC caería inmediatamente, haciendo el botín menos valioso.
+
+Esto es un <b>equilibrio de Nash</b>: dado lo que hacen los demás, ningún actor tiene incentivo para traicionar. No porque confíen entre sí, sino porque traicionar sale más caro.
+
+Los halvings añaden otra capa: cada cuatro años la recompensa se reduce a la mitad. Los mineros ineficientes salen del mercado, los eficientes sobreviven. Es un mecanismo de selección que hace la red progresivamente más robusta.
+
+Ningún sistema financiero anterior había alineado tan precisamente los incentivos individuales con la salud colectiva sin necesidad de reguladores.`
+  },
+  {
+    keys: ["tiempo","bloque","reloj","timestamp","blockchain","cadena","blokchain"],
+    title: "Bitcoin como reloj global distribuido",
+    text: `Una de las ideas más profundas de Bitcoin es que resuelve un problema que no parece financiero: <b>¿cómo se ponen de acuerdo extraños en internet sobre qué ocurrió primero?</b>
+
+En sistemas distribuidos, sin un reloj central, dos nodos pueden tener versiones contradictorias del orden de los eventos. Bitcoin resuelve esto con los bloques: cada bloque es un <b>registro sellado en el tiempo</b> que toda la red acepta.
+
+La cadena de bloques no es principalmente un libro de contabilidad — es un <b>mecanismo de consenso temporal</b>. El hash de cada bloque encadena el tiempo hacia atrás: cambiar un evento pasado requiere rehacer todo el tiempo transcurrido desde entonces.
+
+Esto tiene implicaciones filosóficas: Bitcoin crea una <b>historia objetiva e inmutable</b> — algo inédito en sistemas digitales. El pasado en Bitcoin es más permanente que en la mayoría de bases de datos centralizadas, donde un administrador puede editar registros.
+
+Los ~10 minutos entre bloques no son un límite técnico — son una elección deliberada. Suficiente para que los bloques se propaguen globalmente, suficiente incertidumbre para que la competencia sea justa.`
+  },
+  {
+    keys: ["dinero","historia","oro","fiat","banco central","inflacion","reserva federal","patron oro","bretton"],
+    title: "Bitcoin en la historia del dinero",
+    text: `Para entender Bitcoin hay que entender qué es el dinero y por qué el actual sistema es tan reciente e inusual.
+
+Durante la mayor parte de la historia, el dinero fue <b>dinero mercancía</b>: oro, plata. Su valor venía de la escasez natural y el coste de extracción. Bretton Woods (1944) creó un sistema donde el dólar era convertible a oro. Nixon rompió esa convertibilidad en 1971 — hace apenas 50 años.
+
+Desde entonces vivimos el experimento del <b>dinero fiat puro</b>: dinero que vale porque un gobierno dice que vale. El resultado ha sido expansión monetaria sin precedentes: la Reserva Federal creó más dólares desde 2020 que en toda su historia anterior.
+
+Bitcoin propone volver a la <b>escasez verificable</b>, pero sin las limitaciones físicas del oro: es divisible hasta 8 decimales, transferible globalmente en minutos, verificable sin instrumentos físicos.
+
+La crítica al oro siempre fue: "no puedes enviarlo por internet". La crítica al dinero digital siempre fue: "quién controla el servidor". Bitcoin resuelve ambas al mismo tiempo.`
+  },
+  {
+    keys: ["lightning","layer 2","pagos rapidos","escalar","transacciones por segundo","lento","comision"],
+    title: "Lightning Network: escalabilidad sin sacrificar descentralización",
+    text: `La crítica de escalabilidad es legítima: 7 transacciones por segundo no bastan para el comercio global. La respuesta de Bitcoin es arquitectónica: <b>no escalar la capa base, sino construir capas superiores</b>.
+
+Lightning crea canales de pago entre partes. Dos usuarios abren un canal con una transacción on-chain, luego intercambian millones de pagos instantáneos entre ellos sin tocar la blockchain. Solo el cierre del canal requiere otra transacción on-chain.
+
+Los canales se pueden <b>encadenar</b>: si A tiene canal con B y B con C, A puede pagar a C enrutando por B, sin que B pueda robar — la criptografía lo impide. Esto crea una red de liquidez donde los pagos se enrutan automáticamente.
+
+El resultado: pagos instantáneos, comisiones de fracciones de céntimo, y la liquidación final ocurre en la capa más segura del sistema. Es el mismo modelo que TCP/IP: la capa base es simple y robusta, las aplicaciones complejas se construyen encima.
+
+La crítica honesta: Lightning aún requiere que los canales tengan liquidez y la UX es compleja. Son problemas reales con trabajo activo.`
   }
+];
 
-  setDisabled(false);
-  scrollBottom();
+const FALLBACK = `Esa es una pregunta que no tengo cubierta exactamente, pero puedo hablar con profundidad de:
+
+• <b>La oferta fija</b> — más allá del "21 millones"
+• <b>Seguridad de la red</b> y ataques del 51%
+• <b>El problema del doble gasto</b> y cómo lo resuelve Satoshi
+• <b>Críticas serias</b> a Bitcoin y respuestas honestas
+• <b>Energía y Proof of Work</b> — el debate real
+• <b>Bitcoin vs altcoins</b> — diferencias técnicas y filosóficas
+• <b>Teoría de juegos</b> e incentivos de los mineros
+• <b>Bitcoin como reloj temporal</b> distribuido
+• <b>Historia del dinero</b> y contexto de Bitcoin
+• <b>Lightning Network</b> y escalabilidad
+
+Prueba a preguntar sobre alguno de estos temas.`;
+
+const TOPICS = [
+  { label: "Más allá de los 21M", q: "¿Qué hace valioso a Bitcoin más allá de la escasez de 21 millones?" },
+  { label: "Seguridad", q: "¿Cómo de segura es la red Bitcoin ante ataques?" },
+  { label: "Doble gasto", q: "¿Cómo resuelve Bitcoin el doble gasto sin un banco central?" },
+  { label: "Críticas serias", q: "¿Cuáles son las críticas más serias a Bitcoin?" },
+  { label: "Energía", q: "¿Qué hay detrás del debate sobre el consumo energético de Bitcoin?" },
+  { label: "vs Altcoins", q: "¿En qué se diferencia Bitcoin de Ethereum o Solana?" },
+  { label: "Teoría de juegos", q: "¿Cómo funcionan los incentivos de los mineros en Bitcoin?" },
+  { label: "Historia del dinero", q: "¿Qué lugar ocupa Bitcoin en la historia del dinero?" },
+  { label: "Lightning Network", q: "¿Cómo funciona Lightning Network y la escalabilidad de Bitcoin?" },
+];
+
+function normalize(s) { return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+
+function getResponse(text) {
+  const q = normalize(text);
+  for (const r of RESPONSES) {
+    if (r.keys.some(k => q.includes(normalize(k)))) {
+      return `<b style="color:#F7931A;font-size:14px">${r.title}</b><br><br>${r.text}`;
+    }
+  }
+  return FALLBACK;
 }
 
-function appendMsg(role, text) {
+function addMsg(role, html) {
   const chat = document.getElementById('chat');
   const div = document.createElement('div');
   div.className = `msg ${role}`;
-
   const avatar = document.createElement('div');
   avatar.className = 'avatar';
-  avatar.textContent = role === 'bot' ? '₿' : 'Tú';
-
+  avatar.textContent = role === 'user' ? 'Tú' : '₿';
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
-  bubble.innerHTML = formatText(text);
-
+  bubble.innerHTML = html.replace(/\n/g, '<br>');
   div.appendChild(avatar);
   div.appendChild(bubble);
   chat.appendChild(div);
-  scrollBottom();
-}
-
-function formatText(text) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/\n\n/g, '<br><br>')
-    .replace(/\n/g, '<br>');
-}
-
-function appendTyping() {
-  const chat = document.getElementById('chat');
-  const div = document.createElement('div');
-  div.className = 'msg bot';
-
-  const avatar = document.createElement('div');
-  avatar.className = 'avatar';
-  avatar.textContent = '₿';
-
-  const typing = document.createElement('div');
-  typing.className = 'typing-indicator';
-  typing.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-
-  div.appendChild(avatar);
-  div.appendChild(typing);
-  chat.appendChild(div);
-  scrollBottom();
-  return div;
-}
-
-function appendError(msg) {
-  const chat = document.getElementById('chat');
-  const div = document.createElement('div');
-  div.className = 'error-bubble';
-  div.textContent = msg;
-  chat.appendChild(div);
-}
-
-function setDisabled(v) {
-  document.getElementById('send-btn').disabled = v;
-  document.getElementById('user-input').disabled = v;
-}
-
-function scrollBottom() {
-  const chat = document.getElementById('chat');
   chat.scrollTop = chat.scrollHeight;
 }
 
-function askTopic(q) {
-  document.getElementById('user-input').value = q;
-  sendMessage();
+function handleSend() {
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addMsg('user', text);
+  const btn = document.getElementById('send-btn');
+  btn.disabled = true;
+  setTimeout(() => { addMsg('bot', getResponse(text)); btn.disabled = false; }, 300);
 }
 
-// Auto-resize textarea
-document.getElementById('user-input').addEventListener('input', function() {
-  this.style.height = '48px';
-  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+// Build topic pills
+const topicsEl = document.getElementById('topics');
+TOPICS.forEach(t => {
+  const btn = document.createElement('button');
+  btn.className = 'pill';
+  btn.textContent = t.label;
+  btn.onclick = () => { document.getElementById('user-input').value = t.q; handleSend(); };
+  topicsEl.appendChild(btn);
 });
 
-document.getElementById('user-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
+// Enter key
+document.getElementById('user-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
 });
+
+// Welcome message
+addMsg('bot', `Soy un defensor de Bitcoin — con argumentos reales.<br><br>Nada de "<b>solo hay 21 millones</b>" como si eso lo explicara todo. Pregúntame sobre política monetaria, teoría de juegos, proof of work, críticas serias, historia del dinero, o lo que quieras.<br><br>Usa los botones de arriba o escribe tu pregunta.`);
 </script>
 </body>
 </html>
