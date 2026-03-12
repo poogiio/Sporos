@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía TOC Proyectos para CEOs — poogi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --papel: #f5f0e8;
+  --tinta: #0f0f0f;
+  --rojo:  #c0392b;
+  --rojo-s: #e8d5d3;
+  --gris-m: #6b6560;
+  --gris-l: #d4cfc7;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: #1a1715;
+  font-family: var(--sans);
+  color: var(--tinta);
+  min-height: 100vh;
+}
+
+/* ── SHELL ───────────────────────────────────────────────────────── */
+#shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ── SIDEBAR ─────────────────────────────────────────────────────── */
+#sidebar {
+  background: #0f0e0c;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid #2a2520;
+}
+
+.sidebar-brand {
+  padding: 0 32px 32px;
+  border-bottom: 1px solid #2a2520;
+  margin-bottom: 24px;
+}
+
+.brand-tag {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--rojo);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.brand-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: #f5f0e8;
+  line-height: 1.3;
+}
+
+.brand-title em {
+  color: #8a8480;
+  font-style: italic;
+}
+
+nav { flex: 1; padding: 0 16px; }
+
+.nav-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  margin-bottom: 2px;
+}
+
+.nav-item:hover { background: #1f1c19; }
+.nav-item.active { background: #1f1c19; }
+.nav-item.active .nav-num { color: var(--rojo); }
+.nav-item.active .nav-label { color: #f5f0e8; }
+
+.nav-num {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  color: #4a4540;
+  letter-spacing: 1px;
+  padding-top: 3px;
+  min-width: 20px;
+}
+
+.nav-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: #8a8480;
+  line-height: 1.4;
+}
+
+.nav-divider {
+  height: 1px;
+  background: #2a2520;
+  margin: 12px 16px;
+}
+
+/* search box in sidebar */
+.sidebar-search {
+  padding: 24px 16px 0;
+  margin-top: auto;
+  border-top: 1px solid #2a2520;
+}
+
+.search-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #4a4540;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding: 0 8px;
+}
+
+.search-wrap {
+  position: relative;
+}
+
+#search-input {
+  width: 100%;
+  background: #1f1c19;
+  border: 1px solid #2a2520;
+  border-radius: 8px;
+  padding: 10px 14px 10px 36px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: #f5f0e8;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#search-input::placeholder { color: #4a4540; }
+#search-input:focus { border-color: var(--rojo); }
+
+.search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4a4540;
+  font-size: 14px;
+}
+
+#search-results {
+  margin-top: 8px;
+  display: none;
+}
+
+.search-hit {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 4px;
+  background: #1f1c19;
+  transition: background 0.15s;
+}
+.search-hit:hover { background: #2a2520; }
+
+.hit-chapter {
+  font-size: 10px;
+  color: var(--rojo);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.hit-text {
+  font-size: 12px;
+  color: #8a8480;
+  line-height: 1.4;
+}
+
+.hit-text mark {
+  background: transparent;
+  color: #f5f0e8;
+  font-weight: 500;
+}
+
+/* ── MAIN CONTENT ────────────────────────────────────────────────── */
+#main {
+  background: var(--papel);
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* ── COVER ───────────────────────────────────────────────────────── */
+#cover.visible {
+  display: flex;
+}
+
+.cover-bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 60% 50% at 85% 20%, rgba(192,57,43,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(192,57,43,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cover-tag {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--rojo);
+  text-transform: uppercase;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.1s forwards;
+}
+
+.cover-h1 {
+  font-family: var(--serif);
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--tinta);
+  margin-bottom: 4px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.2s forwards;
+}
+
+.cover-h1-italic {
+  font-family: var(--serif);
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--gris-m);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.3s forwards;
+}
+
+.cover-sub {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--gris-m);
+  margin-bottom: 56px;
+  max-width: 480px;
+  line-height: 1.5;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.4s forwards;
+}
+
+.cover-rule {
+  width: 64px;
+  height: 3px;
+  background: var(--rojo);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.5s forwards;
+}
+
+.cover-meta {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gris-m);
+  opacity: 0;
+  animation: fadeUp 0.6s 0.6s forwards;
+}
+
+.cover-meta strong {
+  font-weight: 500;
+  color: var(--tinta);
+}
+
+.cover-cta {
+  margin-top: 64px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.8s forwards;
+}
+
+.btn-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 14px 28px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.15s;
+  text-transform: uppercase;
+}
+
+.btn-start:hover {
+  background: var(--rojo);
+  transform: translateY(-1px);
+}
+
+.btn-arrow { font-size: 16px; }
+
+.cover-chapters {
+  margin-top: 56px;
+  opacity: 0;
+  animation: fadeUp 0.6s 1s forwards;
+}
+
+.chapters-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--gris-m);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 680px;
+}
+
+.chapter-pill {
+  background: white;
+  border: 1px solid var(--gris-l);
+  border-radius: 6px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.chapter-pill:hover {
+  border-color: var(--rojo);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.pill-num {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--rojo);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.pill-title {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--tinta);
+  line-height: 1.3;
+}
+
+/* ── CHAPTER ─────────────────────────────────────────────────────── */
+.chapter {
+  display: none;
+  padding: 80px 80px 100px;
+  max-width: 760px;
+  animation: fadeIn 0.35s ease;
+}
+
+.chapter.visible {
+  display: block;
+}
+
+/* Cover is full-height, not a scrollable chapter */
+#cover {
+  padding: 80px 80px 60px;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.ch-eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--rojo);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.ch-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--tinta);
+  margin-bottom: 4px;
+}
+
+.ch-title-italic {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gris-m);
+  line-height: 1.1;
+  margin-bottom: 32px;
+}
+
+.ch-rule {
+  width: 48px;
+  height: 3px;
+  background: var(--rojo);
+  margin-bottom: 40px;
+}
+
+.lead {
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--tinta);
+  margin-bottom: 28px;
+}
+
+.body-text {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #1a1815;
+  margin-bottom: 20px;
+}
+
+.body-text strong { font-weight: 500; }
+.body-text em { font-style: italic; color: var(--gris-m); }
+
+.sec-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--tinta);
+  margin-top: 48px;
+  margin-bottom: 20px;
+}
+
+.pull-quote {
+  border-top: 2px solid var(--tinta);
+  border-bottom: 2px solid var(--tinta);
+  padding: 28px 0;
+  margin: 40px 0;
+}
+
+.pull-quote p {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--tinta);
+}
+
+.pull-quote em { color: var(--rojo); font-style: italic; }
+
+.reflexion {
+  background: rgba(192, 57, 43, 0.04);
+  border-left: 3px solid var(--rojo);
+  padding: 24px 28px;
+  margin-top: 52px;
+}
+
+.reflexion-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--rojo);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.reflexion p {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--tinta);
+}
+
+/* stat */
+.stat-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 0;
+  margin: 32px 0;
+}
+
+.stat-num {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 400;
+  color: var(--rojo);
+  line-height: 1;
+  min-width: 120px;
+}
+
+.stat-desc {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--gris-m);
+  line-height: 1.5;
+}
+
+/* paradigm table */
+.ptable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+}
+
+.ptable th {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--gris-l);
+}
+
+.ptable th:first-child { color: var(--gris-m); background: #f0ece4; }
+.ptable th:last-child  { color: var(--rojo);   background: #faf0ef; }
+
+.ptable td {
+  padding: 14px 20px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 300;
+  border-bottom: 1px solid #ece8e0;
+  line-height: 1.5;
+}
+
+.ptable td:first-child { background: #f8f5ef; color: var(--gris-m); }
+.ptable td:last-child  { background: #fdf8f7; }
+
+/* chapter nav */
+.ch-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--gris-l);
+}
+
+.ch-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gris-m);
+  cursor: pointer;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  transition: color 0.15s;
+}
+
+.ch-nav-btn:hover { color: var(--rojo); }
+.ch-nav-btn.primary {
+  color: var(--tinta);
+  font-weight: 500;
+}
+
+/* SVG diagrams */
+.svg-wrap {
+  margin: 36px 0;
+  background: white;
+  border: 1px solid var(--gris-l);
+  border-radius: 8px;
+  padding: 32px;
+  overflow: hidden;
+}
+
+/* ── MOBILE ──────────────────────────────────────────────────────── */
+#mobile-header {
+  display: none;
+  background: #0f0e0c;
+  padding: 16px 20px;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+#hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f5f0e8;
+  font-size: 20px;
+  padding: 4px;
+}
+
+#mobile-title {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: #8a8480;
+  flex: 1;
+  text-align: center;
+}
+
+#mobile-logo {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--rojo);
+  letter-spacing: 2px;
+}
+
+@media (max-width: 900px) {
+  #shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  #sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    z-index: 200;
+    transition: left 0.3s ease;
+    height: 100vh;
+  }
+  #sidebar.open { left: 0; }
+  #mobile-header { display: flex; }
+  #main { height: calc(100vh - 56px); }
+  .cover-chapters { display: none; }
+  .chapter { padding: 40px 24px 80px; }
+  #cover { padding: 48px 24px 60px; }
+  .chapters-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div id="shell">
+
+<!-- ── SIDEBAR ── -->
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-tag">poogi</div>
+    <div class="brand-title">Guía TOC Proyectos<br><em>para CEOs</em></div>
+  </div>
+
+  <nav id="nav">
+    <div class="nav-item active" data-chapter="cover">
+      <span class="nav-num">—</span>
+      <span class="nav-label">Portada</span>
+    </div>
+    <div class="nav-item" data-chapter="apertura">
+      <span class="nav-num">AP</span>
+      <span class="nav-label">Esto le suena familiar</span>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-item" data-chapter="cap1">
+      <span class="nav-num">01</span>
+      <span class="nav-label">El plan era bueno. ¿Entonces qué pasó?</span>
+    </div>
+    <div class="nav-item" data-chapter="cap2">
+      <span class="nav-num">02</span>
+      <span class="nav-label">No es su gente. Es el sistema.</span>
+    </div>
+    <div class="nav-item" data-chapter="cap3">
+      <span class="nav-num">03</span>
+      <span class="nav-label">Por qué sus áreas no se ponen de acuerdo</span>
+    </div>
+    <div class="nav-item" data-chapter="cap4">
+      <span class="nav-num">04</span>
+      <span class="nav-label">Todos ocupados, nada avanza</span>
+    </div>
+    <div class="nav-item" data-chapter="cap5">
+      <span class="nav-num">05</span>
+      <span class="nav-label">El tiempo que se evapora</span>
+    </div>
+    <div class="nav-item" data-chapter="cap6">
+      <span class="nav-num">06</span>
+      <span class="nav-label">Ver el proyecto como un flujo</span>
+    </div>
+    <div class="nav-item" data-chapter="cap7">
+      <span class="nav-num">07</span>
+      <span class="nav-label">Por dónde empezar</span>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-item" data-chapter="cierre">
+      <span class="nav-num">→</span>
+      <span class="nav-label">Su plan puede cumplirse</span>
+    </div>
+  </nav>
+
+  <div class="sidebar-search">
+    <div class="search-label">Buscar en la guía</div>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="search-input" placeholder="proyectos, buffer, sistema…" autocomplete="off">
+    </div>
+    <div id="search-results"></div>
+  </div>
+</aside>
+
+<!-- ── MOBILE HEADER ── -->
+<header id="mobile-header">
+  <button id="hamburger">☰</button>
+  <span id="mobile-title">Guía TOC para CEOs</span>
+  <span id="mobile-logo">poogi</span>
+</header>
+
+<!-- ── MAIN ── -->
+<main id="main">
+
+  <!-- COVER -->
+  <section id="cover" class="chapter visible" style="min-height:100vh;display:none;flex-direction:column;justify-content:center;position:relative;overflow:hidden;max-width:100%;padding:80px 80px 60px;">
+    <div class="cover-bg"></div>
+    <div class="cover-tag">Guía ejecutiva · poogi</div>
+    <div class="cover-h1">Por qué sus proyectos</div>
+    <div class="cover-h1-italic">no terminan.</div>
+    <div class="cover-sub">Y cómo cambiar eso sin cambiar a su gente.</div>
+    <div class="cover-rule"></div>
+    <div class="cover-meta">
+      <strong>Hernán Sedano</strong> · Teoría de Restricciones aplicada a proyectos estratégicos<br>
+      Para CEOs y alta dirección de empresas medianas en América Latina
+    </div>
+    <div class="cover-cta">
+      <button class="btn-start" onclick="goTo('apertura')">
+        Comenzar a leer <span class="btn-arrow">→</span>
+      </button>
+    </div>
+    <div class="cover-chapters">
+      <div class="chapters-label">Ir directo a un capítulo</div>
+      <div class="chapters-grid">
+        <div class="chapter-pill" onclick="goTo('cap1')">
+          <div class="pill-num">01</div>
+          <div class="pill-title">El plan era bueno</div>
+        </div>
+        <div class="chapter-pill" onclick="goTo('cap2')">
+          <div class="pill-num">02</div>
+          <div class="pill-title">No es su gente</div>
+        </div>
+        <div class="chapter-pill" onclick="goTo('cap3')">
+          <div class="pill-num">03</div>
+          <div class="pill-title">Por qué no se ponen de acuerdo</div>
+        </div>
+        <div class="chapter-pill" onclick="goTo('cap4')">
+          <div class="pill-num">04</div>
+          <div class="pill-title">Todos ocupados, nada avanza</div>
+        </div>
+        <div class="chapter-pill" onclick="goTo('cap5')">
+          <div class="pill-num">05</div>
+          <div class="pill-title">El tiempo que se evapora</div>
+        </div>
+        <div class="chapter-pill" onclick="goTo('cap6')">
+          <div class="pill-num">06</div>
+          <div class="pill-title">Ver como un flujo</div>
+        </div>
+        <div class="chapter-pill" onclick="goTo('cap7')">
+          <div class="pill-num">07</div>
+          <div class="pill-title">Por dónde empezar</div>
+        </div>
+        <div class="chapter-pill" onclick="goTo('cierre')">
+          <div class="pill-num">→</div>
+          <div class="pill-title">Su plan puede cumplirse</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APERTURA -->
+  <section id="apertura" class="chapter">
+    <div class="ch-eyebrow">Apertura</div>
+    <div class="ch-title">Esto le suena</div>
+    <div class="ch-title-italic">familiar.</div>
+    <div class="ch-rule"></div>
+
+    <p class="lead">Usted tiene un plan estratégico. Está bien construido. Tiene objetivos claros, responsables definidos, fechas concretas. Lo presentó al directorio con convicción. Y cuando lo presentó, creyó en él.</p>
+
+    <p class="body-text">Eso fue hace doce, dieciocho, quizás veinticuatro meses.</p>
+    <p class="body-text">Hoy ese plan sigue siendo correcto. El problema es que las fechas ya no lo son.</p>
+    <p class="body-text">El primer proyecto se atrasó porque el área de tecnología estaba ocupada con otras prioridades. El segundo porque el líder del proyecto tuvo que apagar un incendio operativo que nadie vio venir. El tercero porque dependía del segundo. Y así, uno por uno, los hitos del plan se fueron corriendo hacia adelante. Tres meses. Luego seis. Luego ya perdió la cuenta.</p>
+    <p class="body-text">Usted convoca reuniones de seguimiento. Las reuniones producen compromisos. Los compromisos producen nuevas fechas. Las nuevas fechas también se incumplen.</p>
+    <p class="body-text">Entonces viene la pregunta que no se hace en voz alta pero que aparece en algún momento de la semana, generalmente un viernes por la tarde: <em>¿es mi gente? ¿Es la cultura? ¿Es que estamos tratando de hacer demasiado al mismo tiempo?</em></p>
+    <p class="body-text">Usted mira hacia adentro. Ve personas que trabajan duro. Ve reuniones, reportes, presentaciones, entregas parciales. Actividad por todas partes. Y aun así, cuando mira el plan estratégico y compara las fechas originales con las actuales, la brecha sigue ahí. Creciendo despacio, pero creciendo.</p>
+    <p class="body-text"><strong>No es que su empresa no ejecute. Es que ejecuta sin avanzar.</strong></p>
+    <p class="body-text">Hay algo en el fondo que no está funcionando, y usted lo siente aunque todavía no pueda nombrarlo con precisión. No es un problema de voluntad. No es un problema de talento. Hay algo en la forma en que están organizados los proyectos, en cómo se asignan los recursos, en cómo se mide el avance, que hace que el resultado sea casi siempre el mismo: más esfuerzo, menos velocidad de la esperada.</p>
+    <p class="body-text">Esta guía no le va a explicar una teoría. Le va a mostrar el mecanismo exacto que produce ese resultado. Y una vez que lo vea, no va a poder verlo de otra forma.</p>
+
+    <div class="pull-quote">
+      <p>¿Por qué proyectos con muy buenos líderes, equipos comprometidos y planes sólidos siguen llegando tarde, <em>una y otra vez?</em></p>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('cover')">← Portada</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cap1')">Capítulo 1 →</button>
+    </div>
+  </section>
+
+  <!-- CAP 1 -->
+  <section id="cap1" class="chapter">
+    <div class="ch-eyebrow">Capítulo 1</div>
+    <div class="ch-title">El plan era bueno.</div>
+    <div class="ch-title-italic">¿Entonces qué pasó?</div>
+    <div class="ch-rule"></div>
+
+    <p class="lead">Usted no desplazó el plan por falta de compromiso. Lo desplazó porque hizo lo que cualquier líder razonable haría frente a proyectos que se atrasan: presionó más, pidió más reportes, convocó más reuniones de seguimiento.</p>
+    <p class="body-text">Y aun así, los proyectos siguieron llegando tarde.</p>
+    <p class="body-text">Eso no es una falla de liderazgo. Es una falla de diagnóstico.</p>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 580 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <text x="0" y="20" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1">PLAN ORIGINAL</text>
+        <line x1="0" y1="40" x2="480" y2="40" stroke="#d4cfc7" stroke-width="2"/>
+        <circle cx="120" cy="40" r="5" fill="#6b6560"/>
+        <circle cx="240" cy="40" r="5" fill="#6b6560"/>
+        <circle cx="360" cy="40" r="5" fill="#6b6560"/>
+        <circle cx="480" cy="40" r="5" fill="#6b6560"/>
+        <line x1="480" y1="40" x2="480" y2="90" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="488" y="68" font-family="'DM Sans',sans-serif" font-size="11" fill="#c0392b">+6 meses</text>
+        <text x="0" y="110" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" font-weight="500" letter-spacing="1">REALIDAD HOY</text>
+        <line x1="0" y1="130" x2="340" y2="130" stroke="#c0392b" stroke-width="2.5"/>
+        <circle cx="120" cy="130" r="5" fill="#c0392b"/>
+        <circle cx="240" cy="130" r="5" fill="#c0392b"/>
+        <line x1="340" y1="130" x2="540" y2="130" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.4"/>
+        <text x="0" y="170" font-family="'DM Sans',sans-serif" font-size="11" fill="#6b6560" font-style="italic">El plan no cambió. Las fechas, sí.</text>
+      </svg>
+    </div>
+
+    <div class="sec-title">La respuesta obvia al atraso es la respuesta equivocada</div>
+    <p class="body-text">Cuando un proyecto se atrasa, la lógica natural dice: hay que acelerar. Más presión, más control, más seguimiento. El equipo trabaja más horas. Las reuniones de avance se vuelven semanales, luego bisemanal, luego diarias. El gerente del proyecto pasa más tiempo reportando que ejecutando.</p>
+    <p class="body-text">¿El resultado? El proyecto igual llega tarde. Solo que ahora todos están agotados.</p>
+    <p class="body-text">Lo que nadie se detiene a preguntarse es por qué ese ciclo se repite. No con un proyecto. Con todos. No con un equipo. Con todos los equipos. No en una empresa. En casi todas las empresas medianas del continente.</p>
+    <p class="body-text"><strong>Cuando algo falla de manera tan consistente y tan universal, la causa no puede ser la gente. La causa tiene que estar en el sistema.</strong></p>
+
+    <div class="sec-title">El problema no es la velocidad. Es cómo están organizados los proyectos</div>
+    <p class="body-text">Piense en el último proyecto estratégico que se atrasó en su empresa. ¿Las personas que trabajaron en ese proyecto eran incompetentes, o estaban haciendo lo mejor posible dentro de las condiciones que tenían?</p>
+    <p class="body-text">La respuesta casi siempre es lo segundo. El líder del proyecto tenía buena voluntad pero no tenía autoridad sobre las áreas que necesitaba. El área de tecnología estaba atendiendo tres proyectos al mismo tiempo. El área jurídica recibía solicitudes de todos lados sin saber cuál era la prioridad real. Cada tarea dependía de otra tarea que dependía de otra persona que dependía de otra área.</p>
+    <p class="body-text">Nadie falló. El sistema produjo el resultado para el que estaba diseñado.</p>
+
+    <div class="pull-quote">
+      <p>Los mismos proyectos, con las mismas personas, terminan en <em>la mitad del tiempo</em> cuando se cambia el sistema.</p>
+    </div>
+
+    <div class="sec-title">Cuarenta años del mismo resultado</div>
+    <p class="body-text">La administración de proyectos como disciplina existe desde hace décadas. Ha producido certificaciones, metodologías, software, libros y consultores. Y sin embargo, los estudios globales muestran el mismo resultado año tras año: la mayoría de los proyectos estratégicos termina tarde, fuera de presupuesto, o con un alcance reducido respecto al original.</p>
+    <p class="body-text">El defecto está en el supuesto sobre el que se construye todo: que si cada tarea del proyecto termina a tiempo, el proyecto completo termina a tiempo. Ese supuesto parece razonable. Es también completamente falso.</p>
+    <p class="body-text">Un proyecto no es una lista de tareas independientes. Es una cadena de dependencias donde el atraso en cualquier punto se propaga hacia adelante, pero las ganancias de tiempo casi nunca llegan. El resultado neto, inevitablemente, es un proyecto que llega tarde.</p>
+
+    <div class="sec-title">Una empresa que ya lo vivió</div>
+    <p class="body-text">Una empresa de servicios financieros en México llevaba tres años con un plan de transformación tecnológica. Cada año, el plan se desplazaba. Cada año, la explicación era diferente. El CEO sentía que algo más profundo estaba fallando pero no podía nombrarlo.</p>
+    <p class="body-text">Lo que encontraron cuando revisaron el sistema no fue falta de compromiso. Encontraron que el área de tecnología estaba asignada simultáneamente a once iniciativas distintas. Once. Cada gerente de proyecto la necesitaba. Ninguno tenía claridad sobre cuál era la prioridad real.</p>
+    <p class="body-text"><strong>El plan era bueno. El sistema lo estaba ahogando.</strong></p>
+
+    <div class="reflexion">
+      <div class="reflexion-label">Reflexión para esta semana</div>
+      <p>Piense en el proyecto estratégico más importante de su empresa hoy. ¿Cuántas veces tuvo que desplazar su fecha de cierre en el último año? Y cada vez que se desplazó, ¿qué explicación recibió? ¿Fueron explicaciones distintas o, en el fondo, era siempre la misma historia con personajes diferentes?</p>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('apertura')">← Apertura</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cap2')">Capítulo 2 →</button>
+    </div>
+  </section>
+
+  <!-- CAP 2 -->
+  <section id="cap2" class="chapter">
+    <div class="ch-eyebrow">Capítulo 2</div>
+    <div class="ch-title">No es su gente.</div>
+    <div class="ch-title-italic">Es el sistema.</div>
+    <div class="ch-rule"></div>
+
+    <p class="lead">Usted tiene dos o tres personas en su empresa de las que puede depender cuando hay que sacar un proyecto adelante. Ya sabe quiénes son. Y cuando esas iniciativas se atrasan, una parte de usted se pregunta si son tan buenas como pensaba.</p>
+    <p class="body-text">Esa pregunta es comprensible. Y casi siempre está mal formulada.</p>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <text x="80" y="20" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1" text-anchor="middle">SISTEMA ROTO</text>
+        <rect x="10" y="35" width="70" height="24" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="45" y="51" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proy A</text>
+        <rect x="10" y="80" width="70" height="24" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="45" y="96" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proy B</text>
+        <rect x="10" y="125" width="70" height="24" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="45" y="141" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proy C</text>
+        <circle cx="170" cy="95" r="28" fill="#1a1715"/>
+        <text x="170" y="91" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle">Camilo</text>
+        <text x="170" y="104" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8480" text-anchor="middle">saturado</text>
+        <line x1="80" y1="47" x2="142" y2="85" stroke="#c0392b" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+        <line x1="80" y1="92" x2="142" y2="95" stroke="#c0392b" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+        <line x1="80" y1="137" x2="142" y2="105" stroke="#c0392b" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+        <text x="170" y="175" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle" font-style="italic">Todos los proyectos se atrasan</text>
+
+        <line x1="250" y1="10" x2="250" y2="190" stroke="#d4cfc7" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <text x="430" y="20" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1" text-anchor="middle">SISTEMA BIEN DISEÑADO</text>
+        <rect x="310" y="80" width="70" height="24" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="345" y="96" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proy A</text>
+        <circle cx="440" cy="92" r="28" fill="#0f0f0f"/>
+        <text x="440" y="88" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle">Camilo</text>
+        <text x="440" y="101" font-family="'DM Sans',sans-serif" font-size="9" fill="#8a8480" text-anchor="middle">enfocado</text>
+        <line x1="380" y1="92" x2="412" y2="92" stroke="#0f0f0f" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="430" y="170" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle" font-style="italic">El proyecto termina a tiempo</text>
+        <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0f0f0f"/></marker></defs>
+      </svg>
+    </div>
+
+    <div class="sec-title">El diagnóstico más costoso del mundo empresarial</div>
+    <p class="body-text">Existe una creencia muy extendida en la alta dirección latinoamericana: los proyectos que funcionan tienen buenos líderes, y los que no funcionan tienen líderes que todavía no están al nivel. La consecuencia lógica es predecible: capacitación, rotación, o ambas.</p>
+    <p class="body-text">Las empresas invierten en certificaciones de gestión de proyectos. Contratan a alguien con más experiencia. Reorganizan el equipo. Y unos meses después, los proyectos siguen llegando tarde. No porque las personas hayan fallado. Sino porque el diagnóstico estaba equivocado desde el principio.</p>
+
+    <div class="sec-title">El experimento mental que lo cambia todo</div>
+    <p class="body-text">Tome a uno de sus mejores líderes. Alguien organizado, comprometido, con experiencia. Ahora asígnele diez proyectos simultáneos, donde cada uno depende del tiempo de las mismas dos o tres áreas de soporte. Dígale que tiene autoridad sobre los resultados pero no sobre las personas. Mídalo por el cumplimiento de cada tarea individual. Y espere.</p>
+    <p class="body-text">Ese líder va a fallar. No por falta de capacidad. Sino porque el sistema en el que opera lo pone a fallar antes de que empiece.</p>
+
+    <div class="sec-title">El gerente que nunca tuvo oportunidad de ganar</div>
+    <p class="body-text">Imagínese a Camilo. Gerente de proyectos en una empresa de servicios financieros en Bogotá. Profesional serio, con maestría en gestión de proyectos, diez años de experiencia. Tiene a su cargo cuatro iniciativas estratégicas del plan de transformación.</p>
+    <p class="body-text">Todos esos proyectos comparten las mismas personas: el área de tecnología, el área jurídica y el área de operaciones. Camilo no tiene autoridad formal sobre ninguna de esas áreas. Cada vez que necesita algo de ellas, tiene que negociar, insistir, esperar.</p>
+    <p class="body-text">Camilo trabaja doce horas al día. Está en todas las reuniones. Genera reportes impecables. Y aun así, los cuatro proyectos se atrasan. <strong>El fracaso estaba garantizado desde el diseño, no desde la ejecución.</strong></p>
+
+    <div class="sec-title">Lo que cambia cuando cambia el sistema</div>
+    <p class="body-text">Goldratt demostró repetidamente algo que sigue siendo igual de efectivo hoy: tome un conjunto de proyectos que están atrasados. No cambie las personas. Solo reorganice el sistema: reduzca el número de proyectos que corren en paralelo con los mismos recursos, establezca reglas claras de prioridad, y cambie la forma en que se mide el avance.</p>
+    <p class="body-text">El resultado, documentado en empresas reales, es siempre el mismo: los mismos proyectos, con las mismas personas, terminan significativamente más rápido. No porque la gente de repente se vuelva más capaz. Sino porque el sistema dejó de ponerla a fallar.</p>
+
+    <div class="reflexion">
+      <div class="reflexion-label">Reflexión para esta semana</div>
+      <p>Piense en el líder de proyecto que más lo ha decepcionado en el último año. Antes de llegar a una conclusión sobre esa persona, respóndase: ¿cuántos proyectos activos tenía asignados al mismo tiempo? ¿Tenía claridad sobre cuál era la prioridad real cuando surgía un conflicto de recursos? Si las respuestas no le gustan, el problema probablemente no era la persona.</p>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('cap1')">← Capítulo 1</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cap3')">Capítulo 3 →</button>
+    </div>
+  </section>
+
+  <!-- CAP 3 -->
+  <section id="cap3" class="chapter">
+    <div class="ch-eyebrow">Capítulo 3</div>
+    <div class="ch-title">Por qué sus áreas</div>
+    <div class="ch-title-italic">no se ponen de acuerdo.</div>
+    <div class="ch-rule"></div>
+
+    <p class="lead">Usted ha tenido esa reunión. Están el gerente de proyectos, el jefe de tecnología, el director de operaciones y alguien de jurídica. El proyecto no avanza. Y en algún momento queda claro que el problema no es técnico. Es que nadie quiere ceder.</p>
+    <p class="body-text">Cada área defiende su agenda. Cada uno tiene razones válidas. Y usted sale con la misma sensación de siempre: su equipo no sabe trabajar en equipo.</p>
+    <p class="body-text">Pero ¿y si el problema no fuera la actitud de su gente?</p>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <text x="290" y="18" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1" text-anchor="middle">RECURSOS COMPARTIDOS SIN REGLAS DE PRIORIDAD</text>
+        <rect x="10" y="35" width="70" height="22" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="45" y="50" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proyecto A</text>
+        <rect x="10" y="80" width="70" height="22" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="45" y="95" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proyecto B</text>
+        <rect x="10" y="125" width="70" height="22" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="45" y="140" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proyecto C</text>
+        <rect x="245" y="40" width="90" height="26" rx="3" fill="#1a1715"/>
+        <text x="290" y="57" font-family="'DM Sans',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle">Tecnología</text>
+        <rect x="245" y="87" width="90" height="26" rx="3" fill="#2a2520"/>
+        <text x="290" y="104" font-family="'DM Sans',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle">Jurídica</text>
+        <rect x="245" y="134" width="90" height="26" rx="3" fill="#2a2520"/>
+        <text x="290" y="151" font-family="'DM Sans',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle">Operaciones</text>
+        <rect x="500" y="35" width="70" height="22" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="535" y="50" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proyecto D</text>
+        <rect x="500" y="80" width="70" height="22" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="535" y="95" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proyecto E</text>
+        <rect x="500" y="125" width="70" height="22" rx="3" fill="#f0e8e7" stroke="#c0392b" stroke-width="1"/>
+        <text x="535" y="140" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle">Proyecto F</text>
+        <line x1="80" y1="46" x2="245" y2="53" stroke="#c0392b" stroke-width="1" opacity="0.5"/>
+        <line x1="80" y1="91" x2="245" y2="53" stroke="#c0392b" stroke-width="1" opacity="0.5"/>
+        <line x1="80" y1="136" x2="245" y2="100" stroke="#c0392b" stroke-width="1" opacity="0.5"/>
+        <line x1="80" y1="46" x2="245" y2="100" stroke="#c0392b" stroke-width="1" opacity="0.3"/>
+        <line x1="80" y1="91" x2="245" y2="147" stroke="#c0392b" stroke-width="1" opacity="0.3"/>
+        <line x1="335" y1="53" x2="500" y2="46" stroke="#c0392b" stroke-width="1" opacity="0.5"/>
+        <line x1="335" y1="100" x2="500" y2="91" stroke="#c0392b" stroke-width="1" opacity="0.5"/>
+        <line x1="335" y1="147" x2="500" y2="136" stroke="#c0392b" stroke-width="1" opacity="0.5"/>
+        <line x1="335" y1="53" x2="500" y2="136" stroke="#c0392b" stroke-width="1" opacity="0.3"/>
+        <line x1="335" y1="147" x2="500" y2="46" stroke="#c0392b" stroke-width="1" opacity="0.3"/>
+        <text x="290" y="192" font-family="'DM Sans',sans-serif" font-size="11" fill="#6b6560" text-anchor="middle" font-style="italic">El conflicto no es cultural. Es matemático.</text>
+      </svg>
+    </div>
+
+    <div class="sec-title">El diagnóstico que cuesta más caro</div>
+    <p class="body-text">La respuesta más común frente a la fricción entre áreas es invertir en cultura. Talleres de trabajo en equipo, programas de liderazgo, dinámicas de confianza. Intervenciones que, con frecuencia, producen mejoras que duran exactamente lo que dura el entusiasmo del taller.</p>
+    <p class="body-text">La fricción entre áreas no es, en la mayoría de los casos, un problema de cultura. Es un problema de estructura. Atacar la cultura cuando la raíz es estructural es como tomar analgésicos para una fractura: alivia el síntoma por un rato, pero el hueso sigue roto.</p>
+
+    <div class="sec-title">Por qué el conflicto es inevitable con múltiples proyectos</div>
+    <p class="body-text">Una empresa mediana tiene seis proyectos estratégicos corriendo en paralelo. Todos fueron aprobados por la dirección. Todos son importantes. Y el área de tecnología tiene capacidad real para atender con profundidad uno o dos proyectos a la vez.</p>
+    <p class="body-text">Los seis gerentes de proyecto lo saben. Y los seis también saben que si no presionan, su proyecto queda al final de la cola. El jefe del área de tecnología hace malabares. Atiende al que más grita. Promete avances que no puede cumplir. Al final de la semana tiene seis gerentes insatisfechos.</p>
+    <p class="body-text"><strong>Esto no es un problema de voluntad ni de habilidades interpersonales. Es un problema de diseño.</strong> La empresa creó una situación en la que el conflicto es la única salida posible para todos los involucrados.</p>
+
+    <div class="sec-title">La solución no es mejorar las relaciones. Es eliminar la contención.</div>
+    <p class="body-text">La primera implicación es reducir el número de proyectos que compiten por los mismos recursos al mismo tiempo. No cancelarlos, sino escalonarlos. Un proyecto que empieza después pero tiene los recursos que necesita cuando los necesita termina mucho antes que uno que arranca hoy pero comparte recursos con otros cinco.</p>
+    <p class="body-text">La segunda es establecer prioridades explícitas. No como un ranking en un documento que nadie consulta, sino como un mecanismo operativo que le diga al jefe del área, en este momento concreto, qué proyecto atender primero. Cuando esa claridad existe, el conflicto tiene un árbitro. Y un árbitro es todo lo que se necesita para que los malabares se conviertan en foco.</p>
+
+    <div class="reflexion">
+      <div class="reflexion-label">Reflexión para esta semana</div>
+      <p>Identifique las dos o tres áreas de su empresa que aparecen como recurso crítico en la mayoría de sus proyectos estratégicos. Cuente cuántos proyectos activos demandan su tiempo simultáneamente. Si ese número es mayor que dos, tiene la respuesta a por qué sus áreas no se ponen de acuerdo.</p>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('cap2')">← Capítulo 2</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cap4')">Capítulo 4 →</button>
+    </div>
+  </section>
+
+  <!-- CAP 4 -->
+  <section id="cap4" class="chapter">
+    <div class="ch-eyebrow">Capítulo 4</div>
+    <div class="ch-title">La trampa invisible:</div>
+    <div class="ch-title-italic">todos ocupados, nada avanza.</div>
+    <div class="ch-rule"></div>
+
+    <p class="lead">Hay una imagen que se repite en muchas empresas medianas de la región. Es el tablero de proyectos: decenas de tareas en amarillo o verde, avances del 60%, del 75%, del 82%. Gente ocupada. Y sin embargo, el proyecto que debía entregarse en marzo sigue proyectándose para julio.</p>
+    <p class="body-text">Nadie está quieto, pero nada llega. ¿Qué está pasando?</p>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <text x="120" y="18" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1" text-anchor="middle">MULTITAREA</text>
+        <text x="440" y="18" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1" text-anchor="middle">FOCO SECUENCIAL</text>
+        <line x1="280" y1="10" x2="280" y2="200" stroke="#d4cfc7" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="10" y="48" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560">Proy A</text>
+        <rect x="55" y="35" width="30" height="14" rx="2" fill="#c0392b" opacity="0.8"/>
+        <rect x="95" y="35" width="20" height="14" rx="2" fill="#c0392b" opacity="0.5"/>
+        <rect x="125" y="35" width="30" height="14" rx="2" fill="#c0392b" opacity="0.8"/>
+        <rect x="165" y="35" width="20" height="14" rx="2" fill="#c0392b" opacity="0.5"/>
+        <rect x="195" y="35" width="30" height="14" rx="2" fill="#c0392b" opacity="0.8"/>
+        <text x="10" y="80" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560">Proy B</text>
+        <rect x="70" y="67" width="20" height="14" rx="2" fill="#c0392b" opacity="0.5"/>
+        <rect x="100" y="67" width="30" height="14" rx="2" fill="#c0392b" opacity="0.8"/>
+        <rect x="145" y="67" width="20" height="14" rx="2" fill="#c0392b" opacity="0.5"/>
+        <rect x="180" y="67" width="30" height="14" rx="2" fill="#c0392b" opacity="0.8"/>
+        <text x="10" y="113" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560">Proy C</text>
+        <rect x="55" y="100" width="25" height="14" rx="2" fill="#c0392b" opacity="0.3"/>
+        <rect x="90" y="100" width="25" height="14" rx="2" fill="#c0392b" opacity="0.3"/>
+        <rect x="130" y="100" width="25" height="14" rx="2" fill="#c0392b" opacity="0.3"/>
+        <rect x="165" y="100" width="25" height="14" rx="2" fill="#c0392b" opacity="0.3"/>
+        <line x1="55" y1="130" x2="240" y2="130" stroke="#d4cfc7" stroke-width="1"/>
+        <text x="120" y="148" font-family="'DM Sans',sans-serif" font-size="11" fill="#6b6560" text-anchor="middle">14 meses</text>
+
+        <text x="310" y="48" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560">Proy A</text>
+        <rect x="355" y="35" width="90" height="14" rx="2" fill="#0f0f0f"/>
+        <text x="400" y="47" font-family="'DM Sans',sans-serif" font-size="9" fill="#f5f0e8" text-anchor="middle">✓ terminado</text>
+        <text x="310" y="80" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560">Proy B</text>
+        <rect x="355" y="67" width="90" height="14" rx="2" fill="#0f0f0f"/>
+        <text x="400" y="79" font-family="'DM Sans',sans-serif" font-size="9" fill="#f5f0e8" text-anchor="middle">✓ terminado</text>
+        <text x="310" y="113" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560">Proy C</text>
+        <rect x="355" y="100" width="90" height="14" rx="2" fill="#0f0f0f"/>
+        <text x="400" y="112" font-family="'DM Sans',sans-serif" font-size="9" fill="#f5f0e8" text-anchor="middle">✓ terminado</text>
+        <line x1="355" y1="130" x2="450" y2="130" stroke="#d4cfc7" stroke-width="1"/>
+        <text x="402" y="148" font-family="'DM Sans',sans-serif" font-size="11" fill="#6b6560" text-anchor="middle">7 semanas</text>
+        <text x="290" y="185" font-family="'DM Sans',sans-serif" font-size="11" fill="#6b6560" text-anchor="middle" font-style="italic">El mismo equipo. El mismo esfuerzo. La mitad del tiempo.</text>
+      </svg>
+    </div>
+
+    <div class="sec-title">Lo que realmente ocurre cuando alguien trabaja en tres proyectos a la vez</div>
+    <p class="body-text">Tome a uno de sus recursos clave. Esa persona tiene asignaciones en cuatro proyectos simultáneos. Trabaja ocho horas al día. Nunca para. En el papel, parece que cada proyecto recibe su atención. En la práctica, lo que recibe cada proyecto es una atención interrumpida, fragmentada y constantemente reiniciada.</p>
+    <p class="body-text">El peor problema es que el tiempo entre el momento en que esa persona empieza a trabajar en una tarea y el momento en que la termina se vuelve dramáticamente más largo que el tiempo que realmente le dedica. La persona puede haber invertido dos semanas reales de trabajo en una tarea que tardó cuatro meses en completarse.</p>
+    <p class="body-text">Multiplique ese efecto por todas las tareas del proyecto. Ese es el origen de sus fechas que no se cumplen.</p>
+
+    <div class="sec-title">La ilusión de los proyectos en curso</div>
+    <p class="body-text">Hay un indicador que la mayoría de los CEOs miran con satisfacción y que en realidad debería generarles alarma: el número de proyectos activos. Más proyectos activos no significa más capacidad de ejecución. Generalmente significa lo contrario.</p>
+    <p class="body-text">Goldratt lo describió con una imagen simple: si quiere que varios elefantes pasen por una puerta, no los meta a todos al mismo tiempo. Si los hace pasar uno detrás del otro, no solo el primero pasa más rápido. El último también llega antes que si hubieran intentado entrar todos a la vez.</p>
+    <p class="body-text"><strong>La velocidad no la genera el número de proyectos que inician. La genera el número de proyectos que terminan.</strong></p>
+
+    <div class="stat-block">
+      <div class="stat-num">×9</div>
+      <div class="stat-desc">más proyectos terminados con el mismo equipo, después de reducir los proyectos activos simultáneos. Resultado documentado en empresa de tecnología.</div>
+    </div>
+
+    <div class="reflexion">
+      <div class="reflexion-label">Reflexión para esta semana</div>
+      <p>Elija a una persona verdaderamente clave de su organización. Cuente cuántos proyectos activos tiene asignados hoy. Si ese número es mayor que dos, tiene frente a usted la explicación más honesta de por qué sus proyectos no terminan a tiempo.</p>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('cap3')">← Capítulo 3</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cap5')">Capítulo 5 →</button>
+    </div>
+  </section>
+
+  <!-- CAP 5 -->
+  <section id="cap5" class="chapter">
+    <div class="ch-eyebrow">Capítulo 5</div>
+    <div class="ch-title">El tiempo que se evapora</div>
+    <div class="ch-title-italic">aunque lo planeen bien.</div>
+    <div class="ch-rule"></div>
+
+    <p class="body-text">El gerente de proyectos entra a su oficina con un cronograma bien armado. El plan se ve sólido. Usted lo revisa, lo aprueba, y piensa: <em>esta vez sí.</em></p>
+    <p class="body-text">Tres meses después, el proyecto llega tarde. No por falta de planeación. No por imprevistos extraordinarios. El cronograma tenía seguridad de sobra. Y aun así, no alcanzó. Esto no es mala suerte. Es física.</p>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 580 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <text x="115" y="18" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1" text-anchor="middle">SEGURIDAD DISPERSA</text>
+        <text x="410" y="18" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" font-weight="500" letter-spacing="1" text-anchor="middle">BUFFER CONCENTRADO (TOC)</text>
+        <line x1="260" y1="10" x2="260" y2="190" stroke="#d4cfc7" stroke-width="1" stroke-dasharray="4,3"/>
+        <rect x="10" y="35" width="35" height="20" rx="2" fill="#d4cfc7"/>
+        <rect x="55" y="35" width="25" height="20" rx="2" fill="#c0392b" opacity="0.3"/>
+        <rect x="90" y="35" width="35" height="20" rx="2" fill="#d4cfc7"/>
+        <rect x="135" y="35" width="20" height="20" rx="2" fill="#c0392b" opacity="0.3"/>
+        <rect x="165" y="35" width="35" height="20" rx="2" fill="#d4cfc7"/>
+        <rect x="210" y="35" width="25" height="20" rx="2" fill="#c0392b" opacity="0.3"/>
+        <text x="30" y="72" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">Trabajo</text>
+        <text x="90" y="72" font-family="'DM Sans',sans-serif" font-size="9" fill="#c0392b" text-anchor="middle">Colchón</text>
+        <text x="115" y="95" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle">Ley de Parkinson +</text>
+        <text x="115" y="110" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle">síndrome del estudiante</text>
+        <text x="115" y="135" font-family="'DM Sans',sans-serif" font-size="10" fill="#c0392b" text-anchor="middle" font-weight="500">+65% probabilidad de llegar tarde</text>
+        <rect x="285" y="35" width="120" height="20" rx="2" fill="#d4cfc7"/>
+        <rect x="415" y="35" width="50" height="20" rx="2" fill="#c0392b"/>
+        <text x="465" y="30" font-family="'DM Sans',sans-serif" font-size="9" fill="#c0392b" text-anchor="middle">Buffer</text>
+        <text x="345" y="72" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">Trabajo (reducido)</text>
+        <text x="440" y="72" font-family="'DM Sans',sans-serif" font-size="9" fill="#c0392b" text-anchor="middle">Buffer</text>
+        <text x="405" y="100" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle">Ganancias y retrasos se</text>
+        <text x="405" y="115" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle">compensan en fondo común</text>
+        <text x="405" y="140" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle" font-weight="500">Protección real con la mitad del tiempo</text>
+        <text x="290" y="178" font-family="'DM Sans',sans-serif" font-size="11" fill="#6b6560" font-style="italic">No hay que agregar más colchón. Hay que moverlo.</text>
+      </svg>
+    </div>
+
+    <div class="sec-title">El colchón que desaparece</div>
+    <p class="body-text">Cuando una empresa planea mal, el remedio instintivo es siempre el mismo: agregar más tiempo a cada tarea. Distribuimos seguridad en cada paso del proyecto, como quien pone cojines en cada escalón de una escalera. La lógica parece impecable. El problema es que esa seguridad tiene una vida muy corta.</p>
+    <p class="body-text">Hay dos fuerzas que la consumen. La primera es la <strong>Ley de Parkinson</strong>: el trabajo se expande para llenar el tiempo disponible. Si una persona sabe que tiene tres semanas para algo que podría hacerse en una, encontrará la manera de ocupar esas tres semanas.</p>
+    <p class="body-text">La segunda es el <strong>síndrome del estudiante</strong>: cuando hay tiempo de sobra, la gente no empieza. Es racional. Es humano. Y destruye sistemáticamente cualquier reserva de tiempo.</p>
+    <p class="body-text">Y hay una tercera fuerza, quizás la más cruel: <strong>las ganancias no se acumulan, pero los retrasos sí.</strong> Cuando una tarea termina antes, la siguiente casi nunca arranca antes. La ganancia se evapora. Cuando una tarea termina tarde, el retraso se transfiere completo.</p>
+
+    <div class="sec-title">La solución no es agregar más colchón. Es moverlo.</div>
+    <p class="body-text">La seguridad debe salir de cada tarea individual y concentrarse en un único lugar: al final del proyecto. En TOC esto se llama <strong>Buffer de Terminación</strong>. No es holgura dispersa. Es una reserva estratégica que protege la fecha de entrega del proyecto completo, en el único momento en que realmente importa.</p>
+    <p class="body-text">Cuando la seguridad ya no está en cada tarea, la Ley de Parkinson no tiene dónde actuar. El síndrome del estudiante pierde su combustible. Y las ganancias de tiempo dejan de evaporarse: hay un mecanismo explícito para que, cuando una tarea termina antes, la siguiente arranque antes.</p>
+    <p class="body-text">Goldratt demostró que al concentrar la seguridad en el Buffer de Terminación se necesita solo la mitad de la seguridad total, y aun así el proyecto tiene protección mucho mayor. La razón es estadística: cuando las ganancias y los retrasos pueden compensarse en un fondo común, el efecto de la variabilidad se amortigua.</p>
+
+    <div class="reflexion">
+      <div class="reflexion-label">Reflexión para esta semana</div>
+      <p>Piense en el último proyecto estratégico que llegó tarde en su empresa. ¿Las tareas individuales llegaron más o menos a tiempo? ¿O el retraso apareció al final, cuando todas las partes se tuvieron que integrar? Si el retraso se concentró al final, acaba de confirmar exactamente lo que este capítulo describe.</p>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('cap4')">← Capítulo 4</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cap6')">Capítulo 6 →</button>
+    </div>
+  </section>
+
+  <!-- CAP 6 -->
+  <section id="cap6" class="chapter">
+    <div class="ch-eyebrow">Capítulo 6</div>
+    <div class="ch-title">Ver el proyecto como un flujo,</div>
+    <div class="ch-title-italic">no como una lista de tareas.</div>
+    <div class="ch-rule"></div>
+
+    <p class="lead">El gerente de proyecto presenta el avance. Las diapositivas muestran barras de progreso. El 70% de las tareas están completadas, muchas marcadas en verde. La reunión termina con sensación de control.</p>
+    <p class="body-text">Dos semanas después, el proyecto llega tarde. Porque el 70% de las tareas completadas no dice absolutamente nada sobre cuándo va a terminar el proyecto.</p>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <text x="10" y="18" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1">CADENA CRÍTICA</text>
+        <rect x="10" y="30" width="70" height="24" rx="3" fill="#1a1715"/>
+        <text x="45" y="46" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle">Tarea 1</text>
+        <line x1="80" y1="42" x2="105" y2="42" stroke="#0f0f0f" stroke-width="2"/>
+        <rect x="105" y="30" width="70" height="24" rx="3" fill="#1a1715"/>
+        <text x="140" y="46" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle">Tarea 2</text>
+        <line x1="175" y1="42" x2="200" y2="42" stroke="#0f0f0f" stroke-width="2"/>
+        <rect x="200" y="30" width="70" height="24" rx="3" fill="#1a1715"/>
+        <text x="235" y="46" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle">Tarea 3</text>
+        <line x1="270" y1="42" x2="295" y2="42" stroke="#0f0f0f" stroke-width="2"/>
+        <rect x="295" y="30" width="70" height="24" rx="3" fill="#2a2520"/>
+        <text x="330" y="46" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle">Tarea 4</text>
+        <line x1="365" y1="42" x2="390" y2="42" stroke="#0f0f0f" stroke-width="2"/>
+        <rect x="390" y="30" width="70" height="24" rx="3" fill="#2a2520"/>
+        <text x="425" y="46" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle">Tarea 5</text>
+        <line x1="460" y1="42" x2="485" y2="42" stroke="#0f0f0f" stroke-width="2"/>
+        <rect x="485" y="30" width="75" height="24" rx="3" fill="#c0392b"/>
+        <text x="522" y="46" font-family="'DM Sans',sans-serif" font-size="10" fill="#f5f0e8" text-anchor="middle">Buffer ▓</text>
+        <line x1="140" y1="54" x2="140" y2="75" stroke="#6b6560" stroke-width="1" stroke-dasharray="3,2"/>
+        <rect x="100" y="75" width="80" height="20" rx="2" fill="#f0ece4" stroke="#d4cfc7" stroke-width="1"/>
+        <text x="140" y="89" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">Tarea sec.</text>
+        <line x1="235" y1="54" x2="235" y2="75" stroke="#6b6560" stroke-width="1" stroke-dasharray="3,2"/>
+        <rect x="195" y="75" width="80" height="20" rx="2" fill="#f0ece4" stroke="#d4cfc7" stroke-width="1"/>
+        <text x="235" y="89" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">B. Aliment.</text>
+
+        <text x="10" y="125" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" font-weight="500" letter-spacing="1">LOS TRES MEDIDORES</text>
+        <rect x="10" y="138" width="165" height="48" rx="4" fill="#f8f5ef" stroke="#d4cfc7" stroke-width="1"/>
+        <text x="92" y="158" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle" font-weight="500">% Cadena Crítica</text>
+        <text x="92" y="173" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">Cuánto del camino real se recorrió</text>
+        <rect x="200" y="138" width="165" height="48" rx="4" fill="#f8f5ef" stroke="#d4cfc7" stroke-width="1"/>
+        <text x="282" y="155" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle" font-weight="500">% Buffer consumido</text>
+        <circle cx="265" cy="170" r="7" fill="#4caf50"/>
+        <circle cx="282" cy="170" r="7" fill="#ff9800"/>
+        <circle cx="299" cy="170" r="7" fill="#c0392b"/>
+        <rect x="390" y="138" width="165" height="48" rx="4" fill="#f8f5ef" stroke="#d4cfc7" stroke-width="1"/>
+        <text x="472" y="158" font-family="'DM Sans',sans-serif" font-size="10" fill="#6b6560" text-anchor="middle" font-weight="500">Velocidad de consumo</text>
+        <text x="472" y="173" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">¿El buffer se recupera o se agota?</text>
+        <text x="290" y="200" font-family="'DM Sans',sans-serif" font-size="11" fill="#6b6560" text-anchor="middle" font-style="italic">Tres números. Toda la información que necesita para actuar.</text>
+      </svg>
+    </div>
+
+    <div class="sec-title">La única cadena que importa</div>
+    <p class="body-text">En cualquier proyecto existe una realidad que la mayoría de los sistemas de seguimiento ignoran: hay una sola secuencia de tareas que determina cuándo termina el proyecto. No es la ruta más larga en el papel. Es la cadena más larga considerando las dependencias entre tareas y la disponibilidad real de los recursos que las ejecutan.</p>
+    <p class="body-text">A esa cadena TOC la llama la <strong>Cadena Crítica</strong>. Las tareas que no están en ella pueden retrasarse cierto tiempo sin que el proyecto se mueva ni un día. Las tareas que sí están en ella no tienen ningún margen: cada día que se retrasan, el proyecto se retrasa exactamente ese día.</p>
+    <p class="body-text">El gerente de proyecto que mide la Cadena Crítica sabe exactamente dónde actuar. El gerente que mide tareas puede estar corriendo a resolver un problema secundario mientras la Cadena Crítica se bloquea en silencio.</p>
+
+    <div class="pull-quote">
+      <p>Un proyecto con 80% de tareas completadas pero la Cadena Crítica bloqueada está en <em>peor estado</em> que uno con 40% completado pero con la cadena fluyendo.</p>
+    </div>
+
+    <div class="sec-title">Tres números que lo dicen todo</div>
+    <p class="body-text">Solo hacen falta tres medidores. El primero: el porcentaje de la Cadena Crítica completado — no el porcentaje de tareas totales. El segundo: el porcentaje del Buffer consumido en relación con el avance de la Cadena Crítica. Si se completó el 50% de la Cadena pero se consumió el 80% del Buffer, hay un problema serio. El tercero: la velocidad de consumo del Buffer — qué tan rápido se está gastando la reserva.</p>
+    <p class="body-text">Con estos tres números, el gerente sabe en cualquier momento si el proyecto va bien, si hay un problema incipiente o si ya es crítico. Y sabe exactamente dónde enfocar la atención.</p>
+
+    <div class="sec-title">Lo que esto cambia en las reuniones de seguimiento</div>
+    <p class="body-text">En vez de revisar decenas de tareas área por área, la reunión empieza con una sola pregunta: ¿cómo está el Buffer? Si el Buffer está en zona verde, la reunión puede ser breve. Si está en zona amarilla, se busca la tarea específica que lo está consumiendo. Si está en zona roja, hay urgencia y recursos disponibles para actuar de inmediato.</p>
+    <p class="body-text">No es una reunión de reporte. Es una reunión de decisión. Y puede durar quince minutos en lugar de dos horas.</p>
+
+    <div class="reflexion">
+      <div class="reflexion-label">Reflexión para esta semana</div>
+      <p>Elija el proyecto estratégico más importante que tiene en curso. ¿Sabe hoy cuál es la Cadena Crítica? ¿Sabe cuánto Buffer de Terminación le queda y a qué velocidad lo está consumiendo? Si la respuesta es "no", entonces lo que tiene es un reporte de actividad. No un sistema de control.</p>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('cap5')">← Capítulo 5</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cap7')">Capítulo 7 →</button>
+    </div>
+  </section>
+
+  <!-- CAP 7 -->
+  <section id="cap7" class="chapter">
+    <div class="ch-eyebrow">Capítulo 7</div>
+    <div class="ch-title">Por dónde empezar:</div>
+    <div class="ch-title-italic">el cambio que su empresa puede hacer ahora.</div>
+    <div class="ch-rule"></div>
+
+    <p class="lead">Este capítulo no es un resumen de lo que ya leyó. Es un mapa de acción. Tres movimientos concretos que puede iniciar con su equipo en los próximos treinta días.</p>
+    <p class="body-text">Antes de llegar a ellos, hay algo que vale la pena decir con claridad: este cambio no funciona si solo lo implementa el gerente de proyecto. El sistema actual tiene incentivos que van en contra del nuevo paradigma. El cambio requiere que la gerencia declare explícitamente nuevas reglas del juego.</p>
+
+    <div class="svg-wrap">
+      <svg viewBox="0 0 580 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <circle cx="100" cy="80" r="50" fill="#1a1715"/>
+        <text x="100" y="65" font-family="'DM Sans',sans-serif" font-size="22" fill="#f5f0e8" text-anchor="middle" font-weight="300">01</text>
+        <text x="100" y="85" font-family="'DM Sans',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle">Mapear</text>
+        <text x="100" y="100" font-family="'DM Sans',sans-serif" font-size="11" fill="#8a8480" text-anchor="middle">el sistema</text>
+        <line x1="150" y1="80" x2="195" y2="80" stroke="#d4cfc7" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <circle cx="290" cy="80" r="50" fill="#c0392b"/>
+        <text x="290" y="65" font-family="'DM Sans',sans-serif" font-size="22" fill="#f5f0e8" text-anchor="middle" font-weight="300">02</text>
+        <text x="290" y="85" font-family="'DM Sans',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle">Elegir</text>
+        <text x="290" y="100" font-family="'DM Sans',sans-serif" font-size="11" fill="#fdf0ef" text-anchor="middle">el piloto</text>
+        <line x1="340" y1="80" x2="385" y2="80" stroke="#d4cfc7" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <circle cx="480" cy="80" r="50" fill="#2a2520"/>
+        <text x="480" y="65" font-family="'DM Sans',sans-serif" font-size="22" fill="#f5f0e8" text-anchor="middle" font-weight="300">03</text>
+        <text x="480" y="85" font-family="'DM Sans',sans-serif" font-size="11" fill="#f5f0e8" text-anchor="middle">Cambiar</text>
+        <text x="480" y="100" font-family="'DM Sans',sans-serif" font-size="11" fill="#8a8480" text-anchor="middle">las reglas</text>
+        <text x="100" y="150" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">Inventario de proyectos</text>
+        <text x="100" y="163" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">y recursos compartidos</text>
+        <text x="290" y="150" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">Cadena Crítica + Buffer.</text>
+        <text x="290" y="163" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">Dejar de medir tareas.</text>
+        <text x="480" y="150" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">Estimaciones ≠ compromisos.</text>
+        <text x="480" y="163" font-family="'DM Sans',sans-serif" font-size="9" fill="#6b6560" text-anchor="middle">El proyecto, no la tarea.</text>
+        <defs><marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#d4cfc7"/></marker></defs>
+      </svg>
+    </div>
+
+    <div class="sec-title">Movimiento 1: Mapear el sistema</div>
+    <p class="body-text">Levante un inventario de todos los proyectos activos de la organización y mapee cuáles comparten los mismos recursos críticos. No es necesario un software sofisticado. Una hoja de papel y dos horas de conversación con los gerentes de proyecto son suficientes.</p>
+    <p class="body-text">Ese mapa ya revela el problema principal. Cuando ve que el área de tecnología aparece en ocho proyectos simultáneos, ya sabe por qué los ocho se atrasan. No necesita más análisis.</p>
+
+    <div class="sec-title">Movimiento 2: Elegir un proyecto piloto</div>
+    <p class="body-text">Elija un proyecto que sea suficientemente importante para que los resultados importen, pero no tan crítico que el riesgo de experimentar sea inaceptable. Con ese proyecto, aplique los principios básicos: identifique la Cadena Crítica, cree un Buffer de Terminación, y deje de medir el avance en términos de tareas completadas. Empiece a medir el estado del Buffer.</p>
+    <p class="body-text">En las primeras semanas habrá fricción. La gente va a sentir que le quitaron su colchón de seguridad. La comunicación aquí es clave: la seguridad no desapareció. Se movió. Ahora está concentrada donde puede verse, medirse y usarse cuando realmente hace falta.</p>
+
+    <div class="sec-title">Movimiento 3: Cambiar las reglas del juego</div>
+    <p class="body-text">Comunique a todos los involucrados que las estimaciones ya no son compromisos individuales. El objetivo no es que cada tarea termine en el tiempo estimado. El objetivo es que el proyecto completo termine a tiempo.</p>
+    <p class="body-text">Este cambio en la conversación transforma el comportamiento sin necesidad de ningún proceso disciplinario. Las personas empiezan a defender el proyecto en lugar de defender su tarea. Y esa es la diferencia cultural que ningún taller de trabajo en equipo puede producir, porque surge del sistema, no de la voluntad.</p>
+
+    <div class="sec-title">Qué esperar en las primeras semanas</div>
+    <p class="body-text">Resistencia inicial: la gente siente que le están quitando su protección. Es normal. Es predecible. Y desaparece cuando el equipo ve que el Buffer existe, que está visible, y que cuando el proyecto lo necesita, está ahí. El primer proyecto que termina a tiempo con este sistema hace más por la adopción del cambio que cualquier presentación de metodología.</p>
+
+    <div class="reflexion">
+      <div class="reflexion-label">Reflexión para esta semana</div>
+      <p>¿Qué proyecto estratégico de su empresa podría ser el piloto perfecto para probar este sistema en los próximos 90 días? Que sea importante, que tenga un equipo identificable, y que usted esté dispuesto a cambiar las reglas de cómo se mide su avance. Ese proyecto es el punto de partida.</p>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('cap6')">← Capítulo 6</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cierre')">Cierre →</button>
+    </div>
+  </section>
+
+  <!-- CIERRE -->
+  <section id="cierre" class="chapter">
+    <div class="ch-eyebrow">Cierre</div>
+    <div class="ch-title">Su plan estratégico</div>
+    <div class="ch-title-italic">puede cumplirse.</div>
+    <div class="ch-rule"></div>
+    <p class="body-text" style="font-style:italic;color:var(--gris-m)">No es una promesa. Es lo que ocurre cuando el sistema cambia.</p>
+
+    <p class="lead">Imagine cómo se ve su empresa doce meses después de haber hecho este cambio. No es una imagen de perfección. Es una imagen de claridad.</p>
+
+    <p class="body-text">Los proyectos que hoy llevan tres o cuatro desplazamientos de fecha tienen ahora un indicador simple que todo el equipo puede leer: el Buffer está sano o el Buffer necesita atención. No hay ambigüedad. No hay optimismo forzado en las reuniones de seguimiento. Hay información real que permite actuar antes de que el problema se vuelva irreversible.</p>
+    <p class="body-text">Las áreas que hoy pelean por prioridades tienen ahora una regla del sistema que las arbitra. El jefe de tecnología no necesita adivinar a cuál proyecto atender primero. El sistema lo dice. Y esa claridad transforma la dinámica de las reuniones: se habla de la solución, no de la culpa.</p>
+    <p class="body-text">Los líderes de proyecto que hoy gastan buena parte de su energía en política interna tienen ahora un lenguaje compartido con las áreas: el estado del Buffer. Ese lenguaje mueve la conversación del "quién tiene la razón" al "dónde hay que actuar hoy".</p>
+    <p class="body-text">Y el plan estratégico —el que usted presentó al directorio con convicción y que hoy acumula desplazamientos— avanza al ritmo para el que fue diseñado. No porque las personas hayan cambiado. Porque el sistema que las rodea cambió.</p>
+
+    <div class="sec-title">Por qué este cambio es más fácil con acompañamiento</div>
+    <p class="body-text">La gente en su empresa lleva años protegiéndose con colchones de tiempo en sus estimaciones. Los gerentes de proyecto llevan años aprendiendo a gestionar la política de recursos. Los líderes de área llevan años respondiendo al que más grita. Esos comportamientos no son irracionales. Son respuestas inteligentes a un sistema que los incentiva exactamente así.</p>
+    <p class="body-text">Cambiar el sistema requiere cambiar esos incentivos. Y eso no se hace con una presentación ni con un manual. Se hace con convicción sostenida desde arriba, con un piloto que produzca evidencia propia, y con alguien que haya recorrido ese camino antes y pueda anticipar dónde van a estar los puntos de resistencia.</p>
+
+    <div style="border-top: 2px solid var(--tinta); padding-top: 40px; margin-top: 48px;">
+      <div style="font-family: var(--serif); font-size: 36px; color: var(--tinta); margin-bottom: 20px; line-height: 1.2;">El siguiente paso<br>es suyo.</div>
+      <p class="body-text">Si lo que leyó en estas páginas resonó con lo que vive en su empresa, hay un lugar donde puede ver esto en acción, hacer preguntas concretas y evaluar si es el momento de dar el siguiente paso.</p>
+
+      <div style="margin-top: 32px;">
+        <div style="font-family: var(--sans); font-size: 28px; font-weight: 500; letter-spacing: 4px; color: var(--tinta); margin-bottom: 6px;">poogi</div>
+        <div style="font-family: var(--sans); font-size: 14px; color: var(--gris-m); font-style: italic; margin-bottom: 20px;">Process Of Ongoing Improvement</div>
+        <p class="body-text">No es una lista de servicios. Es una puerta abierta. La única condición para entrar es la misma que para avanzar: estar dispuesto a ver el sistema antes de buscar al culpable.</p>
+      </div>
+
+      <div style="margin-top: 40px; padding: 28px 32px; background: var(--tinta); border-radius: 4px;">
+        <p style="font-family: var(--serif); font-size: 20px; color: var(--papel); line-height: 1.5; font-style: italic;">Su plan estratégico puede cumplirse. Los proyectos que hoy se atrasan pueden fluir. El equipo que hoy trabaja duro sin avanzar puede, con el sistema correcto, producir resultados que hoy parecen inalcanzables.</p>
+      </div>
+
+      <!-- CTAs -->
+      <div style="margin-top: 48px; display: flex; flex-direction: column; gap: 16px; max-width: 360px;">
+
+        <!-- WhatsApp — acción principal -->
+        <a href="https://wa.me/34649072362?text=Hola%20Hernán%2C%20leí%20la%20guía%20y%20me%20gustaría%20conversar." target="_blank"
+           style="display:flex;align-items:center;gap:14px;background:#25D366;color:#fff;text-decoration:none;padding:14px 22px;border-radius:4px;font-family:var(--sans);font-size:14px;font-weight:500;transition:opacity 0.2s;"
+           onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.116 1.526 5.845L.057 23.882l6.207-1.448A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.796 9.796 0 01-5.001-1.373l-.36-.213-3.685.86.924-3.585-.234-.369A9.78 9.78 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818 5.418 0 9.818 4.4 9.818 9.818 0 5.418-4.4 9.818-9.818 9.818z"/></svg>
+          Escribirle a Hernán por WhatsApp
+        </a>
+
+        <!-- LinkedIn perfil -->
+        <a href="https://www.linkedin.com/in/hernansedano/" target="_blank"
+           style="display:flex;align-items:center;gap:14px;background:#0A66C2;color:#fff;text-decoration:none;padding:14px 22px;border-radius:4px;font-family:var(--sans);font-size:14px;font-weight:500;transition:opacity 0.2s;"
+           onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          Conectar en LinkedIn
+        </a>
+
+        <!-- Newsletter -->
+        <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7151533601908482048" target="_blank"
+           style="display:flex;align-items:center;gap:14px;background:transparent;color:var(--tinta);text-decoration:none;padding:13px 22px;border-radius:4px;border:1.5px solid var(--gris-l);font-family:var(--sans);font-size:14px;font-weight:400;transition:border-color 0.2s,color 0.2s;"
+           onmouseover="this.style.borderColor='var(--tinta)'" onmouseout="this.style.borderColor='var(--gris-l)'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Suscribirse al newsletter de poogi
+        </a>
+
+      </div>
+    </div>
+
+    <div class="ch-nav">
+      <button class="ch-nav-btn" onclick="goTo('cap7')">← Capítulo 7</button>
+      <button class="ch-nav-btn primary" onclick="goTo('cover')">Volver al inicio ↑</button>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+// ── DATA FOR SEARCH ──────────────────────────────────────────────────────────
+const searchIndex = [
+  { chapter: 'apertura', label: 'Apertura', text: 'plan estratégico fechas desplazamiento equipo trabaja duro ejecuta sin avanzar voluntad talento organización recursos esfuerzo líderes comprometidos reuniones compromisos' },
+  { chapter: 'cap1', label: 'Cap. 1', text: 'plan bueno atraso diagnóstico sistema velocidad Goldratt metodología certificaciones cadena dependencias tareas independientes México transformación tecnológica once iniciativas prioridad' },
+  { chapter: 'cap2', label: 'Cap. 2', text: 'gente sistema Camilo Bogotá gerente proyectos líder capacitación rotación autoridad experimento mental fracaso diseño ejecución reorganizar' },
+  { chapter: 'cap3', label: 'Cap. 3', text: 'áreas acuerdo cultura estructura conflicto recursos compartidos tecnología jurídica operaciones prioridades escalonar árbitro malabares foco contención' },
+  { chapter: 'cap4', label: 'Cap. 4', text: 'multitarea ocupados nada avanza tablero tareas activos elefantes velocidad terminan proyectos activos ilusión fragmentada interrumpida reiniciada' },
+  { chapter: 'cap5', label: 'Cap. 5', text: 'buffer terminación tiempo evapora colchón Parkinson síndrome estudiante seguridad ganancias retrasos concentrar reserva variabilidad estadística cronograma seguridad' },
+  { chapter: 'cap6', label: 'Cap. 6', text: 'cadena crítica flujo lista tareas medidores buffer consumido velocidad reunión decisión reporte semáforo verde amarillo rojo seguimiento control' },
+  { chapter: 'cap7', label: 'Cap. 7', text: 'empezar mapear piloto reglas cambio 90 días inventario recursos estimaciones compromisos fricción resistencia adopción movimiento acción' },
+  { chapter: 'cierre', label: 'Cierre', text: 'plan cumplirse acompañamiento poogi siguiente paso claridad prioridades buffer lenguaje incentivos resistencia piloto evidencia resultados posibles' },
+];
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.chapter').forEach(el => { el.style.display = 'none'; });
+const initialCover = document.getElementById('cover');
+if (initialCover) { initialCover.style.display = 'flex'; }
+
+// ── NAVIGATION ───────────────────────────────────────────────────────────────
+function goTo(id) {
+  document.querySelectorAll('.chapter').forEach(el => {
+    el.classList.remove('visible');
+    el.style.display = 'none';
+  });
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.add('visible');
+    target.style.display = id === 'cover' ? 'flex' : 'block';
+    document.getElementById('main').scrollTo({ top: 0, behavior: 'instant' });
+  }
+  const navItem = document.querySelector(`.nav-item[data-chapter="${id}"]`);
+  if (navItem) navItem.classList.add('active');
+  document.getElementById('sidebar').classList.remove('open');
+  const label = navItem ? navItem.querySelector('.nav-label').textContent : '';
+  document.getElementById('mobile-title').textContent = label || 'Guía TOC para CEOs';
+}
+
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => goTo(item.dataset.chapter));
+});
+
+// ── SEARCH ───────────────────────────────────────────────────────────────────
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  searchResults.innerHTML = '';
+  if (q.length < 2) { searchResults.style.display = 'none'; return; }
+  
+  const hits = searchIndex.filter(item => item.text.toLowerCase().includes(q));
+  
+  if (hits.length === 0) {
+    searchResults.style.display = 'block';
+    searchResults.innerHTML = '<div style="padding:10px 12px;color:#4a4540;font-size:12px;">Sin resultados</div>';
+    return;
+  }
+  
+  searchResults.style.display = 'block';
+  hits.slice(0, 5).forEach(hit => {
+    const div = document.createElement('div');
+    div.className = 'search-hit';
+    const words = hit.text.split(' ');
+    const matchWord = words.find(w => w.toLowerCase().includes(q)) || q;
+    div.innerHTML = `<div class="hit-chapter">${hit.label}</div><div class="hit-text">${hit.text.split(' ').slice(0,8).join(' ')}…</div>`;
+    div.addEventListener('click', () => {
+      goTo(hit.chapter);
+      searchInput.value = '';
+      searchResults.style.display = 'none';
+    });
+    searchResults.appendChild(div);
+  });
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.sidebar-search')) searchResults.style.display = 'none';
+});
+
+// ── MOBILE MENU ───────────────────────────────────────────────────────────────
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+});
+</script>
+</body>
+</html>
