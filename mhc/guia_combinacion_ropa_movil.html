@@ -1,0 +1,725 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:transparent;color:var(--color-text-primary)}
+
+.app{max-width:480px;margin:0 auto;padding:0 0 2rem}
+
+.hero{background:#1a1a1a;border-radius:var(--border-radius-lg);padding:2rem 1.5rem 1.5rem;margin-bottom:1.5rem;text-align:center}
+.hero-tag{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#8b8aff;margin-bottom:.75rem}
+.hero-title{font-size:28px;font-weight:500;color:#ffffff;line-height:1.15;margin-bottom:.5rem}
+.hero-sub{font-size:13px;color:#999;line-height:1.5}
+.hero-pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:1rem}
+.hero-pill{background:rgba(255,255,255,.07);border:0.5px solid rgba(255,255,255,.12);border-radius:20px;padding:4px 10px;font-size:11px;color:#ccc}
+
+.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:1.5rem}
+.nav-btn{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 4px;text-align:center;cursor:pointer;transition:.15s}
+.nav-btn.active,.nav-btn:hover{border-color:var(--color-border-secondary);background:var(--color-background-secondary)}
+.nav-icon{font-size:18px;margin-bottom:3px}
+.nav-label{font-size:10px;color:var(--color-text-secondary);line-height:1.2}
+
+.section{display:none}
+.section.active{display:block}
+
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.1rem;margin-bottom:1rem}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem}
+.card-body{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+
+.sec-head{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:.75rem;padding-left:2px}
+
+.tip{border-left:3px solid #7F77DD;background:#EEEDFE;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.65rem .9rem;font-size:12.5px;color:#3C3489;line-height:1.5;margin-bottom:1rem}
+.tip strong{font-weight:500}
+
+.tip-teal{border-color:#1D9E75;background:#E1F5EE;color:#0F6E56}
+.tip-amber{border-color:#BA7517;background:#FAEEDA;color:#633806}
+
+.wheel-section{margin-bottom:1.5rem}
+.wheel-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.wheel-row:last-child{border-bottom:none}
+.swatch-big{width:38px;height:38px;border-radius:8px;flex-shrink:0;border:0.5px solid rgba(0,0,0,.1)}
+.color-name{font-size:13px;font-weight:500;color:var(--color-text-primary);min-width:80px;flex-shrink:0}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{display:flex;align-items:center;gap:4px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:20px;padding:3px 8px;font-size:11px;color:var(--color-text-secondary)}
+.chip-dot{width:9px;height:9px;border-radius:50%;border:0.5px solid rgba(0,0,0,.12);flex-shrink:0}
+
+.spectrum-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:1rem}
+.spec-col{display:flex;flex-direction:column;gap:3px;align-items:center}
+.spec-swatch{width:100%;aspect-ratio:1;border-radius:5px;border:0.5px solid rgba(0,0,0,.08)}
+.spec-label{font-size:9px;color:var(--color-text-tertiary);text-align:center;line-height:1.2}
+
+.tab-row{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--color-text-secondary);cursor:pointer;transition:.15s}
+.tab.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+
+.body-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:.75rem}
+.body-head{padding:.7rem 1rem;display:flex;align-items:center;gap:10px}
+.body-icon{width:36px;height:52px;flex-shrink:0}
+.body-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.body-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.body-detail{padding:.75rem 1rem;border-top:0.5px solid var(--color-border-tertiary)}
+.body-detail-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.5rem}
+.body-detail-row:last-child{margin-bottom:0}
+.detail-box{border-radius:var(--border-radius-md);padding:.5rem .65rem}
+.detail-box-label{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.detail-box p{font-size:11.5px;line-height:1.4}
+.do-box{background:#EAF3DE}
+.do-box .detail-box-label{color:#3B6D11}
+.do-box p{color:#27500A}
+.dont-box{background:#FCEBEB}
+.dont-box .detail-box-label{color:#A32D2D}
+.dont-box p{color:#791F1F}
+
+.occ-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.occ-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.85rem}
+.occ-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:.5rem}
+.occ-name{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:.4rem}
+.occ-tags{display:flex;flex-direction:column;gap:3px}
+.occ-tag{font-size:11px;color:var(--color-text-secondary);line-height:1.3}
+.occ-tag::before{content:"· ";color:var(--color-text-tertiary)}
+
+.stam-rule{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:.75rem}
+.stam-head{padding:.7rem 1rem;display:flex;align-items:center;gap:8px}
+.stam-badge{border-radius:20px;padding:3px 8px;font-size:11px;font-weight:500}
+
+.prop-viz{margin:1rem 0}
+.prop-example{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.75rem 1rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.75rem}
+.prop-bars{display:flex;align-items:center;gap:4px;flex-shrink:0;width:56px}
+.prop-bar{border-radius:3px}
+.prop-label{font-size:12.5px;color:var(--color-text-primary)}
+.prop-label span{font-size:11px;color:var(--color-text-secondary);display:block;margin-top:1px}
+.check-icon{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-left:auto}
+.check-ok{background:#EAF3DE}
+.check-no{background:#FCEBEB}
+
+.frase-block{background:#1a1a1a;border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:1rem}
+.frase-head-bar{padding:.75rem 1rem;border-bottom:0.5px solid rgba(255,255,255,.08)}
+.frase-head-bar p{font-size:12px;font-weight:500;color:#8b8aff}
+.frase-item{padding:.7rem 1rem;border-bottom:0.5px solid rgba(255,255,255,.06);display:flex;gap:.6rem;align-items:flex-start}
+.frase-item:last-child{border-bottom:none}
+.frase-q{font-size:18px;font-weight:500;color:#8b8aff;line-height:1;flex-shrink:0;margin-top:-2px;font-family:var(--font-serif)}
+.frase-text{font-size:12.5px;color:#ccc;line-height:1.5;font-style:italic}
+
+.checklist{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:1rem}
+.check-item{display:flex;align-items:flex-start;gap:.75rem;padding:.8rem 1rem;border-bottom:0.5px solid var(--color-border-tertiary);cursor:pointer;transition:.15s}
+.check-item:last-child{border-bottom:none}
+.check-item:hover{background:var(--color-background-secondary)}
+.check-num{width:26px;height:26px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#3C3489;flex-shrink:0}
+.check-num.done{background:#EAF3DE;color:#3B6D11}
+.check-q{font-size:13px;color:var(--color-text-primary);line-height:1.4;padding-top:4px}
+.check-q span{font-size:11.5px;color:var(--color-text-secondary);display:block;margin-top:2px}
+
+.fab-row{display:flex;gap:8px;margin-top:1rem}
+.fab{flex:1;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.7rem;text-align:center;cursor:pointer;font-size:12px;color:var(--color-text-secondary);transition:.15s}
+.fab:hover{background:var(--color-background-primary);border-color:var(--color-border-secondary)}
+.fab.primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.fab.primary:hover{background:#333}
+</style>
+
+<h2 class="sr-only">Guía interactiva de combinación de ropa para tiendas de souvenirs</h2>
+
+<div class="app">
+
+<div class="hero">
+  <div class="hero-tag">Guía de trabajo</div>
+  <div class="hero-title">Combinar ropa<br>con confianza</div>
+  <div class="hero-sub">8 conceptos para asesorar a cualquier cliente y vender más</div>
+  <div class="hero-pills">
+    <span class="hero-pill">Color</span>
+    <span class="hero-pill">Proporciones</span>
+    <span class="hero-pill">Estampados</span>
+    <span class="hero-pill">Silueta</span>
+    <span class="hero-pill">Ocasión</span>
+    <span class="hero-pill">Frases</span>
+  </div>
+</div>
+
+<div class="nav" id="nav">
+  <div class="nav-btn active" onclick="show('colores',this)">
+    <div class="nav-icon" style="font-size:18px">🎨</div>
+    <div class="nav-label">Colores</div>
+  </div>
+  <div class="nav-btn" onclick="show('silueta',this)">
+    <div class="nav-icon" style="font-size:18px">👗</div>
+    <div class="nav-label">Silueta</div>
+  </div>
+  <div class="nav-btn" onclick="show('estilo',this)">
+    <div class="nav-icon" style="font-size:18px">✂️</div>
+    <div class="nav-label">Estampados</div>
+  </div>
+  <div class="nav-btn" onclick="show('venta',this)">
+    <div class="nav-icon" style="font-size:18px">💬</div>
+    <div class="nav-label">Venta</div>
+  </div>
+</div>
+
+<div id="colores" class="section active">
+  <p class="sec-head">Escala cromática completa</p>
+
+  <div class="card" style="padding:.85rem">
+    <div class="card-title" style="margin-bottom:.75rem">Tonos neutros — combinan con todo</div>
+    <div class="spectrum-grid">
+      <div class="spec-col">
+        <div class="spec-swatch" style="background:#FFFFFF;border:0.5px solid #ddd"></div>
+        <div class="spec-label">Blanco</div>
+      </div>
+      <div class="spec-col">
+        <div class="spec-swatch" style="background:#F5F0E8"></div>
+        <div class="spec-label">Crema</div>
+      </div>
+      <div class="spec-col">
+        <div class="spec-swatch" style="background:#D3C9B0"></div>
+        <div class="spec-label">Beige</div>
+      </div>
+      <div class="spec-col">
+        <div class="spec-swatch" style="background:#888780"></div>
+        <div class="spec-label">Gris</div>
+      </div>
+      <div class="spec-col">
+        <div class="spec-swatch" style="background:#1a1a1a"></div>
+        <div class="spec-label">Negro</div>
+      </div>
+    </div>
+    <div class="tip" style="margin-bottom:0">
+      <strong>Regla de oro:</strong> una prenda de color + una neutra. Nunca falla.
+    </div>
+  </div>
+
+  <p class="sec-head">Colores cálidos</p>
+
+  <div class="card" style="padding:.85rem 1rem">
+    <div class="card-title" style="margin-bottom:.75rem">Rojo · Coral · Naranja · Terracota · Tostado</div>
+    <div class="spectrum-grid" style="grid-template-columns:repeat(5,1fr)">
+      <div class="spec-col"><div class="spec-swatch" style="background:#E24B4A"></div><div class="spec-label">Rojo</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#D85A30"></div><div class="spec-label">Terracota</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#EF9F27"></div><div class="spec-label">Naranja</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#BA7517"></div><div class="spec-label">Mostaza</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#8B5E3C"></div><div class="spec-label">Tostado</div></div>
+    </div>
+  </div>
+
+  <p class="sec-head">Colores fríos</p>
+
+  <div class="card" style="padding:.85rem 1rem">
+    <div class="card-title" style="margin-bottom:.75rem">Azul · Marino · Teal · Verde · Menta</div>
+    <div class="spectrum-grid" style="grid-template-columns:repeat(5,1fr)">
+      <div class="spec-col"><div class="spec-swatch" style="background:#85B7EB"></div><div class="spec-label">Azul cielo</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#185FA5"></div><div class="spec-label">Marino</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#1D9E75"></div><div class="spec-label">Teal</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#639922"></div><div class="spec-label">Verde</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#9FE1CB"></div><div class="spec-label">Menta</div></div>
+    </div>
+  </div>
+
+  <p class="sec-head">Colores suaves / pastel</p>
+
+  <div class="card" style="padding:.85rem 1rem">
+    <div class="card-title" style="margin-bottom:.75rem">Rosa · Lila · Lavanda · Salmón · Melocotón</div>
+    <div class="spectrum-grid" style="grid-template-columns:repeat(5,1fr)">
+      <div class="spec-col"><div class="spec-swatch" style="background:#F4C0D1"></div><div class="spec-label">Rosa</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#D4537E"></div><div class="spec-label">Fucsia</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#AFA9EC"></div><div class="spec-label">Lavanda</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#7F77DD"></div><div class="spec-label">Lila</div></div>
+      <div class="spec-col"><div class="spec-swatch" style="background:#F0997B"></div><div class="spec-label">Salmón</div></div>
+    </div>
+  </div>
+
+  <p class="sec-head">Combinaciones por color — toca para ver</p>
+
+  <div class="wheel-section card" style="padding:.75rem 1rem">
+    <div class="wheel-row">
+      <div class="swatch-big" style="background:#1D9E75"></div>
+      <div class="color-name">Verde</div>
+      <div class="chips">
+        <div class="chip"><div class="chip-dot" style="background:#D85A30"></div>Terracota</div>
+        <div class="chip"><div class="chip-dot" style="background:#EF9F27"></div>Mostaza</div>
+        <div class="chip"><div class="chip-dot" style="background:#1a1a1a"></div>Negro</div>
+      </div>
+    </div>
+    <div class="wheel-row">
+      <div class="swatch-big" style="background:#378ADD"></div>
+      <div class="color-name">Azul</div>
+      <div class="chips">
+        <div class="chip"><div class="chip-dot" style="background:#EF9F27"></div>Naranja</div>
+        <div class="chip"><div class="chip-dot" style="background:#F4C0D1"></div>Rosa</div>
+        <div class="chip"><div class="chip-dot" style="background:#888780"></div>Gris</div>
+      </div>
+    </div>
+    <div class="wheel-row">
+      <div class="swatch-big" style="background:#D85A30"></div>
+      <div class="color-name">Terracota</div>
+      <div class="chips">
+        <div class="chip"><div class="chip-dot" style="background:#D3C9B0"></div>Beige</div>
+        <div class="chip"><div class="chip-dot" style="background:#1D9E75"></div>Verde</div>
+        <div class="chip"><div class="chip-dot" style="background:#1a1a1a"></div>Negro</div>
+      </div>
+    </div>
+    <div class="wheel-row">
+      <div class="swatch-big" style="background:#7F77DD"></div>
+      <div class="color-name">Lavanda</div>
+      <div class="chips">
+        <div class="chip"><div class="chip-dot" style="background:#D3C9B0"></div>Beige</div>
+        <div class="chip"><div class="chip-dot" style="background:#888780"></div>Gris</div>
+        <div class="chip"><div class="chip-dot" style="background:#FFFFFF;border:0.5px solid #ccc"></div>Blanco</div>
+      </div>
+    </div>
+    <div class="wheel-row">
+      <div class="swatch-big" style="background:#D4537E"></div>
+      <div class="color-name">Rosa / Fucsia</div>
+      <div class="chips">
+        <div class="chip"><div class="chip-dot" style="background:#888780"></div>Gris</div>
+        <div class="chip"><div class="chip-dot" style="background:#185FA5"></div>Marino</div>
+        <div class="chip"><div class="chip-dot" style="background:#FFFFFF;border:0.5px solid #ccc"></div>Blanco</div>
+      </div>
+    </div>
+    <div class="wheel-row">
+      <div class="swatch-big" style="background:#EF9F27"></div>
+      <div class="color-name">Mostaza</div>
+      <div class="chips">
+        <div class="chip"><div class="chip-dot" style="background:#185FA5"></div>Marino</div>
+        <div class="chip"><div class="chip-dot" style="background:#8B5E3C"></div>Marrón</div>
+        <div class="chip"><div class="chip-dot" style="background:#1a1a1a"></div>Negro</div>
+      </div>
+    </div>
+    <div class="wheel-row">
+      <div class="swatch-big" style="background:#185FA5"></div>
+      <div class="color-name">Marino</div>
+      <div class="chips">
+        <div class="chip"><div class="chip-dot" style="background:#EF9F27"></div>Mostaza</div>
+        <div class="chip"><div class="chip-dot" style="background:#FFFFFF;border:0.5px solid #ccc"></div>Blanco</div>
+        <div class="chip"><div class="chip-dot" style="background:#F4C0D1"></div>Rosa</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip tip-teal">
+    <strong>Colores opuestos en la rueda = contraste dinámico.</strong> Colores vecinos = armonía suave. Con un neutro siempre aciertas.
+  </div>
+</div>
+
+<div id="silueta" class="section">
+
+  <p class="sec-head">Proporciones — equilibrio visual</p>
+
+  <div class="tip" style="margin-bottom:1rem">
+    <strong>Regla principal:</strong> amplio arriba = ceñido abajo, y al revés. Equilibrio = buen look.
+  </div>
+
+  <div class="prop-viz">
+    <div class="prop-example">
+      <div class="prop-bars">
+        <div class="prop-bar" style="background:#7F77DD;width:22px;height:42px"></div>
+        <div class="prop-bar" style="background:#AFA9EC;width:12px;height:34px"></div>
+      </div>
+      <div class="prop-label">Blusa suelta + pantalón pitillo<span>El volumen arriba se equilibra abajo</span></div>
+      <div class="check-icon check-ok">
+        <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="#3B6D11" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+    <div class="prop-example">
+      <div class="prop-bars">
+        <div class="prop-bar" style="background:#AFA9EC;width:12px;height:34px"></div>
+        <div class="prop-bar" style="background:#7F77DD;width:22px;height:42px"></div>
+      </div>
+      <div class="prop-label">Camiseta ajustada + falda amplia<span>El vuelo abajo equilibra lo ceñido arriba</span></div>
+      <div class="check-icon check-ok">
+        <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="#3B6D11" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+    <div class="prop-example">
+      <div class="prop-bars">
+        <div class="prop-bar" style="background:#7F77DD;width:22px;height:42px"></div>
+        <div class="prop-bar" style="background:#7F77DD;width:22px;height:42px"></div>
+      </div>
+      <div class="prop-label">Amplio arriba + amplio abajo<span>Sin equilibrio — pierde la silueta</span></div>
+      <div class="check-icon check-no">
+        <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 2l6 6M8 2l-6 6" stroke="#A32D2D" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip tip-amber">
+    <strong>Truco del remeter:</strong> remeter la camiseta por delante define la cintura al instante. El truco más fácil de enseñar a un cliente.
+  </div>
+
+  <p class="sec-head" style="margin-top:1rem">Tipos de cuerpo</p>
+
+  <div class="body-card">
+    <div class="body-head" style="background:#EEEDFE">
+      <svg class="body-icon" viewBox="0 0 36 52"><ellipse cx="18" cy="7" rx="7" ry="6" fill="#7F77DD"/><path d="M10 15 Q18 13 26 15 L24 32 Q18 35 12 32Z" fill="#534AB7"/><rect x="10" y="32" width="7" height="14" rx="3" fill="#7F77DD"/><rect x="19" y="32" width="7" height="14" rx="3" fill="#7F77DD"/></svg>
+      <div>
+        <div class="body-name">Pera — caderas más anchas</div>
+        <div class="body-sub">Hombros más estrechos que caderas</div>
+      </div>
+    </div>
+    <div class="body-detail">
+      <div class="body-detail-row">
+        <div class="detail-box do-box">
+          <div class="detail-box-label">Favorece</div>
+          <p>Colores vivos y estampados arriba. Cortes en A abajo. Escotes llamativos.</p>
+        </div>
+        <div class="detail-box dont-box">
+          <div class="detail-box-label">Evitar</div>
+          <p>Pantalones muy ceñidos en cadera. Rayas horizontales abajo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-card">
+    <div class="body-head" style="background:#E1F5EE">
+      <svg class="body-icon" viewBox="0 0 36 52"><ellipse cx="18" cy="7" rx="7" ry="6" fill="#1D9E75"/><path d="M9 15 Q18 12 27 15 L28 28 Q18 32 8 28Z" fill="#0F6E56"/><path d="M8 28 Q18 32 28 28 L26 40 Q18 38 10 40Z" fill="#1D9E75"/><rect x="10" y="40" width="7" height="10" rx="3" fill="#9FE1CB"/><rect x="19" y="40" width="7" height="10" rx="3" fill="#9FE1CB"/></svg>
+      <div>
+        <div class="body-name">Manzana — volumen en el centro</div>
+        <div class="body-sub">Más anchura en el torso</div>
+      </div>
+    </div>
+    <div class="body-detail">
+      <div class="body-detail-row">
+        <div class="detail-box do-box">
+          <div class="detail-box-label">Favorece</div>
+          <p>Prendas fluidas y rectas. Escotes en V. Caída vertical sin ceñir.</p>
+        </div>
+        <div class="detail-box dont-box">
+          <div class="detail-box-label">Evitar</div>
+          <p>Ceñidos en la barriga. Cinturones muy marcados a la altura del torso.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-card">
+    <div class="body-head" style="background:#FAEEDA">
+      <svg class="body-icon" viewBox="0 0 36 52"><ellipse cx="18" cy="7" rx="7" ry="6" fill="#EF9F27"/><path d="M11 14 Q18 12 25 14 L25 38 Q18 40 11 38Z" fill="#BA7517"/><rect x="10" y="38" width="7" height="12" rx="3" fill="#EF9F27"/><rect x="19" y="38" width="7" height="12" rx="3" fill="#EF9F27"/></svg>
+      <div>
+        <div class="body-name">Rectangular — sin curvas marcadas</div>
+        <div class="body-sub">Hombros y caderas similares</div>
+      </div>
+    </div>
+    <div class="body-detail">
+      <div class="body-detail-row">
+        <div class="detail-box do-box">
+          <div class="detail-box-label">Favorece</div>
+          <p>Cinturones y lazos para crear curva. Faldas con vuelo. Drapeados.</p>
+        </div>
+        <div class="detail-box dont-box">
+          <div class="detail-box-label">Evitar</div>
+          <p>Prendas completamente rectas de arriba a abajo sin ningún detalle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-card">
+    <div class="body-head" style="background:#FAECE7">
+      <svg class="body-icon" viewBox="0 0 36 52"><ellipse cx="18" cy="7" rx="7" ry="6" fill="#F0997B"/><path d="M8 14 Q18 11 28 14 L26 24 Q18 22 10 24Z" fill="#D85A30"/><path d="M10 24 Q18 26 26 24 L24 38 Q18 40 12 38Z" fill="#993C1D"/><rect x="10" y="38" width="7" height="12" rx="3" fill="#F0997B"/><rect x="19" y="38" width="7" height="12" rx="3" fill="#F0997B"/></svg>
+      <div>
+        <div class="body-name">Triángulo invertido — hombros anchos</div>
+        <div class="body-sub">Hombros más anchos que caderas</div>
+      </div>
+    </div>
+    <div class="body-detail">
+      <div class="body-detail-row">
+        <div class="detail-box do-box">
+          <div class="detail-box-label">Favorece</div>
+          <p>Volumen abajo: faldas con vuelo, acampanados. Colores vivos en cadera.</p>
+        </div>
+        <div class="detail-box dont-box">
+          <div class="detail-box-label">Evitar</div>
+          <p>Hombreras o manga abullonada. Estampados horizontales arriba.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-card">
+    <div class="body-head" style="background:#EEEDFE">
+      <svg class="body-icon" viewBox="0 0 36 52"><ellipse cx="18" cy="7" rx="7" ry="6" fill="#7F77DD"/><path d="M9 14 Q18 11 27 14 L25 22 Q18 20 11 22Z" fill="#534AB7"/><path d="M13 22 Q18 25 23 22 L23 30 Q18 33 13 30Z" fill="#3C3489"/><path d="M11 30 Q18 32 25 30 L26 40 Q18 42 10 40Z" fill="#534AB7"/><rect x="10" y="40" width="7" height="10" rx="3" fill="#AFA9EC"/><rect x="19" y="40" width="7" height="10" rx="3" fill="#AFA9EC"/></svg>
+      <div>
+        <div class="body-name">Reloj de arena — cintura marcada</div>
+        <div class="body-sub">Curvas naturales equilibradas</div>
+      </div>
+    </div>
+    <div class="body-detail">
+      <div class="body-detail-row">
+        <div class="detail-box do-box">
+          <div class="detail-box-label">Favorece</div>
+          <p>Todo le queda bien. Marcar la cintura con cinturón o prendas ajustadas.</p>
+        </div>
+        <div class="detail-box dont-box">
+          <div class="detail-box-label">Evitar</div>
+          <p>Prendas demasiado anchas que escondan la cintura natural.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip tip-teal" style="margin-top:.5rem">
+    <strong>Siempre en positivo:</strong> di "este corte te va a favorecer porque..." — nunca "para disimular..."
+  </div>
+
+  <p class="sec-head" style="margin-top:1rem">Por ocasión</p>
+  <div class="occ-grid">
+    <div class="occ-card">
+      <div class="occ-icon" style="background:#E1F5EE"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="5" r="3" fill="#1D9E75"/><path d="M2 16 Q9 10 16 16" stroke="#1D9E75" stroke-width="1.5" fill="none"/></svg></div>
+      <div class="occ-name">Playa / vacaciones</div>
+      <div class="occ-tags">
+        <div class="occ-tag">Colores vivos</div>
+        <div class="occ-tag">Lino, viscosa</div>
+        <div class="occ-tag">Estampados étnicos</div>
+      </div>
+    </div>
+    <div class="occ-card">
+      <div class="occ-icon" style="background:#E6F1FB"><svg width="18" height="18" viewBox="0 0 18 18"><rect x="3" y="7" width="12" height="8" rx="2" fill="#378ADD"/><path d="M6 7V5a3 3 0 016 0v2" stroke="#185FA5" stroke-width="1.5" fill="none"/></svg></div>
+      <div class="occ-name">Casual / ciudad</div>
+      <div class="occ-tags">
+        <div class="occ-tag">Denim + básico</div>
+        <div class="occ-tag">Neutros + color</div>
+        <div class="occ-tag">Capas finas</div>
+      </div>
+    </div>
+    <div class="occ-card">
+      <div class="occ-icon" style="background:#1a1a1a"><svg width="18" height="18" viewBox="0 0 18 18"><polygon points="9,2 11,7 16,7 12,11 14,16 9,13 4,16 6,11 2,7 7,7" fill="#7F77DD"/></svg></div>
+      <div class="occ-name">Noche / cena</div>
+      <div class="occ-tags">
+        <div class="occ-tag">Satén, seda</div>
+        <div class="occ-tag">Colores oscuros</div>
+        <div class="occ-tag">1 accesorio clave</div>
+      </div>
+    </div>
+    <div class="occ-card">
+      <div class="occ-icon" style="background:#FBEAF0"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6" fill="none" stroke="#D4537E" stroke-width="1.5"/><path d="M6 9 Q9 6 12 9 Q9 12 6 9" fill="#D4537E"/></svg></div>
+      <div class="occ-name">Evento / boda</div>
+      <div class="occ-tags">
+        <div class="occ-tag">Florales o lisos</div>
+        <div class="occ-tag">Pastel o vivos</div>
+        <div class="occ-tag">Midi o traje</div>
+      </div>
+    </div>
+    <div class="occ-card">
+      <div class="occ-icon" style="background:#FAEEDA"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 14 L9 4 L14 14" stroke="#BA7517" stroke-width="1.5" fill="none" stroke-linejoin="round"/><line x1="6" y1="11" x2="12" y2="11" stroke="#BA7517" stroke-width="1.5"/></svg></div>
+      <div class="occ-name">Turismo activo</div>
+      <div class="occ-tags">
+        <div class="occ-tag">Comodidad</div>
+        <div class="occ-tag">Capas para el clima</div>
+        <div class="occ-tag">Neutros</div>
+      </div>
+    </div>
+    <div class="occ-card">
+      <div class="occ-icon" style="background:#E6F1FB"><svg width="18" height="18" viewBox="0 0 18 18"><rect x="3" y="5" width="12" height="10" rx="2" fill="none" stroke="#185FA5" stroke-width="1.5"/><path d="M6 5V4a3 1.5 0 016 0v1" stroke="#185FA5" stroke-width="1.5" fill="none"/></svg></div>
+      <div class="occ-name">Semi-formal</div>
+      <div class="occ-tags">
+        <div class="occ-tag">Blusa + pantalón</div>
+        <div class="occ-tag">Vestido recto</div>
+        <div class="occ-tag">Tejido de calidad</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="estilo" class="section">
+  <p class="sec-head">Regla de los estampados</p>
+
+  <div class="tip" style="margin-bottom:1rem">
+    <strong>Máximo una prenda estampada por look.</strong> El resto, liso. Así siempre se ve armónico.
+  </div>
+
+  <div class="stam-rule" style="margin-bottom:.75rem">
+    <div class="stam-head" style="background:#EAF3DE">
+      <div style="width:10px;height:10px;border-radius:50%;background:#3B6D11;flex-shrink:0"></div>
+      <div class="card-title" style="margin:0;color:#27500A">Combinaciones seguras</div>
+    </div>
+    <div style="padding:.75rem 1rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div style="background:#EAF3DE;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#27500A">Flores + liso neutro</div>
+        <div style="background:#EAF3DE;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#27500A">Rayas + liso</div>
+        <div style="background:#EAF3DE;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#27500A">Cuadros vichy + blanco</div>
+        <div style="background:#EAF3DE;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#27500A">Étnico + neutro liso</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stam-rule" style="margin-bottom:1rem">
+    <div class="stam-head" style="background:#FCEBEB">
+      <div style="width:10px;height:10px;border-radius:50%;background:#A32D2D;flex-shrink:0"></div>
+      <div class="card-title" style="margin:0;color:#791F1F">Evitar mezclar</div>
+    </div>
+    <div style="padding:.75rem 1rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div style="background:#FCEBEB;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#791F1F">Dos del mismo tamaño</div>
+        <div style="background:#FCEBEB;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#791F1F">Flores grandes + pequeñas</div>
+        <div style="background:#FCEBEB;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#791F1F">Rayas + cuadros juntos</div>
+        <div style="background:#FCEBEB;border-radius:8px;padding:.5rem .7rem;font-size:12px;color:#791F1F">Colores distintos en ambos</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sec-head">Qué hace cada estampado</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">
+    <div class="card" style="padding:.85rem">
+      <div class="card-title" style="font-size:12px;color:#3C3489;margin-bottom:.5rem">Alargan la figura</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.8">
+        Rayas verticales<br>Estampados pequeños<br>Colores oscuros uniformes<br>Diseños lineales verticales
+      </div>
+    </div>
+    <div class="card" style="padding:.85rem">
+      <div class="card-title" style="font-size:12px;color:#993C1D;margin-bottom:.5rem">Ensanchan la figura</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.8">
+        Rayas horizontales<br>Estampados grandes<br>Colores vivos en zona ancha<br>Flores muy grandes
+      </div>
+    </div>
+  </div>
+
+  <p class="sec-head">Tejidos</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">
+    <div class="card" style="padding:.85rem">
+      <div class="card-title" style="font-size:12px;margin-bottom:.5rem">Tejidos que fluyen</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.8">
+        Viscosa — fresca<br>Seda / satén — elegante<br>Lino — veraniego<br>Chiffon — ligero
+      </div>
+    </div>
+    <div class="card" style="padding:.85rem">
+      <div class="card-title" style="font-size:12px;margin-bottom:.5rem">Con estructura</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.8">
+        Algodón — versátil<br>Denim — resistente<br>Punto — elástico<br>Crepé — no arruga
+      </div>
+    </div>
+  </div>
+
+  <div class="tip tip-teal">
+    <strong>Mezcla ganadora:</strong> tejido fluido + tejido estructurado. Ej: blusa de lino + pantalón de algodón.
+  </div>
+
+  <p class="sec-head" style="margin-top:1rem">Accesorios</p>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom:.75rem">Un accesorio transforma el look</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:8px;height:8px;border-radius:50%;background:#7F77DD;flex-shrink:0"></div>
+        <div style="font-size:12.5px;color:var(--color-text-secondary)">Un protagonista + resto discreto</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0"></div>
+        <div style="font-size:12.5px;color:var(--color-text-secondary)">Dorado = calienta el look / Plateado = moderniza</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:8px;height:8px;border-radius:50%;background:#D85A30;flex-shrink:0"></div>
+        <div style="font-size:12.5px;color:var(--color-text-secondary)">El bolso puede ser el punto de color</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0"></div>
+        <div style="font-size:12.5px;color:var(--color-text-secondary)">Cinturón ancho en vestido liso = look nuevo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="venta" class="section">
+  <p class="sec-head">Frases para asesorar y vender</p>
+
+  <div class="frase-block">
+    <div class="frase-head-bar"><p>Cuando el cliente duda o no sabe qué elegir</p></div>
+    <div class="frase-item">
+      <div class="frase-q">"</div>
+      <div class="frase-text">Esta blusa te va a funcionar muy bien porque el azul resalta y combina directamente con lo que llevas puesto ahora.</div>
+    </div>
+    <div class="frase-item">
+      <div class="frase-q">"</div>
+      <div class="frase-text">Con esta tela tan ligera estarás cómoda todo el día aunque haga calor — es perfecta para el verano.</div>
+    </div>
+    <div class="frase-item">
+      <div class="frase-q">"</div>
+      <div class="frase-text">Si lo remetieras por delante, verás que el look cambia completamente. Queda mucho más estilizado, mira.</div>
+    </div>
+    <div class="frase-item">
+      <div class="frase-q">"</div>
+      <div class="frase-text">Este estampado étnico es perfecto para llevar de recuerdo — es muy diferente a lo que se ve en casa.</div>
+    </div>
+    <div class="frase-item">
+      <div class="frase-q">"</div>
+      <div class="frase-text">Este corte en A estiliza mucho porque marca la cintura y cae muy bien. Es favorecedor para casi todo el mundo.</div>
+    </div>
+    <div class="frase-item">
+      <div class="frase-q">"</div>
+      <div class="frase-text">¿La vas a usar más en la playa o también de noche? Así te digo cuál te conviene más.</div>
+    </div>
+    <div class="frase-item">
+      <div class="frase-q">"</div>
+      <div class="frase-text">Si te llevas este pañuelo con la camiseta, tienes dos looks distintos con la misma prenda.</div>
+    </div>
+  </div>
+
+  <p class="sec-head">Checklist antes de asesorar — toca para marcar</p>
+
+  <div class="checklist" id="checklist">
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-num">1</div>
+      <div class="check-q">¿Los colores armonizan o contrastan?<span>¿Hay un neutro que ancle el look?</span></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-num">2</div>
+      <div class="check-q">¿Las proporciones están equilibradas?<span>Si amplio arriba, ceñido abajo — y al revés</span></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-num">3</div>
+      <div class="check-q">¿Solo hay un estampado?<span>Si hay dos, ¿son de tamaño muy diferente?</span></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-num">4</div>
+      <div class="check-q">¿Sé para qué ocasión es?<span>Playa, casual, noche, evento o turismo</span></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-num">5</div>
+      <div class="check-q">¿Un accesorio puede completar el look?<span>Y aumentar el ticket de venta</span></div>
+    </div>
+  </div>
+
+  <div id="reset-row" style="display:none">
+    <button onclick="resetChecklist()" style="width:100%;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:.7rem;font-size:13px;color:var(--color-text-secondary);cursor:pointer">Reiniciar checklist</button>
+  </div>
+
+  <div class="fab-row">
+    <div class="fab" onclick="sendPrompt('Dame más frases de venta para una tienda de souvenirs y ropa ↗')">+ Más frases ↗</div>
+    <div class="fab primary" onclick="sendPrompt('Tengo una clienta con tipo de cuerpo pera y busca algo para una cena de noche en verano. ¿Qué le recomiendo? ↗')">Consultar caso real ↗</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleCheck(item) {
+  const num = item.querySelector('.check-num');
+  if (num.classList.contains('done')) {
+    num.classList.remove('done');
+    num.innerHTML = num.dataset.n;
+    item.style.opacity = '1';
+  } else {
+    num.dataset.n = num.textContent;
+    num.classList.add('done');
+    num.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#3B6D11" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>';
+    item.style.opacity = '.6';
+  }
+  const all = document.querySelectorAll('.check-item');
+  const done = document.querySelectorAll('.check-num.done');
+  document.getElementById('reset-row').style.display = done.length > 0 ? 'block' : 'none';
+}
+
+function resetChecklist() {
+  document.querySelectorAll('.check-item').forEach((item, i) => {
+    const num = item.querySelector('.check-num');
+    num.classList.remove('done');
+    num.textContent = i + 1;
+    item.style.opacity = '1';
+  });
+  document.getElementById('reset-row').style.display = 'none';
+}
+</script>
