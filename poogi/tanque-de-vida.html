@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tu tanque de vida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:     #0d0d0f;
+    --bg2:    #16161a;
+    --bg3:    #1e1e24;
+    --border: rgba(255,255,255,0.07);
+    --text:   #f0ede8;
+    --muted:  #8a8782;
+    --hint:   #4a4846;
+    --accent: #1D9E75;
+    --red:    #E24B4A;
+    --amber:  #EF9F27;
+    --lime:   #97C459;
+    --teal:   #1D9E75;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1.5rem 5rem;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -30%; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse at center, rgba(29,158,117,0.07) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .page { width: 100%; max-width: 560px; position: relative; z-index: 1; }
+
+  /* ── Header ── */
+  .header { text-align: center; margin-bottom: 3.5rem; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-weight: 400; }
+  .header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem,6vw,3.4rem); font-weight: 400; line-height: 1.1; margin-bottom: 1rem; }
+  .header h1 em { font-style: italic; color: var(--accent); }
+  .header p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 380px; margin: 0 auto; }
+
+  /* ── Input ── */
+  .input-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 2rem 2rem 1.75rem; margin-bottom: 2rem; }
+  .input-label { display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; font-weight: 400; }
+  .input-row { display: flex; gap: 10px; align-items: stretch; }
+  .dob-field { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 0 1.1rem; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 400; color: var(--text); height: 52px; outline: none; transition: border-color 0.2s; letter-spacing: 0.04em; }
+  .dob-field::placeholder { color: var(--hint); }
+  .dob-field:focus { border-color: rgba(29,158,117,0.5); }
+  .calc-btn { background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 0 1.5rem; height: 52px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background 0.2s, transform 0.1s; }
+  .calc-btn:hover { background: #18876a; }
+  .calc-btn:active { transform: scale(0.97); }
+  .err-msg { font-size: 12px; color: var(--red); margin-top: 0.6rem; min-height: 18px; padding-left: 2px; }
+
+  /* ── Result ── */
+  .result { display: none; animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── Stats ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 2rem; }
+  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 1.1rem 1rem; text-align: center; }
+  .stat-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--text); line-height: 1.1; }
+  .stat-sub { font-size: 11px; color: var(--hint); margin-top: 3px; }
+
+  /* ── Gauge ── */
+  .gauge-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 2rem 1.5rem 1.5rem; margin-bottom: 2rem; }
+  .section-label { text-align: center; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
+  canvas#gauge { display: block; width: 100%; height: auto; }
+  .legend { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; margin-top: 1rem; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Phrase ── */
+  .phrase-card { border-left: 2px solid var(--accent); padding: 1rem 1.25rem; margin-bottom: 2rem; font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── Weeks ── */
+  .weeks-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 1.5rem; margin-bottom: 2rem; }
+  .weeks-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; }
+  .weeks-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .weeks-count { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text); }
+  .weeks-sub { font-size: 11px; color: var(--hint); }
+  .weeks-grid { display: flex; flex-wrap: wrap; gap: 2.5px; }
+  .wdot { width: 5.5px; height: 5.5px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Test ── */
+  .test-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 1.75rem; margin-bottom: 2rem; }
+  .test-intro { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .test-q { margin-bottom: 1rem; padding: 0.9rem 1rem; background: var(--bg3); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s; }
+  .test-q:hover { border-color: rgba(255,255,255,0.15); }
+  .test-q-text { font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 0.6rem; }
+  .test-options { display: flex; gap: 8px; flex-wrap: wrap; }
+  .test-opt { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+  .test-opt:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+  .test-opt.selected { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .test-opt.selected-bad { background: var(--red); border-color: var(--red); color: #fff; }
+  .test-opt.selected-mid { background: var(--amber); border-color: var(--amber); color: #0d0d0f; }
+  .test-result { display: none; margin-top: 1.5rem; padding: 1.25rem; border-radius: 14px; border: 1px solid var(--border); }
+  .test-result-score { font-family: 'DM Serif Display', serif; font-size: 2.2rem; text-align: center; margin-bottom: 0.5rem; }
+  .test-result-label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin-bottom: 1rem; }
+  .test-result-msg { font-size: 14px; color: var(--muted); line-height: 1.7; text-align: center; }
+  .test-btn { display: block; width: 100%; background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 0.85rem; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; margin-top: 1.25rem; transition: background 0.2s; }
+  .test-btn:hover { background: #18876a; }
+  .reset-btn { font-size: 12px; color: var(--hint); background: none; border: none; cursor: pointer; display: block; margin: 0.75rem auto 0; font-family: 'DM Sans', sans-serif; text-decoration: underline; }
+
+  /* ── CTA ── */
+  .cta-btn { display: block; width: 100%; background: transparent; border: 1px solid var(--border); border-radius: 14px; padding: 1rem; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--muted); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .cta-btn:hover { border-color: var(--accent); color: var(--text); }
+
+  .footer { margin-top: 3rem; text-align: center; font-size: 12px; color: var(--hint); line-height: 1.8; }
+
+  @media (max-width: 420px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat-card:last-child { grid-column: span 2; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <p class="eyebrow">Inspirado en MJ DeMarco</p>
+    <h1>Tu tanque<br>de <em>vida</em></h1>
+    <p>El tiempo es tu único activo irrecuperable. ¿Cuánto combustible te queda?</p>
+  </header>
+
+  <div class="input-card">
+    <label class="input-label" for="dob">Fecha de nacimiento</label>
+    <div class="input-row">
+      <input class="dob-field" type="text" id="dob" placeholder="DD/MM/AAAA" maxlength="10" inputmode="numeric" autocomplete="off"/>
+      <button class="calc-btn" onclick="calculate()">Calcular →</button>
+    </div>
+    <div class="err-msg" id="err"></div>
+  </div>
+
+  <div class="result" id="result">
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Años vividos</div>
+        <div class="stat-value" id="s-lived">—</div>
+        <div class="stat-sub" id="s-days">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Restante</div>
+        <div class="stat-value" id="s-pct">—</div>
+        <div class="stat-sub" id="s-yrs">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Semanas restantes</div>
+        <div class="stat-value" id="s-weeks">—</div>
+        <div class="stat-sub">de 5,200</div>
+      </div>
+    </div>
+
+    <div class="gauge-wrap">
+      <div class="section-label">Nivel de combustible vital</div>
+      <canvas id="gauge" width="520" height="290"></canvas>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#E24B4A"></div>76–100 años</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#EF9F27"></div>51–75 años</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#97C459"></div>26–50 años</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>0–25 años</div>
+      </div>
+    </div>
+
+    <div class="phrase-card" id="phrase"></div>
+
+    <div class="weeks-card">
+      <div class="weeks-header">
+        <span class="weeks-label">Tu vida en semanas</span>
+        <span><span class="weeks-count" id="w-remaining">—</span><span class="weeks-sub"> restantes</span></span>
+      </div>
+      <div class="weeks-grid" id="wgrid"></div>
+    </div>
+
+    <!-- TEST -->
+    <div class="test-card" id="test-card">
+      <div class="section-label" style="text-align:left; margin-bottom:0.5rem;">¿Estás desperdiciando tu tiempo?</div>
+      <p class="test-intro">Basado en los patrones que DeMarco identifica como los principales ladrones de tiempo. Responde con honestidad — nadie te ve.</p>
+      <div id="test-questions"></div>
+      <button class="test-btn" onclick="evaluateTest()">Ver mi resultado →</button>
+      <div class="test-result" id="test-result">
+        <div class="test-result-score" id="t-score"></div>
+        <div class="test-result-label" id="t-label"></div>
+        <div class="test-result-msg" id="t-msg"></div>
+      </div>
+      <button class="reset-btn" id="reset-btn" style="display:none" onclick="resetTest()">Repetir test</button>
+    </div>
+
+    <button class="cta-btn" onclick="openReflection()">
+      ¿Cómo usar mejor el tiempo que queda? →
+    </button>
+
+  </div>
+
+  <footer class="footer">
+    Basado en la analogía del tiempo de <em>MJ DeMarco</em><br>
+    Asumiendo una vida máxima de 100 años.
+  </footer>
+
+</div>
+<script>
+/* ─── PHRASES (cada 5 años, índice = floor(age/5), capped at 19) ─── */
+const PHRASES = [
+  /* 0–4   */ "El tanque está lleno. Aún no puedes elegir, pero pronto podrás. Lo que veas a tu alrededor te estará moldeando.",
+  /* 5–9   */ "La infancia es el cimiento. Los hábitos que se forman aquí duran décadas. La curiosidad es tu mayor activo ahora.",
+  /* 10–14 */ "La adolescencia llega con preguntas enormes. No las ignores — son la brújula que muchos adultos ya perdieron.",
+  /* 15–19 */ "Tienes energía ilimitada y tiempo que parece eterno. Ninguna de las dos cosas lo es. Elige bien con quién y en qué las gastas.",
+  /* 20–24 */ "Los veinte son el campo de pruebas. Experimenta, fracasa rápido y aprende más rápido aún. La dirección importa más que la velocidad.",
+  /* 25–29 */ "A los 25 la mayoría siente que 'debería ya tener algo'. Ese reloj es ficticio. Lo real es: ¿estás construyendo o consumiendo?",
+  /* 30–34 */ "Los treinta traen claridad sobre qué funciona y qué no. Es el momento de eliminar, no de acumular.",
+  /* 35–39 */ "A mitad de los treinta muchos hacen el primer balance real. Si el resultado te incomoda, esa incomodidad es información valiosa.",
+  /* 40–44 */ "Los cuarenta son el punto de inflexión. Ya sabes lo que te da energía y lo que te la roba. No hay excusa para seguir eligiendo lo segundo.",
+  /* 45–49 */ "A los 45 el tiempo empieza a sentirse diferente. Bien — esa sensación es un aliado, no un enemigo. Úsala para tomar mejores decisiones.",
+  /* 50–54 */ "Medio siglo de experiencia. Eso vale más de lo que crees — si lo usas con intención y no lo guardas para después.",
+  /* 55–59 */ "Los cincuenta y tantos son años de máxima sabiduría y energía combinadas. Pocos lo aprovechan. Sé de los pocos.",
+  /* 60–64 */ "A los sesenta el horizonte es más nítido. Las cosas que importan de verdad ya se han revelado. El resto es ruido — déjalo ir.",
+  /* 65–69 */ "La jubilación no es el final del propósito, es el comienzo de la libertad para ejercerlo sin filtros. ¿Sabes qué harás con ella?",
+  /* 70–74 */ "Setenta años de combustible quemado. Lo que queda es precioso. Cada semana merece ser elegida, no simplemente vivida.",
+  /* 75–79 */ "A los 75 muchos descubren que la mayor fuente de bienestar es dar — tiempo, presencia, experiencia. El tanque no se llena solo.",
+  /* 80–84 */ "Cada día que se añade a esta etapa es un regalo real. La plenitud no tiene fecha de caducidad si se cultiva.",
+  /* 85–89 */ "Pocos llegan aquí con claridad y calma. Si tú lo haces, has hecho algo bien. La presencia plena es todo lo que queda.",
+  /* 90–94 */ "Noventa años. Lo que queda es puro regalo. Cada conversación, cada amanecer, cada momento de conexión es irremplazable.",
+  /* 95+   */ "Más allá de los 95 la vida se mide en instantes, no en planes. Eso es una forma de libertad que muy pocos conocen."
+];
+
+function getPhrase(age){ return PHRASES[Math.min(19, Math.floor(age / 5))]; }
+function getZone(age){
+  if(age <= 25) return 'teal';
+  if(age <= 50) return 'lime';
+  if(age <= 75) return 'amber';
+  return 'red';
+}
+
+/* ─── INPUT MASK ─── */
+const input = document.getElementById('dob');
+const errEl = document.getElementById('err');
+input.addEventListener('input', function(){
+  let v = this.value.replace(/\D/g,'');
+  if(v.length > 2) v = v.slice(0,2) + '/' + v.slice(2);
+  if(v.length > 5) v = v.slice(0,5) + '/' + v.slice(5);
+  this.value = v.slice(0,10);
+  errEl.textContent = '';
+});
+input.addEventListener('keydown', e => { if(e.key === 'Enter') calculate(); });
+
+/* ─── GAUGE ─── */
+function drawGauge(pct){
+  const canvas = document.getElementById('gauge');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+  const cx = W/2, cy = H - 48, R = 170, arcW = 34;
+
+  const zones = [
+    {from:0,   to:.25, color:'#E24B4A'},
+    {from:.25, to:.50, color:'#EF9F27'},
+    {from:.50, to:.75, color:'#97C459'},
+    {from:.75, to:1,   color:'#1D9E75'},
+  ];
+
+  ctx.beginPath(); ctx.arc(cx,cy,R,Math.PI,0,false);
+  ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=arcW+6; ctx.lineCap='round'; ctx.stroke();
+
+  zones.forEach(z=>{
+    ctx.beginPath(); ctx.arc(cx,cy,R,Math.PI+z.from*Math.PI,Math.PI+z.to*Math.PI,false);
+    ctx.strokeStyle=z.color; ctx.lineWidth=arcW; ctx.lineCap='butt';
+    ctx.globalAlpha=0.2; ctx.stroke(); ctx.globalAlpha=1;
+  });
+
+  const needleRad = Math.PI + (pct/100)*Math.PI;
+  if(pct>0){
+    zones.forEach(z=>{
+      const zS=Math.PI+z.from*Math.PI, zE=Math.PI+z.to*Math.PI;
+      if(needleRad<=zS) return;
+      ctx.beginPath(); ctx.arc(cx,cy,R,zS,Math.min(needleRad,zE),false);
+      ctx.strokeStyle=z.color; ctx.lineWidth=arcW; ctx.lineCap='butt';
+      ctx.globalAlpha=0.9; ctx.stroke(); ctx.globalAlpha=1;
+    });
+  }
+
+  const ticks=[0,.25,.5,.75,1], tickLbls=['E','25','50','75','F'];
+  ctx.lineCap='round';
+  ticks.forEach((t,i)=>{
+    const a=Math.PI+t*Math.PI, r1=R+arcW/2+6, r2=R+arcW/2+14;
+    ctx.beginPath(); ctx.moveTo(cx+r1*Math.cos(a),cy+r1*Math.sin(a)); ctx.lineTo(cx+r2*Math.cos(a),cy+r2*Math.sin(a));
+    ctx.strokeStyle='rgba(255,255,255,0.2)'; ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.35)'; ctx.font='500 12px "DM Sans",sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(tickLbls[i], cx+(R+arcW/2+26)*Math.cos(a), cy+(R+arcW/2+26)*Math.sin(a));
+  });
+
+  ctx.save(); ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=8;
+  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+(R-16)*Math.cos(needleRad),cy+(R-16)*Math.sin(needleRad));
+  ctx.strokeStyle='#f0ede8'; ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.stroke(); ctx.restore();
+
+  ctx.beginPath(); ctx.arc(cx,cy,10,0,2*Math.PI); ctx.fillStyle='#f0ede8'; ctx.fill();
+
+  ctx.fillStyle='#f0ede8'; ctx.font='400 42px "DM Serif Display",serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(Math.round(pct)+'%', cx, cy-68);
+  ctx.fillStyle='rgba(255,255,255,0.35)'; ctx.font='300 12px "DM Sans",sans-serif';
+  ctx.fillText('combustible restante', cx, cy-40);
+  ctx.fillStyle='rgba(255,255,255,0.25)'; ctx.font='300 11px "DM Sans",sans-serif';
+  ctx.textAlign='left';  ctx.fillText('vacío', cx-R-arcW/2, cy+22);
+  ctx.textAlign='right'; ctx.fillText('lleno', cx+R+arcW/2, cy+22);
+}
+
+/* ─── CALCULATE ─── */
+function calculate(){
+  errEl.textContent='';
+  const raw=document.getElementById('dob').value.trim();
+  const parts=raw.split('/');
+  if(parts.length!==3||parts[0].length!==2||parts[1].length!==2||parts[2].length!==4){
+    errEl.textContent='Introduce la fecha en formato DD/MM/AAAA.'; return;
+  }
+  const dd=parseInt(parts[0],10),mm=parseInt(parts[1],10),yyyy=parseInt(parts[2],10);
+  if(isNaN(dd)||isNaN(mm)||isNaN(yyyy)||mm<1||mm>12||dd<1||dd>31||yyyy<1900){
+    errEl.textContent='Fecha no válida.'; return;
+  }
+  const dob=new Date(yyyy,mm-1,dd);
+  if(dob.getMonth()!==mm-1){errEl.textContent='Día fuera de rango.'; return;}
+  const now=new Date();
+  if(dob>now){errEl.textContent='La fecha no puede ser futura.'; return;}
+
+  const totalDays=100*365.25;
+  const livedDays=Math.floor((now-dob)/86400000);
+  const livedYears=livedDays/365.25;
+  const remainingDays=Math.max(0,totalDays-livedDays);
+  const pct=Math.max(0,(remainingDays/totalDays)*100);
+  const weeksLived=Math.floor(livedDays/7);
+  const weeksRemaining=Math.max(0,5200-weeksLived);
+
+  document.getElementById('s-lived').textContent=livedYears.toFixed(1);
+  document.getElementById('s-days').textContent=livedDays.toLocaleString('es')+' días';
+  document.getElementById('s-pct').textContent=pct.toFixed(1)+'%';
+  document.getElementById('s-yrs').textContent=(remainingDays/365.25).toFixed(1)+' años';
+  document.getElementById('s-weeks').textContent=weeksRemaining.toLocaleString('es');
+  document.getElementById('w-remaining').textContent=weeksRemaining.toLocaleString('es');
+  document.getElementById('phrase').textContent=getPhrase(livedYears);
+
+  drawGauge(pct);
+
+  const grid=document.getElementById('wgrid'); grid.innerHTML='';
+  const zc=['#1D9E75','#97C459','#EF9F27','#E24B4A'];
+  for(let i=0;i<5200;i++){
+    const d=document.createElement('div'); d.className='wdot';
+    if(i<weeksLived){
+      let c=zc[0];
+      if(i>=3900)c=zc[3]; else if(i>=2600)c=zc[2]; else if(i>=1300)c=zc[1];
+      d.style.background=c; d.style.opacity='0.28';
+    } else { d.style.background='rgba(255,255,255,0.08)'; }
+    grid.appendChild(d);
+  }
+
+  buildTest();
+
+  const resultEl=document.getElementById('result');
+  resultEl.style.display='block';
+  setTimeout(()=>resultEl.scrollIntoView({behavior:'smooth',block:'start'}),50);
+}
+
+/* ─── TEST ─── */
+const QUESTIONS = [
+  {
+    q: "¿Cuántas horas al día pasas en redes sociales o viendo contenido pasivo (reels, TikTok, YouTube sin propósito)?",
+    opts: ["Menos de 1h","1–2 horas","2–4 horas","Más de 4 horas"],
+    scores: [0, 1, 2, 3]
+  },
+  {
+    q: "¿Con qué frecuencia terminas el día sin haber avanzado en algo que realmente importa para tu vida?",
+    opts: ["Raramente","A veces","La mayoría de días","Casi siempre"],
+    scores: [0, 1, 2, 3]
+  },
+  {
+    q: "¿Cuánto tiempo dedicas a actividades que solo sirven para escapar del aburrimiento o la incomodidad?",
+    opts: ["Muy poco","Algo","Bastante","Es mi estado por defecto"],
+    scores: [0, 1, 2, 3]
+  },
+  {
+    q: "¿Tienes un propósito claro hacia el que trabajas de forma consistente?",
+    opts: ["Sí, muy claro","Más o menos","Vago e inconsistente","No realmente"],
+    scores: [0, 1, 2, 3]
+  },
+  {
+    q: "¿Con qué frecuencia intercambias tiempo por dinero en trabajos o tareas que no te acercan a ningún objetivo mayor?",
+    opts: ["Casi nunca","Ocasionalmente","Frecuentemente","Es la mayor parte de mi semana"],
+    scores: [0, 1, 2, 3]
+  },
+  {
+    q: "¿Cuánto tiempo dedicas a aprender activamente algo que cambiará tu futuro?",
+    opts: ["Cada día","Varias veces a la semana","Rara vez","Prácticamente nada"],
+    scores: [0, 2, 3, 3]
+  },
+  {
+    q: "¿El alcohol, el ocio excesivo u otras formas de evasión ocupan tiempo que podrías usar de forma consciente?",
+    opts: ["No significativamente","Algo sí","Bastante","Más de lo que quisiera admitir"],
+    scores: [0, 1, 2, 3]
+  },
+  {
+    q: "¿Cuántas de tus horas libres son elegidas con intención vs. consumidas por inercia?",
+    opts: ["La mayoría, elegidas","Mitad y mitad","La mayoría, por inercia","Casi todas por inercia"],
+    scores: [0, 1, 2, 3]
+  }
+];
+
+let selections = new Array(QUESTIONS.length).fill(null);
+
+function buildTest(){
+  const container=document.getElementById('test-questions');
+  container.innerHTML='';
+  selections=new Array(QUESTIONS.length).fill(null);
+  document.getElementById('test-result').style.display='none';
+  document.getElementById('reset-btn').style.display='none';
+
+  QUESTIONS.forEach((item,qi)=>{
+    const wrap=document.createElement('div'); wrap.className='test-q';
+    const qt=document.createElement('div'); qt.className='test-q-text';
+    qt.textContent=(qi+1)+'. '+item.q;
+    const opts=document.createElement('div'); opts.className='test-options';
+    item.opts.forEach((label,oi)=>{
+      const btn=document.createElement('button'); btn.className='test-opt';
+      btn.textContent=label;
+      btn.onclick=()=>{
+        opts.querySelectorAll('.test-opt').forEach(b=>{
+          b.classList.remove('selected','selected-bad','selected-mid');
+        });
+        const sc=item.scores[oi];
+        if(sc===0) btn.classList.add('selected');
+        else if(sc===1) btn.classList.add('selected-mid');
+        else btn.classList.add('selected-bad');
+        selections[qi]=sc;
+      };
+      opts.appendChild(btn);
+    });
+    wrap.appendChild(qt); wrap.appendChild(opts);
+    container.appendChild(wrap);
+  });
+}
+
+function evaluateTest(){
+  const answered=selections.filter(s=>s!==null).length;
+  if(answered<QUESTIONS.length){
+    alert('Responde todas las preguntas para ver tu resultado.'); return;
+  }
+  const total=selections.reduce((a,b)=>a+b,0);
+  const max=QUESTIONS.length*3;
+  const pct=Math.round((total/max)*100);
+
+  let score, label, msg, color;
+  if(pct<=20){
+    score='Muy bajo'; label='Usas bien tu tiempo';
+    msg='Estás alineado con lo que importa. Según DeMarco, la mayoría nunca llega aquí. Mantén esa conciencia — es tu activo más valioso.';
+    color='#1D9E75';
+  } else if(pct<=40){
+    score='Bajo'; label='Algunas fugas';
+    msg='Tienes buena dirección pero hay fugas de tiempo que podrías cerrar. Identifica los 2 patrones que más repites y trabaja en uno cada vez.';
+    color='#97C459';
+  } else if(pct<=60){
+    score='Moderado'; label='Pérdida significativa';
+    msg='Una parte importante de tu tiempo se va sin retorno. DeMarco diría que estás en la zona de peligro silencioso — no duele, pero acumula. El momento de cambiar es ahora.';
+    color='#EF9F27';
+  } else if(pct<=80){
+    score='Alto'; label='Alerta de combustible';
+    msg='Estás desperdiciando una porción grande de tu tiempo. La buena noticia: lo has reconocido. Eso ya es más de lo que hace la mayoría. El siguiente paso es elegir una sola área y cambiarla esta semana.';
+    color='#D85A30';
+  } else {
+    score='Muy alto'; label='Tanque en reserva';
+    msg='El patrón actual está consumiendo tu tiempo de forma acelerada. No es un juicio — es información. DeMarco dice que la consciencia es el primer paso. Ya lo diste. ¿Cuál será el segundo?';
+    color='#E24B4A';
+  }
+
+  const res=document.getElementById('test-result');
+  res.style.display='block';
+  res.style.borderColor=color+'40';
+  document.getElementById('t-score').textContent=score;
+  document.getElementById('t-score').style.color=color;
+  document.getElementById('t-label').textContent=label;
+  document.getElementById('t-label').style.color=color;
+  document.getElementById('t-msg').textContent=msg;
+  document.getElementById('reset-btn').style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function resetTest(){ buildTest(); }
+
+function openReflection(){
+  const q='¿Qué acciones concretas puedo tomar para usar mejor mi tiempo restante, según la filosofía de MJ DeMarco?';
+  window.open('https://claude.ai/new?q='+encodeURIComponent(q),'_blank');
+}
+</script>
+</body>
+</html>
