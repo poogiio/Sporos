@@ -141,7 +141,7 @@
   <header class="header">
     <p class="eyebrow">Inspirado en MJ DeMarco</p>
     <h1>Tu tanque<br>de <em>vida</em></h1>
-    <p>El tiempo es tu único activo irrecuperable.<br> ¿Cuánto combustible te queda?<br> ¿Cómo lo vas a aprovechar?</p>
+    <p>El tiempo es tu único activo irrecuperable.<br>¿Cuánto combustible te queda? ¿Cómo lo vas a aprovechar?</p>
   </header>
 
   <div class="input-card">
@@ -381,49 +381,68 @@ function calculate(){
   setTimeout(()=>resultEl.scrollIntoView({behavior:'smooth',block:'start'}),50);
 }
 
-/* ─── TEST ─── */
+/* ─── TEST ───
+   Pesos según importancia en la filosofía de DeMarco:
+   - Propósito claro (×3): el núcleo de todo el libro
+   - Intercambio tiempo-dinero sin objetivo (×3): la trampa del "sidewalk"
+   - Días sin avance real (×2): medida directa de pérdida
+   - Aprendizaje activo (×2): el combustible del crecimiento
+   - Pantallas pasivas (×1.5): distracción crónica
+   - Evasión/inercia (×1): síntoma secundario
+*/
 const QUESTIONS = [
-  {
-    q: "¿Cuántas horas al día pasas en redes sociales o viendo contenido pasivo (reels, TikTok, YouTube sin propósito)?",
-    opts: ["Menos de 1h","1–2 horas","2–4 horas","Más de 4 horas"],
-    scores: [0, 1, 2, 3]
-  },
-  {
-    q: "¿Con qué frecuencia terminas el día sin haber avanzado en algo que realmente importa para tu vida?",
-    opts: ["Raramente","A veces","La mayoría de días","Casi siempre"],
-    scores: [0, 1, 2, 3]
-  },
-  {
-    q: "¿Cuánto tiempo dedicas a actividades que solo sirven para escapar del aburrimiento o la incomodidad?",
-    opts: ["Muy poco","Algo","Bastante","Es mi estado por defecto"],
-    scores: [0, 1, 2, 3]
-  },
   {
     q: "¿Tienes un propósito claro hacia el que trabajas de forma consistente?",
     opts: ["Sí, muy claro","Más o menos","Vago e inconsistente","No realmente"],
-    scores: [0, 1, 2, 3]
+    scores: [0, 1, 2, 3], weight: 3,
+    note: "Peso alto — DeMarco considera la falta de propósito la mayor pérdida de tiempo."
   },
   {
-    q: "¿Con qué frecuencia intercambias tiempo por dinero en trabajos o tareas que no te acercan a ningún objetivo mayor?",
-    opts: ["Casi nunca","Ocasionalmente","Frecuentemente","Es la mayor parte de mi semana"],
-    scores: [0, 1, 2, 3]
+    q: "¿Qué parte de tu semana laboral intercambias tiempo por dinero en tareas que no te acercan a ningún objetivo mayor?",
+    opts: ["Muy poca","Una parte","La mayoría","Prácticamente toda"],
+    scores: [0, 1, 2, 3], weight: 3,
+    note: "Peso alto — la trampa del intercambio tiempo-dinero sin retorno es central en el libro."
+  },
+  {
+    q: "¿Con qué frecuencia terminas el día sin haber avanzado en algo que realmente importa?",
+    opts: ["Raramente","A veces","La mayoría de días","Casi siempre"],
+    scores: [0, 1, 2, 3], weight: 2,
+    note: "Peso medio-alto — mide directamente la pérdida diaria de tiempo."
   },
   {
     q: "¿Cuánto tiempo dedicas a aprender activamente algo que cambiará tu futuro?",
-    opts: ["Cada día","Varias veces a la semana","Rara vez","Prácticamente nada"],
-    scores: [0, 2, 3, 3]
+    opts: ["A diario","Varias veces por semana","Rara vez","Casi nunca"],
+    scores: [0, 1, 2, 3], weight: 2,
+    note: "Peso medio-alto — el aprendizaje intencional es el motor del cambio para DeMarco."
   },
   {
-    q: "¿El alcohol, el ocio excesivo u otras formas de evasión ocupan tiempo que podrías usar de forma consciente?",
-    opts: ["No significativamente","Algo sí","Bastante","Más de lo que quisiera admitir"],
-    scores: [0, 1, 2, 3]
+    q: "¿Cuántas horas al día pasas en redes sociales o contenido pasivo sin propósito?",
+    opts: ["Menos de 1h","1–2 horas","2–4 horas","Más de 4 horas"],
+    scores: [0, 1, 2, 3], weight: 1.5,
+    note: "Peso medio — distracción crónica identificada explícitamente en el libro."
   },
   {
     q: "¿Cuántas de tus horas libres son elegidas con intención vs. consumidas por inercia?",
     opts: ["La mayoría, elegidas","Mitad y mitad","La mayoría, por inercia","Casi todas por inercia"],
-    scores: [0, 1, 2, 3]
+    scores: [0, 1, 2, 3], weight: 1.5,
+    note: "Peso medio — la inercia como modo por defecto es una señal de alerta en el libro."
+  },
+  {
+    q: "¿Cuánto tiempo dedicas a actividades que solo sirven para escapar del aburrimiento o la incomodidad?",
+    opts: ["Muy poco","Algo","Bastante","Es mi estado por defecto"],
+    scores: [0, 1, 2, 3], weight: 1,
+    note: "Peso base — evasión como síntoma secundario."
+  },
+  {
+    q: "¿El alcohol, el ocio excesivo u otras formas de evasión consumen tiempo que podrías usar conscientemente?",
+    opts: ["No significativamente","Algo sí","Bastante","Más de lo que quisiera admitir"],
+    scores: [0, 1, 2, 3], weight: 1,
+    note: "Peso base — ejemplos directos mencionados por DeMarco."
   }
 ];
+
+/* Máximo posible: suma de (3 × weight) para cada pregunta */
+const MAX_SCORE = QUESTIONS.reduce((a,q) => a + 3 * q.weight, 0);
 
 let selections = new Array(QUESTIONS.length).fill(null);
 
@@ -464,24 +483,24 @@ function evaluateTest(){
   if(answered<QUESTIONS.length){
     alert('Responde todas las preguntas para ver tu resultado.'); return;
   }
-  const total=selections.reduce((a,b)=>a+b,0);
-  const max=QUESTIONS.length*3;
-  const pct=Math.round((total/max)*100);
+  /* Puntuación ponderada */
+  const total=selections.reduce((sum,sc,i) => sum + sc * QUESTIONS[i].weight, 0);
+  const pct=Math.round((total/MAX_SCORE)*100);
 
   let score, label, msg, color;
-  if(pct<=20){
+  if(pct<=15){
     score='Muy bajo'; label='Usas bien tu tiempo';
     msg='Estás alineado con lo que importa. Según DeMarco, la mayoría nunca llega aquí. Mantén esa conciencia — es tu activo más valioso.';
     color='#1D9E75';
-  } else if(pct<=40){
+  } else if(pct<=32){
     score='Bajo'; label='Algunas fugas';
     msg='Tienes buena dirección pero hay fugas de tiempo que podrías cerrar. Identifica los 2 patrones que más repites y trabaja en uno cada vez.';
     color='#97C459';
-  } else if(pct<=60){
+  } else if(pct<=52){
     score='Moderado'; label='Pérdida significativa';
     msg='Una parte importante de tu tiempo se va sin retorno. DeMarco diría que estás en la zona de peligro silencioso — no duele, pero acumula. El momento de cambiar es ahora.';
     color='#EF9F27';
-  } else if(pct<=80){
+  } else if(pct<=72){
     score='Alto'; label='Alerta de combustible';
     msg='Estás desperdiciando una porción grande de tu tiempo. La buena noticia: lo has reconocido. Eso ya es más de lo que hace la mayoría. El siguiente paso es elegir una sola área y cambiarla esta semana.';
     color='#D85A30';
